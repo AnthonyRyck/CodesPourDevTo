@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SQLiteWithRoot.Areas.Identity;
 using SQLiteWithRoot.Data;
+using SQLiteWithRoot.Code;
 
 namespace SQLiteWithRoot
 {
@@ -32,10 +33,12 @@ namespace SQLiteWithRoot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
@@ -56,6 +59,9 @@ namespace SQLiteWithRoot
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Création des roles et de Root.
+			DataInitializer.SeedRolesAsync(app.ApplicationServices).Wait();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
