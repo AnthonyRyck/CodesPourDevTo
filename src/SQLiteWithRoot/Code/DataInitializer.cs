@@ -25,14 +25,14 @@ namespace SQLiteWithRoot.Code
 
 				// Création de l'utilisateur Root.
 				var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-				var user = await userManager.FindByNameAsync("root");
+				var user = await userManager.FindByNameAsync("root@email.com");
 
 				if (user == null)
 				{
 					var poweruser = new IdentityUser
 					{
-						UserName = "root",
-						Email = "change@email.com",
+						UserName = "root@email.com",
+						Email = "root@email.com",
 						EmailConfirmed = true
 					};
 					string userPwd = "Azerty123!";
