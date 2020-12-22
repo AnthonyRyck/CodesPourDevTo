@@ -1,0 +1,17 @@
+﻿@using BlazorEventCallBack.Composants
+@using BlazorEventCallBack.Data
+@inject  FansService service
+
+@page "/FansPage"
+
+<h3>Page des fans</h3>
+
+@foreach (var fan in service.FansCollection)
+{
+	<FanComponent EtreFan="fan"
+					ClickCallback="@(() => service.GetClick(fan.Nom))"/>
+}
+
+@code {
+
+}

@@ -1,0 +1,21 @@
+﻿@using BlazorEventCallBack.Data
+
+<div class="fan">
+	<div>
+		<div>Je suis : @EtreFan.Nom</div>
+		<div>Nombre de clique sur moi : @EtreFan.NombreDeClickRecu</div>
+	</div>
+
+	<button @onclick="ClickCallback">Click sur moi !</button>
+
+</div>
+
+@code {
+
+	[Parameter]
+	public Fan EtreFan { get; set; }
+
+	[Parameter]
+	public EventCallback ClickCallback { get; set; }
+
+}

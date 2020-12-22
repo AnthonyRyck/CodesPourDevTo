@@ -1,0 +1,15 @@
+﻿@page "/FanclubPage"
+
+@using BlazorEventCallBack.Composants
+@using BlazorEventCallBack.Data
+@inject FansService service
+
+<h3>Page du fan club</h3>
+
+<FanClubComposant FanCollection="@service.FansCollection"
+					GetSonClickCallBack="@service.GetClick"/>
+
+
+@code {
+
+}
