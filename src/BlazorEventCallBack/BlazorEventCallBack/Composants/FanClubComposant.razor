@@ -5,7 +5,7 @@
 	@foreach (var fan in FanCollection)
 	{
 		<FanComponent EtreFan="fan"
-					  ClickCallback="@(() => GetSonClickCallBack.InvokeAsync(fan.Nom))" />
+					  OnClickCallback="@(() => OnGetSonClickCallBack.InvokeAsync(fan.Nom))" />
 	}
 </div>
 
@@ -15,5 +15,5 @@
 	public IEnumerable<Fan> FanCollection { get; set; }
 
 	[Parameter]
-	public EventCallback<string> GetSonClickCallBack { get; set; }
+	public EventCallback<string> OnGetSonClickCallBack { get; set; }
 }

@@ -9,7 +9,7 @@
 @foreach (var fan in service.FansCollection)
 {
 	<FanComponent EtreFan="fan"
-					ClickCallback="@(() => service.GetClick(fan.Nom))"/>
+					OnClickCallback="@(() => service.GetClick(fan.Nom))"/>
 }
 
 @code {
