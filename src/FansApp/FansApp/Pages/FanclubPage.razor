@@ -1,0 +1,25 @@
+﻿@page "/FanclubPage"
+
+@using FansApp.Composants
+@using FansApp.ViewModel
+
+@inject IFanClubViewModel viewModel
+
+<h3>Page du fan club</h3>
+
+<div>
+	<button @onclick="@viewModel.DisplayNewFan">Ajouter un nouveau membre</button>
+</div>
+
+<TemplatedDialog Show="viewModel.CanDisplayNewFan">
+	<NewFanComponent GetNameFanCallBack="viewModel.AddFan"
+					OnCancel="viewModel.CancelNewFan" />
+</TemplatedDialog>
+
+<FanClubComposant FanCollection="@viewModel.AllFansCollection"
+				  GetSonClickCallBack="@viewModel.AddClick" />
+
+
+@code {
+
+}

@@ -1,0 +1,19 @@
+﻿@using FansApp.Data
+
+
+<div class="fanClub">
+	@foreach (var fan in FanCollection)
+	{
+		<FanComponent EtreFan="fan"
+					  ClickCallback="@(() => GetSonClickCallBack.InvokeAsync(fan.Id))" />
+	}
+</div>
+
+@code {
+
+	[Parameter]
+	public IEnumerable<Fan> FanCollection { get; set; }
+
+	[Parameter]
+	public EventCallback<int> GetSonClickCallBack { get; set; }
+}
