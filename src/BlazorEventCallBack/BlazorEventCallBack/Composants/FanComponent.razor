@@ -6,7 +6,7 @@
 		<div>Nombre de clique sur moi : @EtreFan.NombreDeClickRecu</div>
 	</div>
 
-	<button @onclick="ClickCallback">Click sur moi !</button>
+	<button @onclick="OnClickCallback">Click sur moi !</button>
 
 </div>
 
@@ -16,6 +16,6 @@
 	public Fan EtreFan { get; set; }
 
 	[Parameter]
-	public EventCallback ClickCallback { get; set; }
+	public EventCallback OnClickCallback { get; set; }
 
 }
