@@ -1,4 +1,5 @@
 ﻿using FansApp.Data;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,12 @@ namespace FansApp.ViewModel
 	public class FanClubViewModel : IFanClubViewModel
 	{
 		private FakeAccessDatabase fakeAccess;
+		private NavigationManager navigationManager;
 
-		public FanClubViewModel(FakeAccessDatabase accessDataBase)
+		public FanClubViewModel(FakeAccessDatabase accessDataBase, NavigationManager navigation)
 		{
+			navigationManager = navigation;
+
 			fakeAccess = accessDataBase;
 			AllFansCollection = fakeAccess.GetAllFans();
 
@@ -74,6 +78,13 @@ namespace FansApp.ViewModel
 		{
 			fakeAccess.RemoveFan(id);
 			AllFansCollection.RemoveAll(x => x.Id == id);
+		}
+
+		///<inheritdoc cref="IFanClubViewModel.OpenFanPage(int)"/>
+		public void OpenFanPage(int id)
+		{
+			string urlToFan = "/fan/" + id;
+			navigationManager.NavigateTo(urlToFan, true);
 		}
 
 		#endregion

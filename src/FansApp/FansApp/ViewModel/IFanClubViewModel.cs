@@ -54,5 +54,11 @@ namespace FansApp.ViewModel
 		/// </summary>
 		/// <param name="id"></param>
 		void RemoveFan(int id);
+
+		/// <summary>
+		/// Permet d'ouvrir la page du fan
+		/// </summary>
+		/// <param name="id"></param>
+		void OpenFanPage(int id);
 	}
 }

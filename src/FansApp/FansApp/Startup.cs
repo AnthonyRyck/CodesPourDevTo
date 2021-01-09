@@ -34,6 +34,9 @@ namespace FansApp
 
 			// ViewModel pour le FanClub
 			services.AddScoped<IFanClubViewModel, FanClubViewModel>();
+
+			// ViewModel pour un Fan
+			services.AddScoped<IFanViewModel, FanViewModel>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -21,5 +21,10 @@ namespace FansApp.Data
 		/// Nombre de clique reçu
 		/// </summary>
 		public int NombreDeClickRecu { get; set; }
+
+		/// <summary>
+		/// Autres informations sur le fan.
+		/// </summary>
+		public string InfoDiverse { get; set; }
 	}
 }

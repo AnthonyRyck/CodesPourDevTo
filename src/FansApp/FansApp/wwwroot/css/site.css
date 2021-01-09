@@ -79,6 +79,14 @@ a, .btn-link {
     flex-wrap: wrap;
 }
 
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.1);
+}
+
 
 
 /*************************/
