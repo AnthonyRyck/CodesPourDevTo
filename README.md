@@ -15,5 +15,6 @@ Codes d'exemple pour les articles que j'écris sur [**ctrl-alt-suppr.dev**](http
     * Code source : [ici](https://github.com/AnthonyRyck/CodesPourDevTo/tree/master/src/FansApp)
     * [Article](https://www.ctrl-alt-suppr.dev/2021/01/01/mvvm-avec-blazor/)
     
-- **Communication entre composants - Part 2** 
-    * _en cours de rédaction_ 
+- **Communication entre composants - Part 2**
+    * Code source : [ici](https://github.com/AnthonyRyck/CodesPourDevTo/tree/master/src/FansApp)
+    * [Article](https://www.ctrl-alt-suppr.dev/2021/01/18/communiquer-entre-composants-avec-blazor-part-2/)
