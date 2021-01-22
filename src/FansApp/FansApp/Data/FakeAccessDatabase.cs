@@ -18,15 +18,19 @@ namespace FansApp.Data
 
 		public FakeAccessDatabase()
 		{
-			FansCollection = new List<Fan>();
-			FansCollection.Add(new Fan() { Id=1 , Nom = "Michel", NombreDeClickRecu = 0, InfoDiverse = "Plein d'infos" });
-			FansCollection.Add(new Fan() { Id=2 , Nom = "Jean", NombreDeClickRecu = 0, InfoDiverse = "Plein d'infos" });
-			FansCollection.Add(new Fan() { Id=3 , Nom = "George", NombreDeClickRecu = 0, InfoDiverse = "George en Français est la déclinaison anglaise de Georges" });
-			FansCollection.Add(new Fan() { Id=4 , Nom = "Marcel", NombreDeClickRecu = 0, InfoDiverse = "Plein d'infos" });
-			FansCollection.Add(new Fan() { Id=5 , Nom = "Christophe", NombreDeClickRecu = 0, InfoDiverse = "Christophe est un prénom masculin qui vient du grec Χριστοφόρος (Christophóros), littéralement « celui qui porte le Christ ». Il est composé à partir des éléments χρίστος (chrístos) « Christ, sacré » et φέρω (phérō) « porter »." });
-			FansCollection.Add(new Fan() { Id=6 , Nom = "Germain", NombreDeClickRecu = 0, InfoDiverse = "Mange des chats, comme ALF." });
-			FansCollection.Add(new Fan() { Id=7 , Nom = "Ronan", NombreDeClickRecu = 0, InfoDiverse = "Aime le chocolat." });
+			//FansCollection = new List<Fan>();
+			//FansCollection.Add(new Fan() { Id=1 , Nom = "Michel", NombreDeClickRecu = 0, InfoDiverse = "Plein d'infos" });
+			//FansCollection.Add(new Fan() { Id=2 , Nom = "Jean", NombreDeClickRecu = 0, InfoDiverse = "Plein d'infos" });
+			//FansCollection.Add(new Fan() { Id=3 , Nom = "George", NombreDeClickRecu = 0, InfoDiverse = "George en Français est la déclinaison anglaise de Georges" });
+			//FansCollection.Add(new Fan() { Id=4 , Nom = "Marcel", NombreDeClickRecu = 0, InfoDiverse = "Plein d'infos" });
+			//FansCollection.Add(new Fan() { Id=5 , Nom = "Christophe", NombreDeClickRecu = 0, InfoDiverse = "Christophe est un prénom masculin qui vient du grec Χριστοφόρος (Christophóros), littéralement « celui qui porte le Christ ». Il est composé à partir des éléments χρίστος (chrístos) « Christ, sacré » et φέρω (phérō) « porter »." });
+			//FansCollection.Add(new Fan() { Id=6 , Nom = "Germain", NombreDeClickRecu = 0, InfoDiverse = "Mange des chats, comme ALF." });
+			//FansCollection.Add(new Fan() { Id=7 , Nom = "Ronan", NombreDeClickRecu = 0, InfoDiverse = "Aime le chocolat." });
+
+			InitCollection();
 		}
+
+		
 
 		/// <summary>
 		/// Retourne la liste des Fans
@@ -89,5 +93,17 @@ namespace FansApp.Data
 			FansCollection.RemoveAll(x => x.Id == id);
 		}
 
+
+		internal void InitCollection()
+		{
+			FansCollection = new List<Fan>();
+			FansCollection.Add(new Fan() { Id = 1, Nom = "Michel", NombreDeClickRecu = 0, InfoDiverse = "Plein d'infos" });
+			FansCollection.Add(new Fan() { Id = 2, Nom = "Jean", NombreDeClickRecu = 0, InfoDiverse = "Plein d'infos" });
+			FansCollection.Add(new Fan() { Id = 3, Nom = "George", NombreDeClickRecu = 0, InfoDiverse = "George en Français est la déclinaison anglaise de Georges" });
+			FansCollection.Add(new Fan() { Id = 4, Nom = "Marcel", NombreDeClickRecu = 0, InfoDiverse = "Plein d'infos" });
+			FansCollection.Add(new Fan() { Id = 5, Nom = "Christophe", NombreDeClickRecu = 0, InfoDiverse = "Christophe est un prénom masculin qui vient du grec Χριστοφόρος (Christophóros), littéralement « celui qui porte le Christ ». Il est composé à partir des éléments χρίστος (chrístos) « Christ, sacré » et φέρω (phérō) « porter »." });
+			FansCollection.Add(new Fan() { Id = 6, Nom = "Germain", NombreDeClickRecu = 0, InfoDiverse = "Mange des chats, comme ALF." });
+			FansCollection.Add(new Fan() { Id = 7, Nom = "Ronan", NombreDeClickRecu = 0, InfoDiverse = "Aime le chocolat." });
+		}
 	}
 }

@@ -1,4 +1,5 @@
 using FansApp.Data;
+using FansApp.Services;
 using FansApp.ViewModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -37,6 +38,9 @@ namespace FansApp
 
 			// ViewModel pour un Fan
 			services.AddScoped<IFanViewModel, FanViewModel>();
+
+			// Service pour remettre à zéro
+			services.AddHostedService<ResetHostedService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
