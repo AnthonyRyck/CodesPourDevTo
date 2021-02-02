@@ -32,8 +32,8 @@ namespace FansApp.Services
 		/// <returns></returns>
 		public Task StartAsync(CancellationToken cancellationToken)
 		{
-			// 24h en millisecondes
-			var tempsEnMillisecond = Convert.ToInt32(TimeSpan.FromHours(24).TotalMilliseconds);
+			// 10 jours en millisecondes
+			var tempsEnMillisecond = Convert.ToInt32(TimeSpan.FromHours(240).TotalMilliseconds);
 			_timerReset = new Timer(ResetCounter, null, 0, tempsEnMillisecond);
 			
 			return Task.CompletedTask;

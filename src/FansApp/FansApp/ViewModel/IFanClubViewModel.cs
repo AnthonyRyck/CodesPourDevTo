@@ -1,4 +1,6 @@
 ﻿using FansApp.Data;
+using FansApp.Models;
+using Microsoft.AspNetCore.Components.Forms;
 using System.Collections.Generic;
 
 namespace FansApp.ViewModel
@@ -13,12 +15,22 @@ namespace FansApp.ViewModel
 		/// <summary>
 		/// Indicateur pour afficher ou non le TemplatedDialog
 		/// </summary>
-		public bool CanDisplayNewFan { get; set; }
+		bool CanDisplayNewFan { get; set; }
+
+		/// <summary>
+		/// Indicateur pour afficher ou non le TemplatedDialog avec Validation
+		/// </summary>
+		bool CanDisplayNewFanWithValidation { get; set; }
 
 		/// <summary>
 		/// Permet d'ouvrir le TemplatedDialog
 		/// </summary>
 		void DisplayNewFan();
+
+		/// <summary>
+		/// Permet d'ouvrir le TemplatedDialog avec validation
+		/// </summary>
+		void DisplayNewFanWithValidation();
 
 		/// <summary>
 		/// Ferme le TemplatedDialog
@@ -60,5 +72,19 @@ namespace FansApp.ViewModel
 		/// </summary>
 		/// <param name="id"></param>
 		void OpenFanPage(int id);
+
+
+		/// <summary>
+		/// Pour la validation d'un fan
+		/// </summary>
+		EditContext EditContextValidationFan { get; set; }
+
+		/// <summary>
+		/// Model de validation pour un fan.
+		/// </summary>
+		FanModelValidation FanModelValidation { get; set; }
+
+
+		void ValidNewFan();
 	}
 }
