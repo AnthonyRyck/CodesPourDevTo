@@ -8,67 +8,74 @@
 		xmlns:localViewModel="clr-namespace:WpfApp.ViewModel"
 		mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-		<Grid.DataContext>
-			<localViewModel:MainViewModel />
-		</Grid.DataContext>
 
+	<Window.DataContext>
+		<localViewModel:MainViewModel />
+	</Window.DataContext>
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition />
 			<RowDefinition />
 			<RowDefinition />
 		</Grid.RowDefinitions>
 
-		<Grid>
-			<customcontrol:ProgressHexagon ColorHexagon="Blue"
-											Size="40"
-											x:Name="HexaProgress"/>
+		<Grid Grid.Row="0">
+			<StackPanel>
+				<customcontrol:ProgressHexagon ColorHexagon="Blue"
+												Size="40"
+												Margin="5"
+												x:Name="HexaProgress"
+												Visibility="{Binding Loading, Mode=OneWay}"/>
+				<Button Width="70" 
+						Command="{Binding StartStopClick}"
+						Margin="5">Stop/Start</Button>
+			</StackPanel>
 		</Grid>
 
 		<!--Saisie message Log-->
 		<Grid Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition />
-				<RowDefinition />
-			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
 
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition/>
-					<ColumnDefinition Width="Auto"/>
-				</Grid.ColumnDefinitions>
+			<Grid Grid.Column="0" Margin="5">
+				<StackPanel Orientation="Vertical">
+					<Label Grid.Column="0">Message à logger</Label>
 
-				<Grid Grid.Column="0" Margin="5">
-					<StackPanel Orientation="Vertical">
-						<Label Grid.Column="0">Message à logger</Label>
+					<RadioButton GroupName="InfoLog"
+										Content="Info"
+										Checked="RadioButton_Checked"/>
+					<RadioButton GroupName="InfoLog"
+										Content="Success"
+										Checked="RadioButton_Checked"/>
+					<RadioButton GroupName="InfoLog"
+										Content="Warning"
+										Checked="RadioButton_Checked"/>
+					<RadioButton GroupName="InfoLog"
+										Content="Error"
+										Checked="RadioButton_Checked"/>
+				</StackPanel>
 
-						<RadioButton GroupName="InfoLog"
-										Content="Info"/>
-						<RadioButton GroupName="InfoLog"
-										Content="Warning"/>
-						<RadioButton GroupName="InfoLog"
-										Content="Error" />
-					</StackPanel>
-				
-				</Grid>
+			</Grid>
 
-				<TextBox Grid.Column="1" Text="{Binding }" />
+			<TextBox Grid.Column="1" Text="{Binding MessageToLog, Mode=TwoWay}" />
 
-				<Button Content="Envoyer"
+			<Button Content="Envoyer"
 						Margin="20"
 						Grid.Column="2"
-						Height="30"/>
-			</Grid>
+						Height="30"
+						Command="{Binding AddLogsClick}"/>
 
 		</Grid>
 
 
 		<!--Logger-->
 		<Grid Grid.Row="2">
-			<!--<customcontrol:LoggerControl 
-						AllLogs=""
-						Margin="10" />-->
+			<customcontrol:LoggerControl 
+						AllLogs="{Binding Logs, Mode=OneWay}"
+						Margin="10" />
 		</Grid>
 	</Grid>
 </Window>

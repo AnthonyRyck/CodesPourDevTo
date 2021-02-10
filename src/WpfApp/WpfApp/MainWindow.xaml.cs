@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp.ViewModel;
 
 namespace WpfApp
 {
@@ -23,6 +24,20 @@ namespace WpfApp
 		public MainWindow()
 		{
 			InitializeComponent();
+		}
+
+		private void RadioButton_Checked(object sender, RoutedEventArgs e)
+		{
+			RadioButton radioButtonTypeInfo = (sender as RadioButton);
+
+			var viewModel = GetViewModel();
+			viewModel.StatusLog = radioButtonTypeInfo.Content.ToString();
+		}
+
+
+		private MainViewModel GetViewModel()
+		{
+			return this.DataContext as MainViewModel;
 		}
 	}
 }
