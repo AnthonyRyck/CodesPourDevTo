@@ -1,0 +1,64 @@
+﻿@page "/titanic"
+
+@using FansApp.ViewModel
+
+@inject ITitanicViewModel ViewModel
+
+<h3>Allez-vous survivre au Titanic ?</h3>
+
+<div class="border-rounded margin-5px">
+	<EditForm OnValidSubmit="@ViewModel.OnValidSubmit" 
+			  Model="@ViewModel.PassageModel">
+		<div>
+			@* Super IMPORTANT !!! *@
+			<DataAnnotationsValidator />
+
+			<div>
+				<ValidationMessage For="@(() => ViewModel.PassageModel.Classe)" />
+			</div>
+			<label>Choisir la Classe du passagé :</label>
+			<InputNumber @bind-Value="ViewModel.PassageModel.Classe" ></InputNumber>
+		</div>
+
+		<div>
+			<div>
+				<ValidationMessage For="@(() => ViewModel.PassageModel.Sexe)" />
+			</div>
+			<div>
+				<label id="sexe">Sexe du passage :</label>
+				<InputSelect @bind-Value=ViewModel.PassageModel.Sexe>
+				  <option value=""></option>
+				  <option value="male">Homme</option>
+				  <option value="female">Femme</option>
+				</InputSelect>
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<ValidationMessage For="@(() => ViewModel.PassageModel.Age)" />
+			</div>
+			<div>
+				<label>Age du passagé :</label>
+				<InputNumber @bind-Value="ViewModel.PassageModel.Age"></InputNumber>
+			</div>
+		</div>
+
+		<div class="row margin-5px">
+			<button type="submit">Tester</button>
+			<button @onclick="ViewModel.OnCancel">Annuler</button>
+		</div>
+	</EditForm>
+</div>
+
+<div class="margin-5px border-rounded">
+	<span>Chance de survie : @ViewModel.PourcentageSurvie</span>
+
+</div>
+
+
+
+
+@code {
+
+}

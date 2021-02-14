@@ -41,6 +41,10 @@ namespace FansApp
 
 			// Service pour remettre à zéro
 			services.AddHostedService<ResetHostedService>();
+
+
+			// Titanic Model
+			services.AddScoped<ITitanicViewModel, TitanicViewModel>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
