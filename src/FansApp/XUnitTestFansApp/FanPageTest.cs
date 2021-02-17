@@ -5,9 +5,9 @@ using FansApp.Data;
 using Moq;
 using System;
 using Xunit;
+using Microsoft.Extensions.DependencyInjection;
 
 using static Bunit.ComponentParameterFactory;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace XUnitTestFansApp
 {
