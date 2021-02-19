@@ -1,7 +1,6 @@
 ﻿using Bunit;
 using FansApp.Composants;
 using FansApp.Data;
-using Microsoft.AspNetCore.Components;
 using System;
 using Xunit;
 
@@ -17,7 +16,7 @@ namespace XUnitTestFansApp
 			Nom = "FanTest",
 			DateInscription = new DateTime(2021, 1, 1),
 			NombreDeClickRecu = 150,
-			InfoDiverse = "Fan de Test",
+			InfoDiverses = "Fan de Test",
 		};
 
 
@@ -27,19 +26,13 @@ namespace XUnitTestFansApp
 			#region ARRANGE
 
 			bool isClickAddClick = false;
-			bool isClickOpenPage = false;
-
+			
 			TestContext ctx = new TestContext();
 			var renderedComponent = ctx.RenderComponent<FanComponent>(Parameter("EtreFan", fanDeTest),
 								EventCallback(nameof(FanComponent.ClickCallback),
 									(e) =>
 									{
 										isClickAddClick = true;
-									}),
-								EventCallback(nameof(FanComponent.OnClickToFanPage),
-									(e) =>
-									{
-										isClickOpenPage = true;
 									}));
 
 			#endregion
@@ -54,7 +47,6 @@ namespace XUnitTestFansApp
 			#region ASSERT
 
 			Assert.True(isClickAddClick);
-			Assert.False(isClickOpenPage);
 
 			#endregion
 		}
@@ -65,16 +57,10 @@ namespace XUnitTestFansApp
 		{
 			#region ARRANGE
 
-			bool isClickAddClick = false;
 			bool isClickOpenPage = false;
 
 			TestContext ctx = new TestContext();
-			var renderedComponent = ctx.RenderComponent<FanComponent>(Parameter("EtreFan", fanDeTest),
-								EventCallback(nameof(FanComponent.ClickCallback),
-									(e) =>
-									{
-										isClickAddClick = true;
-									}),
+			IRenderedComponent<FanComponent> renderedComponent = ctx.RenderComponent<FanComponent>(Parameter("EtreFan", fanDeTest),
 								EventCallback(nameof(FanComponent.OnClickToFanPage),
 									(e) =>
 									{
@@ -92,7 +78,6 @@ namespace XUnitTestFansApp
 
 			#region ASSERT
 
-			Assert.False(isClickAddClick);
 			Assert.True(isClickOpenPage);
 
 			#endregion

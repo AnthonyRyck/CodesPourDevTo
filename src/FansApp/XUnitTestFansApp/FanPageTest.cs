@@ -19,7 +19,7 @@ namespace XUnitTestFansApp
 			Nom = "FanTest",
 			DateInscription = new DateTime(2021, 1, 1),
 			NombreDeClickRecu = 150,
-			InfoDiverse = "Fan de Test",
+			InfoDiverses = "Fan de Test",
 		};
 
 
@@ -28,20 +28,10 @@ namespace XUnitTestFansApp
 		{
 			#region ARRANGE
 
-			//var mock = new Mock<IFanViewModel>();
-
-			//mock.Setup(library => library.LoadFan(12));
-			//mock.Setup(fan => fan.FanSelected)
-			//	.Returns(fanDeTest);
-
-			//var ctx = new TestContext();
-			//// Enregistre notre service avec notre moq
-			//ctx.Services.AddSingleton<IFanViewModel>(mock.Object);
-
-			var ctx = InitComposant();
+			var ctx = InitContextTest();
 
 			#endregion
-			
+
 			#region ACT
 
 			// Création du composant FanPage avec les paramètres si besoin.
@@ -53,27 +43,23 @@ namespace XUnitTestFansApp
 
 			// NOTE: le "#" est TRES IMPORTANT !!!
 
-			// InfoDiverse : Fan de Test
-			var textContent = renderedComponent.Find("#infoDiverse").TextContent;
+			// infoDiverses : Fan de Test
+			var textContent = renderedComponent.Find("#infoDiverses").TextContent;
+			Assert.Equal("Info Diverses : " + fanDeTest.InfoDiverses, textContent);
 
-			// <div id="infoDiverse"><u>InfoDiverse</u> : Fan de Test</div>
-			var outerHtml = renderedComponent.Find("#infoDiverse").OuterHtml;
+			// <div id="infoDiverses"><u>infoDiverses</u> : Fan de Test</div>
+			var outerHtml = renderedComponent.Find("#infoDiverses").OuterHtml;
+			// Ajouter le @ et doubler les "" pour faire l'échappement.
+			Assert.Equal(@"<div id=""infoDiverses""><u>Info Diverses</u> : " + fanDeTest.InfoDiverses + "</div>", outerHtml);
 
-			// <u>InfoDiverse</u> : Fan de Test
-			var innerHtml = renderedComponent.Find("#infoDiverse").InnerHtml;
+			// <u>infoDiverses</u> : Fan de Test
+			// Faire attention aux espaces qui sont mis dans les div.
+			var innerHtml = renderedComponent.Find("#infoDiverses").InnerHtml;
+			Assert.Equal("<u>Info Diverses</u> : " + fanDeTest.InfoDiverses, innerHtml);
 
 			// "  : Fan de Test"
-			string textInfoDivers = renderedComponent.Find("#infoDiverse").LastChild.TextContent;
-
-
-			Assert.Equal("Info Divers : " + fanDeTest.InfoDiverse, textContent);
-
-			// Ajouter le @ et doubler les "" pour faire l'échappement.
-			Assert.Equal(@"<div id=""infoDiverse""><u>Info Divers</u> : " + fanDeTest.InfoDiverse + "</div>", outerHtml);
-			
-			// Faire attention aux espaces qui sont mis dans les div.
-			Assert.Equal("<u>Info Divers</u> : " + fanDeTest.InfoDiverse, innerHtml);
-			Assert.Equal(" : " + fanDeTest.InfoDiverse, textInfoDivers);
+			string textInfoDivers = renderedComponent.Find("#infoDiverses").LastChild.TextContent;
+			Assert.Equal(" : " + fanDeTest.InfoDiverses, textInfoDivers);
 
 			#endregion
 		}
@@ -83,7 +69,7 @@ namespace XUnitTestFansApp
 		{
 			#region ARRANGE
 
-			var ctx = InitComposant();
+			var ctx = InitContextTest();
 
 			#endregion
 
@@ -102,11 +88,10 @@ namespace XUnitTestFansApp
 			#endregion
 		}
 
-		private TestContext InitComposant()
+		private TestContext InitContextTest()
 		{
 			var mock = new Mock<IFanViewModel>();
 
-			mock.Setup(fan => fan.LoadFan(12));
 			mock.Setup(fan => fan.FanSelected)
 				.Returns(fanDeTest);
 

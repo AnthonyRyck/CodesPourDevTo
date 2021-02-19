@@ -25,7 +25,7 @@ namespace FansApp.Data
 		/// <summary>
 		/// Autres informations sur le fan.
 		/// </summary>
-		public string InfoDiverse { get; set; }
+		public string InfoDiverses { get; set; }
 
 		/// <summary>
 		/// Date d'inscription du fan

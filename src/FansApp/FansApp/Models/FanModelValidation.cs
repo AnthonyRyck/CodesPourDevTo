@@ -14,7 +14,7 @@ namespace FansApp.Models
 		public string Nom { get; set; }
 
 		[Required(ErrorMessage = "Manque l'info.")]
-		public string InfoDiverse { get; set; }
+		public string infoDiverses { get; set; }
 
 		[Required(ErrorMessage = "Choisir une date d'inscription")]
 		public DateTime? DateInscription { get; set; }
@@ -24,7 +24,7 @@ namespace FansApp.Models
 			return new Fan()
 			{
 				Nom = this.Nom,
-				InfoDiverse = this.InfoDiverse,
+				InfoDiverses = this.infoDiverses,
 				DateInscription = DateInscription.Value
 			};
 		}
