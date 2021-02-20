@@ -26,9 +26,10 @@ namespace XUnitTestFansApp
 			#region ARRANGE
 
 			bool isClickAddClick = false;
-			
+			var etreFan = Parameter("EtreFan", fanDeTest);
+
 			TestContext ctx = new TestContext();
-			var renderedComponent = ctx.RenderComponent<FanComponent>(Parameter("EtreFan", fanDeTest),
+			var renderedComponent = ctx.RenderComponent<FanComponent>(etreFan,
 								EventCallback(nameof(FanComponent.ClickCallback),
 									(e) =>
 									{
@@ -58,9 +59,10 @@ namespace XUnitTestFansApp
 			#region ARRANGE
 
 			bool isClickOpenPage = false;
+			var etreFan = Parameter("EtreFan", fanDeTest);
 
 			TestContext ctx = new TestContext();
-			IRenderedComponent<FanComponent> renderedComponent = ctx.RenderComponent<FanComponent>(Parameter("EtreFan", fanDeTest),
+			IRenderedComponent<FanComponent> renderedComponent = ctx.RenderComponent<FanComponent>(etreFan,
 								EventCallback(nameof(FanComponent.OnClickToFanPage),
 									(e) =>
 									{

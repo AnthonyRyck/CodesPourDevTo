@@ -29,13 +29,14 @@ namespace XUnitTestFansApp
 			#region ARRANGE
 
 			var ctx = InitContextTest();
+			ComponentParameter paramIdFan = Parameter(nameof(FanPage.idFan), 12);
 
 			#endregion
 
 			#region ACT
 
 			// Création du composant FanPage avec les paramètres si besoin.
-			var renderedComponent = ctx.RenderComponent<FanPage>(Parameter(nameof(FanPage.idFan), 12));
+			var renderedComponent = ctx.RenderComponent<FanPage>(paramIdFan);
 
 			#endregion
 
