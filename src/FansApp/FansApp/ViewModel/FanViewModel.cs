@@ -5,7 +5,7 @@ namespace FansApp.ViewModel
 {
 	public class FanViewModel : IFanViewModel
 	{
-		private FakeAccessDatabase AccessDatabase { get; set; }
+		private IAccessDatabase AccessDatabase { get; set; }
 
 		/// <see cref="IFanViewModel.IdFan"/>
 		public int IdFan { get; set; }
@@ -13,7 +13,7 @@ namespace FansApp.ViewModel
 		/// <see cref="IFanViewModel.FanSelected"/>
 		public Fan FanSelected { get; set; }
 
-		public FanViewModel(FakeAccessDatabase fakeAccessDatabase)
+		public FanViewModel(IAccessDatabase fakeAccessDatabase)
 		{
 			AccessDatabase = fakeAccessDatabase;
 		}

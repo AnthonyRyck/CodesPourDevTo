@@ -12,11 +12,11 @@ namespace FansApp.Services
 	{
 		private Timer _timerReset;
 
-		private readonly FakeAccessDatabase FakeAccess;
+		private readonly IAccessDatabase FakeAccess;
 
 		#region Constructeur
 
-		public ResetHostedService(FakeAccessDatabase fakeAccess)
+		public ResetHostedService(IAccessDatabase fakeAccess)
 		{
 			FakeAccess = fakeAccess;
 		}

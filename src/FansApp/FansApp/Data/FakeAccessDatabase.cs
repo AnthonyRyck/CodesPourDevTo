@@ -8,7 +8,7 @@ namespace FansApp.Data
 	/// <summary>
 	/// 
 	/// </summary>
-	public class FakeAccessDatabase
+	public class FakeAccessDatabase : IAccessDatabase
 	{
 		/// <summary>
 		/// Collection des fans.
@@ -18,19 +18,8 @@ namespace FansApp.Data
 
 		public FakeAccessDatabase()
 		{
-			//FansCollection = new List<Fan>();
-			//FansCollection.Add(new Fan() { Id=1 , Nom = "Michel", NombreDeClickRecu = 0, infoDiverses = "Plein d'infos" });
-			//FansCollection.Add(new Fan() { Id=2 , Nom = "Jean", NombreDeClickRecu = 0, infoDiverses = "Plein d'infos" });
-			//FansCollection.Add(new Fan() { Id=3 , Nom = "George", NombreDeClickRecu = 0, infoDiverses = "George en Français est la déclinaison anglaise de Georges" });
-			//FansCollection.Add(new Fan() { Id=4 , Nom = "Marcel", NombreDeClickRecu = 0, infoDiverses = "Plein d'infos" });
-			//FansCollection.Add(new Fan() { Id=5 , Nom = "Christophe", NombreDeClickRecu = 0, infoDiverses = "Christophe est un prénom masculin qui vient du grec Χριστοφόρος (Christophóros), littéralement « celui qui porte le Christ ». Il est composé à partir des éléments χρίστος (chrístos) « Christ, sacré » et φέρω (phérō) « porter »." });
-			//FansCollection.Add(new Fan() { Id=6 , Nom = "Germain", NombreDeClickRecu = 0, infoDiverses = "Mange des chats, comme ALF." });
-			//FansCollection.Add(new Fan() { Id=7 , Nom = "Ronan", NombreDeClickRecu = 0, infoDiverses = "Aime le chocolat." });
-
 			InitCollection();
 		}
-
-		
 
 		/// <summary>
 		/// Retourne la liste des Fans
@@ -76,11 +65,11 @@ namespace FansApp.Data
 		/// <param name="nom"></param>
 		public Fan AddFan(string nom)
 		{
-			Fan newFan = new Fan() 
-			{ 
-				Id = GetNextId(), 
-				Nom = nom, 
-				NombreDeClickRecu = 0, 
+			Fan newFan = new Fan()
+			{
+				Id = GetNextId(),
+				Nom = nom,
+				NombreDeClickRecu = 0,
 				DateInscription = DateTime.Now,
 				InfoDiverses = "Aucune saisie"
 			};
@@ -112,10 +101,10 @@ namespace FansApp.Data
 		}
 
 
-		internal void InitCollection()
+		public void InitCollection()
 		{
 			FansCollection = new List<Fan>();
-			FansCollection.Add(new Fan() { Id = 1, Nom = "Michel", NombreDeClickRecu = 0, InfoDiverses = "Plein d'infos", DateInscription = new DateTime(2018,5,10) });
+			FansCollection.Add(new Fan() { Id = 1, Nom = "Michel", NombreDeClickRecu = 0, InfoDiverses = "Plein d'infos", DateInscription = new DateTime(2018, 5, 10) });
 			FansCollection.Add(new Fan() { Id = 2, Nom = "Jean", NombreDeClickRecu = 0, InfoDiverses = "Plein d'infos", DateInscription = new DateTime(2018, 5, 10) });
 			FansCollection.Add(new Fan() { Id = 3, Nom = "George", NombreDeClickRecu = 0, InfoDiverses = "George en Français est la déclinaison anglaise de Georges", DateInscription = new DateTime(2018, 5, 10) });
 			FansCollection.Add(new Fan() { Id = 4, Nom = "Marcel", NombreDeClickRecu = 0, InfoDiverses = "Plein d'infos", DateInscription = new DateTime(2018, 5, 10) });

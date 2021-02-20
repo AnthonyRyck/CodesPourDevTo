@@ -11,10 +11,10 @@ namespace FansApp.ViewModel
 {
 	public class FanClubViewModel : IFanClubViewModel
 	{
-		private FakeAccessDatabase fakeAccess;
+		private IAccessDatabase fakeAccess;
 		private NavigationManager navigationManager;
 
-		public FanClubViewModel(FakeAccessDatabase accessDataBase, NavigationManager navigation)
+		public FanClubViewModel(IAccessDatabase accessDataBase, NavigationManager navigation)
 		{
 			navigationManager = navigation;
 

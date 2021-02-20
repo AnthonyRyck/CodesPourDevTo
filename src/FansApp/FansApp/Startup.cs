@@ -31,7 +31,7 @@ namespace FansApp
 			services.AddServerSideBlazor();
 
 			// Un service pour simuler l'accès à une base de données, ou un service API
-			services.AddSingleton<FakeAccessDatabase>();
+			services.AddSingleton<IAccessDatabase, FakeAccessDatabase>();
 
 			// ViewModel pour le FanClub
 			services.AddScoped<IFanClubViewModel, FanClubViewModel>();
