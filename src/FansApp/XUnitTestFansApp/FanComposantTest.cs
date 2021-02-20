@@ -19,7 +19,6 @@ namespace XUnitTestFansApp
 			InfoDiverses = "Fan de Test",
 		};
 
-
 		[Fact]
 		public void TestAddClick()
 		{
@@ -27,19 +26,15 @@ namespace XUnitTestFansApp
 
 			bool isClickAddClick = false;
 			var etreFan = Parameter("EtreFan", fanDeTest);
-
-			TestContext ctx = new TestContext();
-			var renderedComponent = ctx.RenderComponent<FanComponent>(etreFan,
-								EventCallback(nameof(FanComponent.ClickCallback),
-									(e) =>
-									{
-										isClickAddClick = true;
-									}));
-
+			var clickCallBackTest = EventCallback(nameof(FanComponent.ClickCallback), (e) => { isClickAddClick = true; });
+			
 			#endregion
 
 			#region ACT
 
+			TestContext ctx = new TestContext();
+			var renderedComponent = ctx.RenderComponent<FanComponent>(etreFan, clickCallBackTest);
+			
 			var buttonTest = renderedComponent.Find("button");
 			buttonTest.Click();
 
@@ -52,7 +47,6 @@ namespace XUnitTestFansApp
 			#endregion
 		}
 
-
 		[Fact]
 		public void TestClickToOpenFanPage()
 		{
@@ -60,18 +54,14 @@ namespace XUnitTestFansApp
 
 			bool isClickOpenPage = false;
 			var etreFan = Parameter("EtreFan", fanDeTest);
-
-			TestContext ctx = new TestContext();
-			IRenderedComponent<FanComponent> renderedComponent = ctx.RenderComponent<FanComponent>(etreFan,
-								EventCallback(nameof(FanComponent.OnClickToFanPage),
-									(e) =>
-									{
-										isClickOpenPage = true;
-									}));
-
+			var onClickToFanPageTest = EventCallback(nameof(FanComponent.OnClickToFanPage), (e) => { isClickOpenPage = true; });
+			
 			#endregion
 
 			#region ACT
+
+			TestContext ctx = new TestContext();
+			IRenderedComponent<FanComponent> renderedComponent = ctx.RenderComponent<FanComponent>(etreFan, onClickToFanPageTest);
 
 			var buttonTest = renderedComponent.Find("#openFanPage");
 			buttonTest.Click();
