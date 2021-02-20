@@ -113,11 +113,7 @@ namespace FansApp.ViewModel
 
 		public void ValidNewFan()
 		{
-			if (!EditContextValidationFan.Validate())
-			{
-				return;
-			}
-			else
+			if (EditContextValidationFan.Validate())
 			{
 				CanDisplayNewFanWithValidation = false;
 
