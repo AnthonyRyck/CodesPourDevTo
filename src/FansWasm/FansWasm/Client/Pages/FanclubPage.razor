@@ -1,8 +1,7 @@
 ﻿@page "/FanclubPage"
 
-@using FansApp.ViewModel
-@using FansApp.Composants
-
+@using FansWasm.Client.Composants
+@using FansWasm.Client.ViewModel
 
 @inject IFanClubViewModel viewModel
 
@@ -30,10 +29,20 @@
 									OnValidSubmit="viewModel.ValidNewFan"/>
 </TemplatedDialog>
 
-<FanClubComposant FanCollection="@viewModel.AllFansCollection"
-				  GetSonClickCallBack="@viewModel.AddClick"
-				  OnClickToOpenFanPage="@viewModel.OpenFanPage" />
+@if (viewModel.AllFansCollection == null)
+{
+	 <p><em>Loading...</em></p>
+}
+else{
+<FanClubComposant FanCollection="viewModel.AllFansCollection"
+				  GetSonClickCallBack="viewModel.AddClick"
+				  OnClickToOpenFanPage="viewModel.OpenFanPage" />	
+}
+
 
 @code {
-
+	protected async override Task OnInitializedAsync()
+	{
+           await viewModel.GetFans();
+	}
 }

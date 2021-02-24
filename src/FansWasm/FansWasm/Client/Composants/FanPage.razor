@@ -1,0 +1,36 @@
+﻿@page "/fan/{idFan:int}"
+
+@using ViewModel
+@inject IFanViewModel ViewModel
+
+@if (ViewModel.FanSelected == null)
+{
+	<h3>Erreur</h3>
+
+	<div>Pas de Fan trouvé avec l'ID = @idFan</div>
+}
+else
+{
+	<h3>Page du Fan - </h3>
+
+	<div><u>Nom</u> : @ViewModel.FanSelected.Nom</div>
+	<div><u>Nombre de clique reçu</u> : @ViewModel.FanSelected.NombreDeClickRecu</div>
+	<div id="infoDiverses"><u>Info Diverses</u> : @ViewModel.FanSelected.InfoDiverses</div>
+	<div><u>Inscription</u> : <span id="dateInscrit">@ViewModel.FanSelected.DateInscription.ToString("d")</span></div>
+}
+
+@code {
+
+	[Parameter]
+	public int idFan { get; set; }
+
+	/// <summary>
+	/// Appelé une fois que les Parametres sont tous récupérés du composant parent.
+	/// </summary>
+	protected override void OnParametersSet()
+	{
+		ViewModel.LoadFan(idFan);
+		base.OnParametersSet();
+	}
+
+}
