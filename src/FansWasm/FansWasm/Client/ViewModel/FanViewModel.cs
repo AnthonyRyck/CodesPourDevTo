@@ -2,13 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace FansWasm.Client.ViewModel
 {
 	public class FanViewModel : IFanViewModel
 	{
-		//private IAccessDatabase AccessDatabase { get; set; }
+		private HttpClient ClientHttp { get; set; }
 
 		/// <see cref="IFanViewModel.IdFan"/>
 		public int IdFan { get; set; }
@@ -16,19 +18,16 @@ namespace FansWasm.Client.ViewModel
 		/// <see cref="IFanViewModel.FanSelected"/>
 		public Fan FanSelected { get; set; }
 
-		//public FanViewModel(IAccessDatabase fakeAccessDatabase)
-		//{
-		//	AccessDatabase = fakeAccessDatabase;
-		//}
+		public FanViewModel(HttpClient httpClient)
+		{
+			ClientHttp = httpClient;
+		}
 
 		/// <see cref="IFanViewModel.LoadFan(int)"/>
-		public void LoadFan(int id)
+		public async Task LoadFan(int id)
 		{
-			//var fan = AccessDatabase.GetFan(id);
-			//if(fan != null)
-			//{
-			//	FanSelected = fan;
-			//}
+			FanSelected = await ClientHttp.GetFromJsonAsync<Fan>($"FansApi/{id}");
 		}
+
 	}
 }

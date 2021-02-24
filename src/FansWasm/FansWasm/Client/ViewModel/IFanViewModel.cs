@@ -22,6 +22,6 @@ namespace FansWasm.Client.ViewModel
 		/// Charge le Fan donné en ID
 		/// </summary>
 		/// <param name="id"></param>
-		void LoadFan(int id);
+		Task LoadFan(int id);
 	}
 }

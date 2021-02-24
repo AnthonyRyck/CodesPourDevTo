@@ -26,6 +26,12 @@ namespace FansWasm.Server.Controllers
 			return AccessDatabase.GetAllFans().ToArray();
 		}
 
+		[HttpGet("{id}")]
+		public Fan Get(int id)
+		{
+			return AccessDatabase.GetFan(id);
+		}
+
 		[HttpDelete]
 		public void RemoveFan(int id)
 		{
