@@ -1,5 +1,6 @@
 ﻿using FansWasm.Server.Data;
 using FansWasm.Shared;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,21 @@ namespace FansWasm.Server.Controllers
 		[HttpGet("{id}")]
 		public Fan Get(int id)
 		{
-			return AccessDatabase.GetFan(id);
+			var fan = AccessDatabase.GetFan(id);
+
+			if (fan == null)
+			{
+				fan = new Fan()
+				{
+					Id = id,
+					Nom = "Aucun nom",
+					InfoDiverses = "Aucun fan de trouvé avec cet ID",
+					NombreDeClickRecu = 0,
+					DateInscription = DateTime.Now
+				};
+			}
+
+			return fan;
 		}
 
 		[HttpDelete]

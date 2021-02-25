@@ -1,5 +1,5 @@
 using Bunit;
-using FansWasm.Client.Composants;
+using FansWasm.Client.Pages;
 using FansWasm.Client.ViewModel;
 using FansWasm.Shared;
 using Moq;
