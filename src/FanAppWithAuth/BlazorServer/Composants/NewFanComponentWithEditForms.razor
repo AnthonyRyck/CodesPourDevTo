@@ -1,0 +1,58 @@
+﻿@using FansApp.Models
+
+<div>
+	<EditForm EditContext="@EditContextValidation"
+			  OnValidSubmit="@OnValidSubmit" Context="valideMoi">
+
+		<div>
+			@* Super IMPORTANT !!! *@
+			<DataAnnotationsValidator />
+
+			<div>
+				<ValidationMessage For="@(() => ((FanModelValidation)EditContextValidation.Model).Nom)" />
+			</div>
+			<label>Nom du nouveau fan :</label>
+			<input type="text" @bind-value="FanModel.Nom" />
+		</div>
+
+		<div>
+			<div>
+				<ValidationMessage For="@(() => ((FanModelValidation)EditContextValidation.Model).infoDiverses)" />
+			</div>
+			<div>
+				<label>Info sur fan :</label>
+				<input type="text" @bind-value="FanModel.infoDiverses" />
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<ValidationMessage For="@(() => ((FanModelValidation)EditContextValidation.Model).DateInscription)" />
+			</div>
+			<div>
+				<label>Date inscription :</label>
+				<input type="date" @bind-value="FanModel.DateInscription" />
+			</div>
+		</div>
+
+		<div class="row margin-5px">
+			<button type="submit">OK</button>
+			<button @onclick="OnCancel">Cancel</button>
+		</div>
+	</EditForm>
+</div>
+
+@code {
+
+	[Parameter]
+	public EventCallback OnCancel { get; set; }
+
+	[Parameter]
+	public EditContext EditContextValidation { get; set; }
+
+	[Parameter]
+	public EventCallback OnValidSubmit { get; set; }
+
+	[Parameter]
+	public FanModelValidation FanModel { get; set; }
+}

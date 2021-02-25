@@ -1,0 +1,39 @@
+﻿@page "/FanclubPage"
+
+@using FansApp.ViewModel
+@using FansApp.Composants
+
+
+@inject IFanClubViewModel viewModel
+
+<h3>Page du fan club</h3>
+
+<div>
+	<span>
+		<button @onclick="@viewModel.DisplayNewFan">Ajouter un nouveau membre</button>
+
+		<button @onclick="@viewModel.DisplayNewFanWithValidation">Ajouter un nouveau membre avec validation</button>
+	</span>
+</div>
+
+@*Sans validation*@
+<TemplatedDialog Show="viewModel.CanDisplayNewFan">
+	<NewFanComponent GetNameFanCallBack="viewModel.AddFan"
+					OnCancel="viewModel.CancelNewFan" />
+</TemplatedDialog>
+
+@*Avec validation des champs*@
+<TemplatedDialog Show="viewModel.CanDisplayNewFanWithValidation">
+	<NewFanComponentWithEditForms EditContextValidation="viewModel.EditContextValidationFan"
+									FanModel="viewModel.FanModelValidation"
+									OnCancel="viewModel.CancelNewFan"
+									OnValidSubmit="viewModel.ValidNewFan"/>
+</TemplatedDialog>
+
+<FanClubComposant FanCollection="@viewModel.AllFansCollection"
+				  GetSonClickCallBack="@viewModel.AddClick"
+				  OnClickToOpenFanPage="@viewModel.OpenFanPage" />
+
+@code {
+
+}

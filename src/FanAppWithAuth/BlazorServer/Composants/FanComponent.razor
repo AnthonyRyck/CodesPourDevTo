@@ -1,0 +1,25 @@
+﻿@using FansApp.Data
+
+<div id="openFanPage" class="fan grow" @onclick="OnClickToFanPage">
+	<div>
+		<div>ID : @EtreFan.Id</div>
+		<div>Je suis : @EtreFan.Nom</div>
+		<div>Nombre de clique sur moi : @EtreFan.NombreDeClickRecu</div>
+	</div>
+		
+	<button @onclick="ClickCallback" 
+			@onclick:stopPropagation="true">Click sur moi !</button>
+</div>
+
+
+@code {
+
+	[Parameter]
+	public Fan EtreFan { get; set; }
+
+	[Parameter]
+	public EventCallback ClickCallback { get; set; }
+
+	[Parameter]
+	public EventCallback OnClickToFanPage { get; set; }
+}
