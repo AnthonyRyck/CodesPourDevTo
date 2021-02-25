@@ -59,6 +59,10 @@ namespace FansApp
 
 			app.UseRouting();
 
+			// très important !
+			app.UseAuthentication();
+			app.UseAuthorization();
+
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapBlazorHub();
