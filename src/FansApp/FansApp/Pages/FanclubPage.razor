@@ -3,6 +3,8 @@
 @using FansApp.ViewModel
 @using FansApp.Composants
 
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<FanclubPage> localizer
 
 @inject IFanClubViewModel viewModel
 
@@ -10,24 +12,24 @@
 
 <div>
 	<span>
-		<button @onclick="@viewModel.DisplayNewFan">Ajouter un nouveau membre</button>
+		<button @onclick="@viewModel.DisplayNewFan">@localizer["AddNewMember"]</button>
 
-		<button @onclick="@viewModel.DisplayNewFanWithValidation">Ajouter un nouveau membre avec validation</button>
+		<button @onclick="@viewModel.DisplayNewFanWithValidation">@localizer["AddNewMemberValidation"]</button>
 	</span>
 </div>
 
 @*Sans validation*@
 <TemplatedDialog Show="viewModel.CanDisplayNewFan">
 	<NewFanComponent GetNameFanCallBack="viewModel.AddFan"
-					OnCancel="viewModel.CancelNewFan" />
+					 OnCancel="viewModel.CancelNewFan" />
 </TemplatedDialog>
 
 @*Avec validation des champs*@
 <TemplatedDialog Show="viewModel.CanDisplayNewFanWithValidation">
 	<NewFanComponentWithEditForms EditContextValidation="viewModel.EditContextValidationFan"
-									FanModel="viewModel.FanModelValidation"
-									OnCancel="viewModel.CancelNewFan"
-									OnValidSubmit="viewModel.ValidNewFan"/>
+								  FanModel="viewModel.FanModelValidation"
+								  OnCancel="viewModel.CancelNewFan"
+								  OnValidSubmit="viewModel.ValidNewFan" />
 </TemplatedDialog>
 
 <FanClubComposant FanCollection="@viewModel.AllFansCollection"

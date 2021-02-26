@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TitanicML.Model", "TitanicM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5DAA25E8-3920-42D3-A36E-DF3909AC4951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestFansApp", "XUnitTestFansApp\XUnitTestFansApp.csproj", "{8287D046-53EE-4612-96F0-0036EBE81D2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestFansApp", "XUnitTestFansApp\XUnitTestFansApp.csproj", "{8287D046-53EE-4612-96F0-0036EBE81D2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

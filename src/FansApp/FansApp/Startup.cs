@@ -4,11 +4,14 @@ using FansApp.ViewModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,6 +48,24 @@ namespace FansApp
 
 			// Titanic Model
 			services.AddScoped<ITitanicViewModel, TitanicViewModel>();
+
+			// Service pour la localization
+			services.AddLocalization(options => options.ResourcesPath = "Resources");
+			services.Configure<RequestLocalizationOptions>(options =>
+			{
+				// Définition de la liste de langue pris en charge.
+				var supportedCultures = new List<CultureInfo>()
+									{
+										 new CultureInfo("en-US"),
+										 new CultureInfo("fr-FR")
+									};
+
+				// Langue par défaut
+				options.DefaultRequestCulture = new RequestCulture("en-US");
+
+				options.SupportedCultures = supportedCultures;
+				options.SupportedUICultures = supportedCultures;
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,12 +80,15 @@ namespace FansApp
 				app.UseExceptionHandler("/Error");
 			}
 
+			// Middleware pour la localization
+			app.UseRequestLocalization(app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value);
+
 			app.UseStaticFiles();
-
 			app.UseRouting();
-
 			app.UseEndpoints(endpoints =>
 			{
+				// MapControllers - pour ajouter notre controller
+				endpoints.MapControllers();
 				endpoints.MapBlazorHub();
 				endpoints.MapFallbackToPage("/_Host");
 			});

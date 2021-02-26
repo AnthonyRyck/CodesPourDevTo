@@ -8,6 +8,10 @@ using Xunit;
 using Microsoft.Extensions.DependencyInjection;
 
 using static Bunit.ComponentParameterFactory;
+using Microsoft.AspNetCore.Builder;
+using System.Collections.Generic;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace XUnitTestFansApp
 {
@@ -99,6 +103,25 @@ namespace XUnitTestFansApp
 			var ctx = new TestContext();
 			// Enregistre notre service avec notre moq
 			ctx.Services.AddSingleton<IFanViewModel>(mock.Object);
+
+			// Service pour la localization
+			ctx.Services.AddLocalization(options => options.ResourcesPath = "Resources")
+						.Configure<RequestLocalizationOptions>(options =>
+						{
+							// Définition de la liste de langue pris en charge.
+							var supportedCultures = new List<CultureInfo>()
+													{
+														 new CultureInfo("en-US"),
+														 new CultureInfo("fr-FR")
+													};
+
+							// Langue par défaut
+							options.DefaultRequestCulture = new RequestCulture("en-US");
+
+							options.SupportedCultures = supportedCultures;
+							options.SupportedUICultures = supportedCultures;
+						});
+
 
 			return ctx;
 		}

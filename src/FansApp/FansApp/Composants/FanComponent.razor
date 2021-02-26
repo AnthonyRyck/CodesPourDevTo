@@ -1,14 +1,19 @@
 ﻿@using FansApp.Data
 
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<FanComponent> localizer
+
 <div id="openFanPage" class="fan grow" @onclick="OnClickToFanPage">
 	<div>
 		<div>ID : @EtreFan.Id</div>
-		<div>Je suis : @EtreFan.Nom</div>
-		<div>Nombre de clique sur moi : @EtreFan.NombreDeClickRecu</div>
+		<div id="iam">@localizer["JeSuis"].Value : @EtreFan.Nom</div>
+		<div>@localizer["NbreClickOnMe"].Value : @EtreFan.NombreDeClickRecu</div>
 	</div>
-		
-	<button @onclick="ClickCallback" 
-			@onclick:stopPropagation="true">Click sur moi !</button>
+
+	<button @onclick="ClickCallback"
+			@onclick:stopPropagation="true">
+		@localizer["ClickOnMe"].Value
+	</button>
 </div>
 
 

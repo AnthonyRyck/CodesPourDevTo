@@ -1,22 +1,25 @@
 ﻿@page "/fan/{idFan:int}"
 
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<FanPage> localizer
+
 @using ViewModel
 @inject IFanViewModel ViewModel
 
 @if (ViewModel.FanSelected == null)
 {
-	<h3>Erreur</h3>
+	<h3>@localizer["Error"].Value</h3>
 
-	<div>Pas de Fan trouvé avec l'ID = @idFan</div>
+	<div>@localizer["NoFan"].Value = @idFan</div>
 }
 else
 {
-	<h3>Page du Fan - </h3>
+	<h3>@localizer["PageFan"].Value</h3>
 
-	<div><u>Nom</u> : @ViewModel.FanSelected.Nom</div>
-	<div><u>Nombre de clique reçu</u> : @ViewModel.FanSelected.NombreDeClickRecu</div>
-	<div id="infoDiverses"><u>Info Diverses</u> : @ViewModel.FanSelected.InfoDiverses</div>
-	<div><u>Inscription</u> : <span id="dateInscrit">@ViewModel.FanSelected.DateInscription.ToString("d")</span></div>
+	<div><u>@localizer["Name"].Value</u> : @ViewModel.FanSelected.Nom</div>
+	<div><u>@localizer["NbreClickRecu"].Value</u> : @ViewModel.FanSelected.NombreDeClickRecu</div>
+	<div id="infoDiverses"><u>@localizer["Info"].Value</u> : @ViewModel.FanSelected.InfoDiverses</div>
+	<div><u>@localizer["Inscription"].Value</u> : <span id="dateInscrit">@ViewModel.FanSelected.DateInscription.ToString("d")</span></div>
 }
 
 @code {
