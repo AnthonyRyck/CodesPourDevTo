@@ -4,10 +4,13 @@
 
 @inject ITitanicViewModel ViewModel
 
-<h3>Allez-vous survivre au Titanic ?</h3>
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<TitanicPage> localizer
+
+<h3>@localizer["TitreTitanic"]</h3>
 
 <div class="border-rounded margin-5px">
-	<EditForm OnValidSubmit="@ViewModel.OnValidSubmit" 
+	<EditForm OnValidSubmit="@ViewModel.OnValidSubmit"
 			  Model="@ViewModel.PassageModel">
 		<div>
 			@* Super IMPORTANT !!! *@
@@ -16,8 +19,8 @@
 			<div>
 				<ValidationMessage For="@(() => ViewModel.PassageModel.Classe)" />
 			</div>
-			<label>Choisir la Classe du passagé :</label>
-			<InputNumber @bind-Value="ViewModel.PassageModel.Classe" ></InputNumber>
+			<label>@localizer["ChoixClasse"]:</label>
+			<InputNumber @bind-Value="ViewModel.PassageModel.Classe"></InputNumber>
 		</div>
 
 		<div>
@@ -25,11 +28,11 @@
 				<ValidationMessage For="@(() => ViewModel.PassageModel.Sexe)" />
 			</div>
 			<div>
-				<label id="sexe">Sexe du passage :</label>
+				<label id="sexe">@localizer["ChoixSexe"] :</label>
 				<InputSelect @bind-Value=ViewModel.PassageModel.Sexe>
-				  <option value=""></option>
-				  <option value="male">Homme</option>
-				  <option value="female">Femme</option>
+					<option value=""></option>
+					<option value="male">@localizer["Homme"]</option>
+					<option value="female">@localizer["Femme"]</option>
 				</InputSelect>
 			</div>
 		</div>
@@ -39,20 +42,20 @@
 				<ValidationMessage For="@(() => ViewModel.PassageModel.Age)" />
 			</div>
 			<div>
-				<label>Age du passagé :</label>
+				<label>@localizer["AgePassager"] :</label>
 				<InputNumber @bind-Value="ViewModel.PassageModel.Age"></InputNumber>
 			</div>
 		</div>
 
 		<div class="row margin-5px">
-			<button type="submit">Tester</button>
-			<button @onclick="ViewModel.OnCancel">Annuler</button>
+			<button type="submit">@localizer["Tester"]</button>
+			<button @onclick="ViewModel.OnCancel">@localizer["Annuler"]</button>
 		</div>
 	</EditForm>
 </div>
 
 <div class="margin-5px border-rounded">
-	<span>Chance de survie : @ViewModel.PourcentageSurvie</span>
+	<span>@localizer["ChanceSurvie"] : @ViewModel.PourcentageSurvie</span>
 
 </div>
 

@@ -123,4 +123,7 @@
   <data name="AddNewMemberValidation" xml:space="preserve">
     <value>Add a new member with validation</value>
   </data>
+  <data name="TitreFanclub" xml:space="preserve">
+    <value>Fan club page</value>
+  </data>
 </root>

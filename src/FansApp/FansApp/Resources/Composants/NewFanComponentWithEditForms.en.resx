@@ -117,13 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddNewMember" xml:space="preserve">
-    <value>Ajouter un nouveau membre</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="AddNewMemberValidation" xml:space="preserve">
-    <value>Ajouter un nouveau membre avec validation</value>
+  <data name="DateRegister" xml:space="preserve">
+    <value>Registration date</value>
   </data>
-  <data name="TitreFanclub" xml:space="preserve">
-    <value>Page du fan club</value>
+  <data name="InfoFan" xml:space="preserve">
+    <value>Fan Info</value>
+  </data>
+  <data name="NomFan" xml:space="preserve">
+    <value>Name of new fan</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
   </data>
 </root>
