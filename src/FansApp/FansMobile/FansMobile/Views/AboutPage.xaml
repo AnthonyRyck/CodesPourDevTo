@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FansMobile.Views.AboutPage"
+             xmlns:vm="clr-namespace:FansMobile.ViewModels"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="C'est Demo" FontSize="Title"/>
+                <Label FontSize="16" Padding="0,24,0,0">
+					C'est une application demo pour mes articles sur Xamarin
+				</Label>
+
+				<Label FontAttributes="Bold"
+                        FontSize="16">
+                   https://www.ctrl-alt-suppr.dev
+                </Label>
+                <Button Margin="0,10,0,0" Text="Blog"
+                        Command="{Binding OpenWebCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

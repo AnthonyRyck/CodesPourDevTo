@@ -11,6 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5DAA25E8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestFansApp", "XUnitTestFansApp\XUnitTestFansApp.csproj", "{8287D046-53EE-4612-96F0-0036EBE81D2C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xamarin", "Xamarin", "{295C33D4-6D13-4DC4-9D0E-E16D10F2A498}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorServer", "BlazorServer", "{245A693B-640F-4D0A-AC48-AB075F17B201}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FansMobile.Android", "FansMobile\FansMobile.Android\FansMobile.Android.csproj", "{7A7CA6A7-CB66-4A85-B343-F04A3363735F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B6E6B0E2-E27F-45F5-8BEF-C20F4595E9C5} = {B6E6B0E2-E27F-45F5-8BEF-C20F4595E9C5}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FansMobile", "FansMobile\FansMobile\FansMobile.csproj", "{5FF1085D-3E1D-4740-89CF-FFF3DEE9A2C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +40,26 @@ Global
 		{8287D046-53EE-4612-96F0-0036EBE81D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8287D046-53EE-4612-96F0-0036EBE81D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8287D046-53EE-4612-96F0-0036EBE81D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A7CA6A7-CB66-4A85-B343-F04A3363735F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A7CA6A7-CB66-4A85-B343-F04A3363735F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A7CA6A7-CB66-4A85-B343-F04A3363735F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7A7CA6A7-CB66-4A85-B343-F04A3363735F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A7CA6A7-CB66-4A85-B343-F04A3363735F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A7CA6A7-CB66-4A85-B343-F04A3363735F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5FF1085D-3E1D-4740-89CF-FFF3DEE9A2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FF1085D-3E1D-4740-89CF-FFF3DEE9A2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FF1085D-3E1D-4740-89CF-FFF3DEE9A2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FF1085D-3E1D-4740-89CF-FFF3DEE9A2C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{B6E6B0E2-E27F-45F5-8BEF-C20F4595E9C5} = {245A693B-640F-4D0A-AC48-AB075F17B201}
+		{246A4299-49E0-4BDF-97B8-D03977F80386} = {245A693B-640F-4D0A-AC48-AB075F17B201}
 		{8287D046-53EE-4612-96F0-0036EBE81D2C} = {5DAA25E8-3920-42D3-A36E-DF3909AC4951}
+		{7A7CA6A7-CB66-4A85-B343-F04A3363735F} = {295C33D4-6D13-4DC4-9D0E-E16D10F2A498}
+		{5FF1085D-3E1D-4740-89CF-FFF3DEE9A2C9} = {295C33D4-6D13-4DC4-9D0E-E16D10F2A498}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_CodeReferences = {"Items":[{"Expression":"\\W($File.$Key)\\W","Extensions":".cs,.xaml,.cshtml","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"\\W($File.$Key)\\W","Extensions":".vbhtml","IsCaseSensitive":false,"SingleLineComment":null},{"Expression":"ResourceManager.GetString\\(\"($Key)\"\\)","Extensions":".cs","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"typeof\\((\\w+\\.)*($File)\\).+\"($Key)\"|\"($Key)\".+typeof\\((\\w+\\.)*($File)\\)","Extensions":".cs","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"\\W($Key)\\W","Extensions":".vb","IsCaseSensitive":false,"SingleLineComment":"'"},{"Expression":"\\W($File::$Key)\\W","Extensions":".cpp,.c,.hxx,.h","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"&lt;%\\$\\s+Resources:\\s*($File)\\s*,\\s*($Key)\\s*%&gt;","Extensions":".aspx,.ascx,.master","IsCaseSensitive":true,"SingleLineComment":null},{"Expression":"StringResourceKey\\.($Key)","Extensions":".cs","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"\\.($Key)","Extensions":".ts,.html","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"@localizer[\"($Key)\"]","Extensions":".razor","IsCaseSensitive":false,"SingleLineComment":null}]}
