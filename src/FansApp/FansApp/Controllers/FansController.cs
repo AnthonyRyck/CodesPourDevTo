@@ -74,5 +74,20 @@ namespace FansApp.Controllers
 			return nouveauFan.Id;
 		}
 
+		[HttpPost]
+		public IActionResult Create([FromBody] Fan fan)
+		{
+			try
+			{
+				var nouveauFan = AccessDatabase.AddFan(fan);
+
+			}
+			catch (Exception)
+			{
+				
+			}
+			return Ok(fan);
+		}
+
 	}
 }

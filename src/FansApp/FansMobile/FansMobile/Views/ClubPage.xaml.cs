@@ -19,9 +19,9 @@ namespace FansMobile.Views
 			InitializeComponent();
 		}
 
-		private void AddFan_ToolbarItem_Clicked(object sender, EventArgs e)
+		private async void AddFan_ToolbarItem_Clicked(object sender, EventArgs e)
 		{
-
+			await Navigation.PushAsync(new NewFan());
 		}
 
 		protected async override void OnAppearing()

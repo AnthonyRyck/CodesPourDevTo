@@ -37,13 +37,41 @@
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
-							<StackLayout Padding="20,0,0,0" 
-                                 HorizontalOptions="StartAndExpand"
-                                 Orientation="Horizontal">
-								<Label Text="{Binding Nom}" 
-                               VerticalTextAlignment="Center" />
-								<Label Text="{Binding NombreDeClickRecu}" />
-							</StackLayout>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+							
+
+								<StackLayout Orientation="Vertical"
+											Grid.Column="0">
+									<Label Text="Nom du fan" FontAttributes="Bold" />
+									<Label Text="{Binding Nom}"  />
+								</StackLayout>
+
+								<StackLayout Orientation="Vertical"
+											Grid.Column="1">
+									<Label Text="Nombre de Click" 
+												FontAttributes="Bold" />
+									<Label Text="{Binding NombreDeClickRecu}" />
+								</StackLayout>
+
+							</Grid>
+							<!--<StackLayout Padding="20,0,0,0"
+										VerticalOptions="Center"
+										Orientation="Vertical">
+								<StackLayout Orientation="Vertical">
+									<Label Text="Nom du fan" FontAttributes="Bold" />
+									<Label Text="{Binding Nom}"  />
+								</StackLayout>
+
+								<StackLayout Orientation="Vertical">
+									<Label Text="Nombre de Click" 
+											FontAttributes="Bold" />
+									<Label Text="{Binding NombreDeClickRecu}" />
+								</StackLayout>
+							</StackLayout>-->
 						</ViewCell>
 					</DataTemplate>
 				</ListView.ItemTemplate>

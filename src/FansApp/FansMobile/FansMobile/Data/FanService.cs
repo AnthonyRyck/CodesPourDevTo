@@ -66,9 +66,20 @@ namespace FansMobile.Data
 			return nombreDeClickRecu;
 		}
 
-		public Task AddNewFan(Fan newFan)
+		public async Task AddNewFan(Fan newFan)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				string json = JsonConvert.SerializeObject(newFan);
+				StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+				var reponseTest = await client.PostAsync("api/fans/newfan", content);
+
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(@"\tERROR {0}", ex.Message);
+			}
 		}
 
 

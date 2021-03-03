@@ -15,7 +15,6 @@ namespace FansMobile.Data
 			Service = fanService;
 		}
 
-
 		public async Task<List<Fan>> GetAllFansAsync()
 		{
 			try
@@ -39,6 +38,18 @@ namespace FansMobile.Data
 			}
 
 			return 0;
+		}
+
+		internal async Task AddFan(Fan nouveauFan)
+		{
+			try
+			{
+				await Service.AddNewFan(nouveauFan);
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 	}
 }
