@@ -85,7 +85,5 @@ namespace FansMobile.Data
 				Debug.WriteLine(@"\tERROR {0}", ex.Message);
 			}
 		}
-
-
 	}
 }
