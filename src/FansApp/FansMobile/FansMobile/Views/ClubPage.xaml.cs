@@ -9,9 +9,12 @@ namespace FansMobile.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ClubPage : ContentPage
 	{
+		private readonly ClubViewModel viewModel;
+
 		public ClubPage()
 		{
 			InitializeComponent();
+			viewModel = (ClubViewModel)BindingContext;
 		}
 
 		private async void AddFan_ToolbarItem_Clicked(object sender, EventArgs e)
@@ -22,7 +25,7 @@ namespace FansMobile.Views
 		protected async override void OnAppearing()
 		{
 			base.OnAppearing();
-			await ((ClubViewModel)BindingContext).LoadFans();
+			await viewModel.LoadFans();
 		}
 
 		private async void OnFanSelected(object sender, SelectedItemChangedEventArgs e)
@@ -30,10 +33,7 @@ namespace FansMobile.Views
 			var fanViewModel = new FanViewModel();
 			fanViewModel.FanSelected = e.SelectedItem as Fan;
 
-			await Navigation.PushAsync(new FanPage
-			{
-				BindingContext = fanViewModel
-			});
+			await Navigation.PushAsync(new FanPage(fanViewModel));
 		}
 	}
 }

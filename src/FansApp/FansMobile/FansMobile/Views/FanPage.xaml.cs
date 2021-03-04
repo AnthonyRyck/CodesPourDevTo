@@ -13,9 +13,13 @@ namespace FansMobile.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class FanPage : ContentPage
 	{
-		public FanPage()
+		private readonly FanViewModel fanViewModel;
+
+		public FanPage(FanViewModel fanView)
 		{
 			InitializeComponent();
+			fanViewModel = fanView;
+			BindingContext = fanView;
 		}
 
 		private async void ButtonClose_Clicked(object sender, EventArgs e)
@@ -25,7 +29,7 @@ namespace FansMobile.Views
 
 		private async void AddClick_Clicked(object sender, EventArgs e)
 		{
-			await ((FanViewModel)BindingContext).AddClick();
+			await fanViewModel.AddClick();
 		}
 	}
 }

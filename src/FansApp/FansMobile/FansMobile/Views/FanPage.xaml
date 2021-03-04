@@ -4,9 +4,9 @@
              x:Class="FansMobile.Views.FanPage"
 			 xmlns:vm="clr-namespace:FansMobile.ViewModels">
 
-	<ContentPage.BindingContext>
+	<!--<ContentPage.BindingContext>
 		<vm:FanViewModel />
-	</ContentPage.BindingContext>
+	</ContentPage.BindingContext>-->
 
 	<ContentPage.Content>
         <StackLayout Margin="10">

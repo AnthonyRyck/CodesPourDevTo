@@ -15,7 +15,9 @@ namespace FansMobile.Data
 		HttpClient client;
 
 		public static string IPAddress = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
-		public static string BackendUrl = $"http://{IPAddress}:45455/";
+		// Mettre VOTRE PORT donné par Conveyor
+		public static int Port = 45457;
+		public static string BackendUrl = $"http://{IPAddress}:{Port}/";
 
 		public List<Fan> Fans { get; private set; }
 
