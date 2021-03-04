@@ -1,4 +1,5 @@
-﻿using FansMobile.Models;
+﻿using FansMobile.Data;
+using FansMobile.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace FansMobile.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewFan : ContentPage
 	{
+		private IFanService FanService => DependencyService.Get<IFanService>();
+
 		public NewFan()
 		{
 			BindingContext = new Fan();
@@ -22,7 +25,7 @@ namespace FansMobile.Views
 		private async void OnAjouterButtonClicked(object sender, EventArgs e)
 		{
 			var nouveauFan = (Fan)BindingContext;
-			await App.FansManager.AddFan(nouveauFan);
+			await FanService.AddNewFan(nouveauFan);
 			
 			await Navigation.PopAsync();
 		}

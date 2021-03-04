@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace FansMobile.Data
 {
@@ -13,12 +14,15 @@ namespace FansMobile.Data
 	{
 		HttpClient client;
 
+		public static string IPAddress = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
+		public static string BackendUrl = $"http://{IPAddress}:45455/";
+
 		public List<Fan> Fans { get; private set; }
 
 		public FanService()
 		{
 			client = new HttpClient();
-			client.BaseAddress = new Uri($"{App.BackendUrl}");
+			client.BaseAddress = new Uri($"{BackendUrl}");
 		}
 
 		public async Task<List<Fan>> GetFans()

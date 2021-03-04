@@ -1,4 +1,5 @@
-﻿using FansMobile.Models;
+﻿using FansMobile.Data;
+using FansMobile.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,7 @@ namespace FansMobile.ViewModels
 	{
 		public Fan FanSelected { get; set; }
 
+		private IFanService FanService => DependencyService.Get<IFanService>();
 
 		public FanViewModel()
 		{
@@ -20,7 +22,7 @@ namespace FansMobile.ViewModels
 
 		public async Task AddClick()
 		{
-			var nbreClick = await App.FansManager.AddClick(FanSelected.Id);
+			var nbreClick = await FanService.AddClickToFan(FanSelected.Id);
 			FanSelected.NombreDeClickRecu = nbreClick;
 		}
 	}

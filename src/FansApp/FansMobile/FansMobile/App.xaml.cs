@@ -10,19 +10,13 @@ namespace FansMobile
 {
 	public partial class App : Application
 	{
-		public static FansManager FansManager {get; private set;}
-
-
-		public static string IPAddress = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
-		public static string BackendUrl = $"http://{IPAddress}:45455/";
-
 		public App()
 		{
 			InitializeComponent();
 
-			FansManager = new FansManager(new FanService());
-
 			DependencyService.Register<MockDataStore>();
+			DependencyService.Register<IFanService, FanService>();
+
 			MainPage = new AppShell();
 		}
 
