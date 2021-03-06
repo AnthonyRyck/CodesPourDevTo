@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FansMobile.Data
+namespace FansMobile.Services
 {
 	public interface IFanService
 	{

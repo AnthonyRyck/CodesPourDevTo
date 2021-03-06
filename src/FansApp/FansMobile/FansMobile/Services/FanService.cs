@@ -8,22 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace FansMobile.Data
+namespace FansMobile.Services
 {
 	public class FanService : IFanService
 	{
 		HttpClient client;
 
-		public static string IPAddress = DeviceInfo.Platform == DevicePlatform.Android ? "10.0.2.2" : "localhost";
-		// Mettre VOTRE PORT donné par Conveyor
-		public static int Port = 45457;
-		public static string BackendUrl = $"http://{IPAddress}:{Port}/";
+		// Mettre l'IP et le PORT donné par Conveyor
+		public static string IPAddress = "192.168.1.24";
+		public static int Port = 45456;
+
+		public static string BackendUrl = $"https://{IPAddress}:{Port}/";
 
 		public List<Fan> Fans { get; private set; }
 
 		public FanService()
 		{
-			client = new HttpClient();
+			// Pour ignorer les erreurs SSL
+			var httpClientHandler = new HttpClientHandler();
+			httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+
+			client = new HttpClient(httpClientHandler);
 			client.BaseAddress = new Uri($"{BackendUrl}");
 		}
 

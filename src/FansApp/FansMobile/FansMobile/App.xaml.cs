@@ -1,5 +1,4 @@
-﻿using FansMobile.Data;
-using FansMobile.Services;
+﻿using FansMobile.Services;
 using FansMobile.Views;
 using System;
 using Xamarin.Essentials;
