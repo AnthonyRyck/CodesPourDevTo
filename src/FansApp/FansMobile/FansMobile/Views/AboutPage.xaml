@@ -18,7 +18,7 @@
     <Grid>
         <ScrollView>
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="C'est Demo" FontSize="Title"/>
+                <Label Text="C'est une Demo" FontSize="Title"/>
                 <Label FontSize="16" Padding="0,24,0,0">
 					C'est une application demo pour mes articles sur Xamarin
 				</Label>

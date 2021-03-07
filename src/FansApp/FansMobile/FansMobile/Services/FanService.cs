@@ -15,10 +15,11 @@ namespace FansMobile.Services
 		HttpClient client;
 
 		// Mettre l'IP et le PORT donné par Conveyor
-		public static string IPAddress = "192.168.1.24";
-		public static int Port = 45456;
+		//public static string IPAddress = "192.168.1.24";
+		//public static int Port = 45456;
+		//public static string BackendUrl = $"https://{IPAddress}:{Port}/";
 
-		public static string BackendUrl = $"https://{IPAddress}:{Port}/";
+		public static string BackendUrl = $"https://fandemo.ctrl-alt-suppr.dev/";
 
 		public List<Fan> Fans { get; private set; }
 
