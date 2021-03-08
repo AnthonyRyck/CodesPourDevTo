@@ -1,10 +1,12 @@
 using FansApp.Data;
+using FansApp.Hubs;
 using FansApp.Services;
 using FansApp.ViewModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -45,7 +47,6 @@ namespace FansApp
 			// Service pour remettre à zéro
 			services.AddHostedService<ResetHostedService>();
 
-
 			// Titanic Model
 			services.AddScoped<ITitanicViewModel, TitanicViewModel>();
 
@@ -66,11 +67,22 @@ namespace FansApp
 				options.SupportedCultures = supportedCultures;
 				options.SupportedUICultures = supportedCultures;
 			});
+
+			// Service pour SignalR
+			services.AddSignalR();
+			services.AddResponseCompression(opts =>
+			{
+				opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+					new[] { "application/octet-stream" });
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			// pour SignalR
+			app.UseResponseCompression();
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
@@ -90,6 +102,8 @@ namespace FansApp
 				// MapControllers - pour ajouter notre controller
 				endpoints.MapControllers();
 				endpoints.MapBlazorHub();
+				// pour SignalR
+				endpoints.MapHub<FanHub>("/fanhub");
 				endpoints.MapFallbackToPage("/_Host");
 			});
 		}

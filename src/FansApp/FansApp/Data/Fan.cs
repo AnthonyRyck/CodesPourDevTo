@@ -32,4 +32,20 @@ namespace FansApp.Data
 		/// </summary>
 		public DateTime DateInscription { get; set; }
 	}
+
+
+	public static class FanExtension
+	{
+		public static Fan ToClone(this Fan fan)
+		{
+			return new Fan()
+			{
+				Id = fan.Id,
+				Nom = fan.Nom,
+				NombreDeClickRecu = fan.NombreDeClickRecu,
+				InfoDiverses = fan.InfoDiverses,
+				DateInscription = fan.DateInscription
+			};
+		}
+	}
 }

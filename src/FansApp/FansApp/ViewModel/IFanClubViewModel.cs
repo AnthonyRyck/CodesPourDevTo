@@ -1,7 +1,10 @@
 ﻿using FansApp.Data;
 using FansApp.Models;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FansApp.ViewModel
 {
@@ -86,5 +89,27 @@ namespace FansApp.ViewModel
 
 
 		void ValidNewFan();
+
+		/// <summary>
+		/// Initialise le HubConnection.
+		/// </summary>
+		/// <returns></returns>
+		Task InitHub();
+
+		/// <summary>
+		/// Dispose la connexion avec le Hub
+		/// </summary>
+		/// <returns></returns>
+		Task DisposeHubConnection();
+
+		/// <summary>
+		/// Récupère de la vue le StateHasChanged.
+		/// pour que le ViewModel puisse l'appeler.
+		/// </summary>
+		/// <param name="changed"></param>
+		void SetStateHasChanged(Action changed);
+
+
+		HubConnection HubConnection { get; set; }
 	}
 }
