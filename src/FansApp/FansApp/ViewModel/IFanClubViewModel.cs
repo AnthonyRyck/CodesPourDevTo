@@ -110,6 +110,5 @@ namespace FansApp.ViewModel
 		void SetStateHasChanged(Action changed);
 
 
-		HubConnection HubConnection { get; set; }
 	}
 }

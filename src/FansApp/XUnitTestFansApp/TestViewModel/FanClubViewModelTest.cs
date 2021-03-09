@@ -1,4 +1,5 @@
 ﻿using FansApp.Data;
+using FansApp.Services;
 using FansApp.ViewModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -33,11 +34,15 @@ namespace XUnitTestFansApp.TestViewModel
 				CallBase = true
 			};
 
+			var mockHubService = new Mock<IHubService>();
+
 			#endregion
 
 			#region ACT
 
-			FanClubViewModel viewModel = new FanClubViewModel(mockDataBase.Object, mockNavigationManager.Object);
+			FanClubViewModel viewModel = new FanClubViewModel(mockDataBase.Object, 
+																mockNavigationManager.Object,
+																mockHubService.Object);
 			viewModel.OpenFanPage(idFan);
 
 			#endregion
@@ -80,11 +85,16 @@ namespace XUnitTestFansApp.TestViewModel
 
 			var mockNavigationManager = new Mock<MockNavigationManager>();
 
+			var mockHubService = new Mock<IHubService>();
+			mockHubService.Setup(svc => svc.SendAsync("SyncNewFan", nouveauFanTest));
+
 			#endregion
 
 			#region ACT
 
-			FanClubViewModel viewModel = new FanClubViewModel(mockDataBase.Object, mockNavigationManager.Object);
+			FanClubViewModel viewModel = new FanClubViewModel(mockDataBase.Object, 
+															mockNavigationManager.Object,
+															mockHubService.Object);
 			viewModel.AddFan(nomNouveauFan);
 
 			#endregion
@@ -102,6 +112,8 @@ namespace XUnitTestFansApp.TestViewModel
 
 			// Vérifie que je suis passé UNE SEULE fois dans la méthode AddFan()
 			mockDataBase.Verify(mock => mock.AddFan(It.IsAny<string>()), Times.Once);
+
+			mockHubService.Verify(mock => mock.SendAsync("SyncNewFan", nouveauFanTest), Times.Once);
 
 			#endregion
 		}

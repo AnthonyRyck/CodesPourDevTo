@@ -35,6 +35,8 @@ namespace FansApp
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
 
+			services.AddTransient<IHubService, HubService>();
+
 			// Un service pour simuler l'accès à une base de données, ou un service API
 			services.AddSingleton<IAccessDatabase, FakeAccessDatabase>();
 
@@ -69,6 +71,7 @@ namespace FansApp
 			});
 
 			// Service pour SignalR
+			
 			services.AddSignalR();
 			services.AddResponseCompression(opts =>
 			{
