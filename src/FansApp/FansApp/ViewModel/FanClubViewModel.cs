@@ -102,7 +102,6 @@ namespace FansApp.ViewModel
 
 			// Envoie pour les autres clients
 			hubService.SendAsync("SyncNewFan", nouveauFan);
-			//HubConnection.SendAsync("SyncNewFan", nouveauFan);
 		}
 
 		///<inheritdoc cref="IFanClubViewModel.RemoveFan(int)"/>
@@ -141,7 +140,6 @@ namespace FansApp.ViewModel
 
 				// Envoie pour les autres clients
 				hubService.SendAsync("SyncNewFan", nouveauFan);
-				//HubConnection.SendAsync("SyncNewFan", nouveauFan);
 			}
 		}
 
@@ -156,13 +154,11 @@ namespace FansApp.ViewModel
 
 			// Pour envoyer l'info aux autres.
 			await hubService.SendAsync("SyncClick", id);
-			//await HubConnection.SendAsync("SyncClick", id);
 		}
 		
 		public async Task DisposeHubConnection()
 		{
 			await hubService.DisposeAsync();
-			//await HubConnection.DisposeAsync();
 		}
 
 		public void SetStateHasChanged(Action changed)
@@ -176,9 +172,6 @@ namespace FansApp.ViewModel
 
 		public async Task InitHub()
 		{
-			//hubService.HubConnection = new HubConnectionBuilder()
-			//	.WithUrl(navigationManager.ToAbsoluteUri("/fanhub"))
-			//	.Build();
 			hubService.InitHub(navigationManager.ToAbsoluteUri("/fanhub"));
 
 			hubService.On<int>("ReceiveClick", (idfan) =>
@@ -191,18 +184,6 @@ namespace FansApp.ViewModel
 				AllFansCollection.Add(newFan);
 				StateHasChanged.Invoke();
 			});
-
-			//hubService.HubConnection.On<int>("ReceiveClick", (idfan) =>
-			//{
-			//	AllFansCollection.Find(x => x.Id == idfan).NombreDeClickRecu += 1;
-			//	StateHasChanged.Invoke();
-			//});
-
-			//hubService.HubConnection.On<Fan>("ReceiveNewFan", (newFan) =>
-			//{
-			//	AllFansCollection.Add(newFan);
-			//	StateHasChanged.Invoke();
-			//});
 
 			await hubService.HubConnection.StartAsync();
 		}
