@@ -113,6 +113,7 @@ namespace XUnitTestFansApp.TestViewModel
 			// Vérifie que je suis passé UNE SEULE fois dans la méthode AddFan()
 			mockDataBase.Verify(mock => mock.AddFan(It.IsAny<string>()), Times.Once);
 
+			// Vérification que je suis passé une fois dans la méthode du Hub
 			mockHubService.Verify(mock => mock.SendAsync("SyncNewFan", nouveauFanTest), Times.Once);
 
 			#endregion

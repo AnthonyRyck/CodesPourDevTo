@@ -71,7 +71,6 @@ namespace FansApp
 			});
 
 			// Service pour SignalR
-			
 			services.AddSignalR();
 			services.AddResponseCompression(opts =>
 			{
