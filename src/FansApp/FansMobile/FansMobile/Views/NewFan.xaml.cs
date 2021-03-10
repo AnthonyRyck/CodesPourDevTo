@@ -16,6 +16,8 @@ namespace FansMobile.Views
 	{
 		private IFanService FanService => DependencyService.Get<IFanService>();
 
+		private IFanHubService hubConnection => DependencyService.Get<IFanHubService>();
+
 		public NewFan()
 		{
 			BindingContext = new Fan();
@@ -25,14 +27,29 @@ namespace FansMobile.Views
 		private async void OnAjouterButtonClicked(object sender, EventArgs e)
 		{
 			var nouveauFan = (Fan)BindingContext;
-			await FanService.AddNewFan(nouveauFan);
-			
+			Fan fanAjoute = await FanService.AddNewFan(nouveauFan);
+
+			await hubConnection.SendAsync("SyncNewFan", fanAjoute);
+
 			await Navigation.PopAsync();
 		}
 
 		private async void OnCancelButtonClicked(object sender, EventArgs e)
 		{
 			await Navigation.PopAsync();
+		}
+
+
+		protected async override void OnAppearing()
+		{
+			hubConnection.CreateHub(Constants.UrlHub);
+			await hubConnection.Hub.StartAsync();
+			base.OnAppearing();
+		}
+
+		protected async override void OnDisappearing()
+		{
+			await hubConnection.DisposeAsync();
 		}
 	}
 }

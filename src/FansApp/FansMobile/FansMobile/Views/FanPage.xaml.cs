@@ -31,5 +31,16 @@ namespace FansMobile.Views
 		{
 			await fanViewModel.AddClick();
 		}
+
+		protected async override void OnAppearing()
+		{
+			base.OnAppearing();
+			await fanViewModel.ConnectToSignalR();
+		}
+
+		protected async override void OnDisappearing()
+		{
+			await fanViewModel.DisconnectToSignalR();
+		}
 	}
 }

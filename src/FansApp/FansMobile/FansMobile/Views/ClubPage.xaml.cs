@@ -26,6 +26,13 @@ namespace FansMobile.Views
 		{
 			base.OnAppearing();
 			await viewModel.LoadFans();
+			await viewModel.ConnectToSignalR();
+		}
+
+		protected async override void OnDisappearing()
+		{
+			base.OnDisappearing();
+			await viewModel.DisconnectToSignalR();
 		}
 
 		private async void OnFanSelected(object sender, SelectedItemChangedEventArgs e)

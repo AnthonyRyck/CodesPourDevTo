@@ -173,6 +173,7 @@ namespace FansApp.ViewModel
 		public async Task InitHub()
 		{
 			hubService.InitHub(navigationManager.ToAbsoluteUri("/fanhub"));
+			//hubService.InitHub(new Uri("https://adressToYourServer/fanhub"));
 
 			hubService.On<int>("ReceiveClick", (idfan) =>
 			{

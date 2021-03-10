@@ -16,6 +16,8 @@ namespace FansMobile
 			DependencyService.Register<MockDataStore>();
 			DependencyService.Register<IFanService, FanService>();
 
+			DependencyService.Register<IFanHubService, FanHubService>();
+		
 			MainPage = new AppShell();
 		}
 

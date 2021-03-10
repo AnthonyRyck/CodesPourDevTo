@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace FansMobile.ViewModels
 {
@@ -30,7 +31,6 @@ namespace FansMobile.ViewModels
 		/// </summary>
 		private IFanService FanService => DependencyService.Get<IFanService>();
 
-
 		public ClubViewModel()
 		{
 			Title = "Club";
@@ -43,6 +43,31 @@ namespace FansMobile.ViewModels
 		public async Task LoadFans()
 		{
 			AllFans = await FanService.GetFans();
+		}
+
+
+		private IFanHubService hubConnection => DependencyService.Get<IFanHubService>();
+
+		internal async Task ConnectToSignalR()
+		{
+			hubConnection.CreateHub(Constants.UrlHub);
+
+			hubConnection.Hub.On<int>("ReceiveClick", (idfan) =>
+			{
+				AllFans.Find(x => x.Id == idfan).NombreDeClickRecu += 1;
+			});
+			hubConnection.Hub.On<Fan>("ReceiveNewFan", (newFan) =>
+			{
+				AllFans.Add(newFan);
+				AllFans = new List<Fan>(AllFans);
+			});
+
+			await hubConnection.Hub.StartAsync();
+		}
+
+		internal async Task DisconnectToSignalR()
+		{
+			await hubConnection.DisposeAsync();
 		}
 	}
 }

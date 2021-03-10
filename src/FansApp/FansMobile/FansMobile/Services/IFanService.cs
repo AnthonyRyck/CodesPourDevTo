@@ -19,7 +19,7 @@ namespace FansMobile.Services
 		/// </summary>
 		/// <param name="newFan"></param>
 		/// <returns></returns>
-		Task AddNewFan(Fan newFan);
+		Task<Fan> AddNewFan(Fan newFan);
 
 		/// <summary>
 		/// Ajoute un click à un fan.

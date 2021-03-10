@@ -14,13 +14,6 @@ namespace FansMobile.Services
 	{
 		HttpClient client;
 
-		// Mettre l'IP et le PORT donné par Conveyor
-		//public static string IPAddress = "192.168.1.24";
-		//public static int Port = 45456;
-		//public static string BackendUrl = $"https://{IPAddress}:{Port}/";
-
-		public static string BackendUrl = $"https://fandemo.ctrl-alt-suppr.dev/";
-
 		public List<Fan> Fans { get; private set; }
 
 		public FanService()
@@ -30,7 +23,7 @@ namespace FansMobile.Services
 			httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
 
 			client = new HttpClient(httpClientHandler);
-			client.BaseAddress = new Uri($"{BackendUrl}");
+			client.BaseAddress = new Uri(string.Format(Constants.UrlApi, string.Empty));
 		}
 
 		public async Task<List<Fan>> GetFans()
@@ -39,7 +32,7 @@ namespace FansMobile.Services
 
 			try
 			{
-				HttpResponseMessage response = await client.GetAsync("api/fans");
+				HttpResponseMessage response = await client.GetAsync(Constants.GetUrlApi(string.Empty));
 				if (response.IsSuccessStatusCode)
 				{
 					string content = await response.Content.ReadAsStringAsync();
@@ -63,7 +56,7 @@ namespace FansMobile.Services
 				string json = JsonConvert.SerializeObject(id);
 				StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-				HttpResponseMessage response = await client.PostAsync("api/fans/" + id, content);
+				HttpResponseMessage response = await client.PostAsync(Constants.GetUrlApi(id), content);
 				if (response.IsSuccessStatusCode)
 				{
 					string contentClcik = await response.Content.ReadAsStringAsync();
@@ -78,20 +71,31 @@ namespace FansMobile.Services
 			return nombreDeClickRecu;
 		}
 
-		public async Task AddNewFan(Fan newFan)
+		public async Task<Fan> AddNewFan(Fan newFan)
 		{
+			Fan nouveauFan = null;
 			try
 			{
 				string json = JsonConvert.SerializeObject(newFan);
 				StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-				var reponseTest = await client.PostAsync("api/fans/newfan", content);
+				var reponseTest = await client.PostAsync(Constants.GetUrlApi("newfan"), content);
 
+				if (reponseTest.IsSuccessStatusCode)
+				{
+					string contentId = await reponseTest.Content.ReadAsStringAsync();
+					int id = JsonConvert.DeserializeObject<int>(contentId);
+
+					newFan.Id = id;
+					nouveauFan = newFan;
+				}
 			}
 			catch (Exception ex)
 			{
 				Debug.WriteLine(@"\tERROR {0}", ex.Message);
 			}
+
+			return nouveauFan;
 		}
 	}
 }
