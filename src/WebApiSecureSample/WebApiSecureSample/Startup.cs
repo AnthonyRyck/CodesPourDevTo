@@ -1,21 +1,14 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using WebApiSecureSample.Areas.Identity;
 using WebApiSecureSample.Data;
 using WebApiSecureSample.SecureApi;
@@ -34,7 +27,7 @@ namespace WebApiSecureSample
 		// This method gets called by the runtime. Use this method to add services to the container.
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
-		{
+		{	
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
 
@@ -49,9 +42,8 @@ namespace WebApiSecureSample
 			services.AddDatabaseDeveloperPageExceptionFilter();
 			services.AddSingleton<WeatherForecastService>();
 
-
 			// Pour JWT auth
-			var key = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+			var key = Configuration["KeyPourJwt"];
 
 			services.AddAuthentication(x =>
 			{
@@ -79,8 +71,6 @@ namespace WebApiSecureSample
 				options.AddPolicy("ManagerRequest", policy =>
 					   policy.RequireRole("Manager"));
 			});
-
-			
 
 			services.AddScoped<IJwtAuthenticationManager, JwtAuthenticationManager>();
 		}

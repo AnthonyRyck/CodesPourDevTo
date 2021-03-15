@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -12,15 +12,13 @@ namespace WebApiSecureSample.SecureApi
 {
 	public class JwtAuthenticationManager : IJwtAuthenticationManager
 	{
-
-		private string mySuperKey = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-
-
+		private string mySuperKey;
 		private readonly UserManager<IdentityUser> userManager;
 		
-		public JwtAuthenticationManager(UserManager<IdentityUser> user)
+		public JwtAuthenticationManager(UserManager<IdentityUser> user, IConfiguration configuration)
 		{
 			userManager = user;
+			mySuperKey = configuration["KeyPourJwt"];
 		}
 
 
