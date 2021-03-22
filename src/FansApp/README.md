@@ -1,5 +1,6 @@
 # FanApp
-C'est un projet de demo pour mes posts sur [www.ctrl-alt-suppr.dev](https://www.ctrl-alt-suppr.dev/)
+C'est un projet de demo pour mes posts sur [www.ctrl-alt-suppr.dev](https://www.ctrl-alt-suppr.dev/)  
+Il y a un live de la demo sur [fandemo.ctrl-alt-suppr.dev](https://fandemo.ctrl-alt-suppr.dev/), et pour l'application Xamarin sur le [Playstore](https://play.google.com/store/apps/details?id=com.anthonyryck.fansmobile)
 
 ## Une partie sur Blazor Server
 [Blazor – Créer un utilisateur Root au démarrage de l’application](https://www.ctrl-alt-suppr.dev/2020/12/17/blazor-creer-un-utilisateur-root-au-demarrage-de-lapplication/)  
