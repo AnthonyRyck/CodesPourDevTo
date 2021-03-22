@@ -20,14 +20,17 @@ namespace FansMobile.Views
 
 		public NewFan()
 		{
-			BindingContext = new Fan();
+			BindingContext = new FanWithValidation();
 			InitializeComponent();
 		}
 
 		private async void OnAjouterButtonClicked(object sender, EventArgs e)
 		{
-			var nouveauFan = (Fan)BindingContext;
-			Fan fanAjoute = await FanService.AddNewFan(nouveauFan);
+			var fanValidation = (FanWithValidation)BindingContext;
+			if (fanValidation.HasErrors)
+				return;
+
+			Fan fanAjoute = await FanService.AddNewFan(fanValidation.ToFan());
 
 			await hubConnection.SendAsync("SyncNewFan", fanAjoute);
 
