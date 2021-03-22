@@ -85,5 +85,4 @@ namespace FansMobile.Models
 			};
 		}
 	}
-
 }

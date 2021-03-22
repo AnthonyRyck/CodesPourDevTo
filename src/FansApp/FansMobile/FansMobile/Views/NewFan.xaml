@@ -14,7 +14,7 @@
 				<DataTrigger TargetType="Label" 
 							Binding="{Binding Path=ErrorMsgNomFan}"
 							Value="{x:Null}">
-					<Setter Property="IsVisible" Value="True"></Setter>
+					<Setter Property="IsVisible" Value="False"></Setter>
 				</DataTrigger>
 			</Label.Triggers>
 		</Label>
@@ -28,7 +28,7 @@
 				<DataTrigger TargetType="Label" 
 							Binding="{Binding Path=ErrorMsgInfoDiverses}"
 							Value="{x:Null}">
-					<Setter Property="IsVisible" Value="True"></Setter>
+					<Setter Property="IsVisible" Value="False"></Setter>
 				</DataTrigger>
 			</Label.Triggers>
 		</Label>
