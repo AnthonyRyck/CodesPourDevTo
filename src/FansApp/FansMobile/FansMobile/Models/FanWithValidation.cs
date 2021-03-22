@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using FansMobile.Validation;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace FansMobile.Models
 {
-	public class FanWithValidation : INotifyPropertyChanged
+	public class FanWithValidation : ValidationModel
 	{
 		[Required(AllowEmptyStrings = false, ErrorMessage = "Il faut un nom !")]
 		[StringLength(10, MinimumLength = 4, ErrorMessage = "Il faut un nom de Fan avec au moins 4 caractères et max 10.")]
@@ -17,10 +13,10 @@ namespace FansMobile.Models
 			set
 			{
 				ErrorMsgNomFan = ValidateProperty(value, "NomFan");
-				_nomFan = value;
-
 				IsNameError = ErrorMsgNomFan != null;
 				OnNotifyPropertyChanged("HasErrors");
+
+				_nomFan = value;
 			}
 		}
 		private string _nomFan;
@@ -32,10 +28,10 @@ namespace FansMobile.Models
 			get { return _infoDiverses; }
 			set {
 				ErrorMsgInfoDiverses = ValidateProperty(value, "InfoDiverses");
-				_infoDiverses = value;
-
 				IsInfoError = ErrorMsgInfoDiverses != null;
 				OnNotifyPropertyChanged("HasErrors");
+
+				_infoDiverses = value;
 			}
 		}
 		private string _infoDiverses;
@@ -68,59 +64,26 @@ namespace FansMobile.Models
 		}
 		private string _errorMsgInfoDiverses;
 
-
-		public bool HasErrors { get { return IsNameError || IsInfoError; } }
+		///<see cref="ValidationModel.HasErrors"/>
+		public override bool HasErrors { get { return IsNameError || IsInfoError; } }
+		
 		private bool IsNameError = true;
 		private bool IsInfoError = true;
-
-
-		protected string ValidateProperty(object value, string propertyName)
-		{
-			var info = this.GetType().GetProperty(propertyName);
-
-			IEnumerable<string> errorInfos =
-				  (from va in info.GetCustomAttributes(true).OfType<ValidationAttribute>()
-				   where !va.IsValid(value)
-				   select va.FormatErrorMessage(string.Empty)).ToList();
-
-
-			if (errorInfos.Count() > 0)
-			{
-				return errorInfos.FirstOrDefault<string>();
-			}
-			return null;
-		}
-
-		/// <summary>
-		/// Retourne un "Fan"
-		/// </summary>
-		/// <returns></returns>
-		internal Fan ToFan()
-		{
-			Fan fan = new Fan()
-			{
-				Nom = this.NomFan,
-				InfoDiverses = this.InfoDiverses
-			};
-
-			return fan;
-		}
-
-
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected void OnNotifyPropertyChanged([CallerMemberName] string propertyName = "")
-		{
-			var changed = PropertyChanged;
-			if (changed == null)
-				return;
-
-			changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-
-		#endregion
-
 	}
+
+	/// <summary>
+	/// Class d'extension.
+	/// </summary>
+	public static class FanWithValidationExtension
+	{
+		public static Fan ToFan(this FanWithValidation model)
+		{
+			return new Fan()
+			{
+				Nom = model.NomFan,
+				InfoDiverses = model.InfoDiverses
+			};
+		}
+	}
+
 }
