@@ -9,13 +9,13 @@
 					  ClickCallback="@(() => GetSonClickCallBack.InvokeAsync(fan.Id))"
 					  OnClickToFanPage="@(() => OnClickToOpenFanPage.InvokeAsync(fan.Id))" />*@
 
+		//Voir le post sur Créer une Library Razor
 		<FanComposant Nom="@fan.Nom"
 						Id="@fan.Id"
 						NombreDeClickRecu="@fan.NombreDeClickRecu"
 						ClickCallback="@(() => GetSonClickCallBack.InvokeAsync(fan.Id))"
 						OnClickToFanPage="@(() => OnClickToOpenFanPage.InvokeAsync(fan.Id))"
-						Localizer="@Localizer"/>
-		
+						Localizer = "@Localizer" />
 	}
 </div>
 

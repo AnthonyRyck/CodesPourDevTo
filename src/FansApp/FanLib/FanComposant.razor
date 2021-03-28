@@ -1,17 +1,17 @@
-﻿<div id="openFanPage" 
-	class="fan grow" 
-	@onclick="OnClickToFanPage">
+﻿<div id="openFanPage"
+	 class="fan grow"
+	 @onclick="OnClickToFanPage">
 
 	<div>
 		<div>ID : @Id</div>
 
-		<div id="iam">@Localizer.Invoke("JeSuis") : @Nom</div>
-		<div>@Localizer.Invoke("NbreClickOnMe") : @NombreDeClickRecu</div>
+		<div id="iam">@GetRessource("JeSuis") : @Nom</div>
+		<div>@GetRessource("NbreClickOnMe") : @NombreDeClickRecu</div>
 	</div>
 
 	<button @onclick="ClickCallback"
 			@onclick:stopPropagation="true">
-		@(Localizer.Invoke("ClickOnMe"))
+		@(GetRessource("ClickOnMe"))
 		@*@(Localizer.Invoke("RessourceIdontKnow"))*@
 	</button>
 </div>
@@ -39,5 +39,13 @@
 
 	[Parameter]
 	public EventCallback OnClickToFanPage { get; set; }
-	
+
+
+
+	private string GetRessource(string keyRessource)
+	{
+		return Localizer is null 
+			? keyRessource
+			: Localizer.Invoke(keyRessource);
+	}
 }
