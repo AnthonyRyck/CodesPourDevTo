@@ -65,28 +65,10 @@ a, .btn-link {
     padding: 2px;
 }
 
-.fan {
-    border: 2px solid black;
-    border-radius: 3px;
-    margin: 5px;
-    padding: 2px;
-    width: 230px;
-}
-
-
 .fanClub {
     display: flex;
     flex-wrap: wrap;
 }
-
-.grow {
-    transition: all .2s ease-in-out;
-}
-
-.grow:hover {
-    transform: scale(1.1);
-}
-
 
 
 /*************************/

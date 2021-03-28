@@ -1,0 +1,43 @@
+﻿<div id="openFanPage" 
+	class="fan grow" 
+	@onclick="OnClickToFanPage">
+
+	<div>
+		<div>ID : @Id</div>
+
+		<div id="iam">@Localizer.Invoke("JeSuis") : @Nom</div>
+		<div>@Localizer.Invoke("NbreClickOnMe") : @NombreDeClickRecu</div>
+	</div>
+
+	<button @onclick="ClickCallback"
+			@onclick:stopPropagation="true">
+		@(Localizer.Invoke("ClickOnMe"))
+		@*@(Localizer.Invoke("RessourceIdontKnow"))*@
+	</button>
+</div>
+
+
+@code {
+
+	[Parameter]
+	public int Id { get; set; }
+
+	[Parameter]
+	public string Nom { get; set; }
+
+	[Parameter]
+	public int NombreDeClickRecu { get; set; }
+
+	/// <summary>
+	/// Permet de changer le texte à afficher.
+	/// </summary>
+	[Parameter]
+	public Func<string, string> Localizer { get; set; }
+
+	[Parameter]
+	public EventCallback ClickCallback { get; set; }
+
+	[Parameter]
+	public EventCallback OnClickToFanPage { get; set; }
+	
+}

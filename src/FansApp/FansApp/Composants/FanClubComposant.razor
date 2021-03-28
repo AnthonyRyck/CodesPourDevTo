@@ -1,12 +1,21 @@
 ﻿@using FansApp.Data
+@using FanLib
 
 
 <div class="fanClub">
 	@foreach (var fan in FanCollection)
 	{
-		<FanComponent EtreFan="fan"
+		@*<FanComponent EtreFan="fan"
 					  ClickCallback="@(() => GetSonClickCallBack.InvokeAsync(fan.Id))"
-					  OnClickToFanPage="@(() => OnClickToOpenFanPage.InvokeAsync(fan.Id))" />
+					  OnClickToFanPage="@(() => OnClickToOpenFanPage.InvokeAsync(fan.Id))" />*@
+
+		<FanComposant Nom="@fan.Nom"
+						Id="@fan.Id"
+						NombreDeClickRecu="@fan.NombreDeClickRecu"
+						ClickCallback="@(() => GetSonClickCallBack.InvokeAsync(fan.Id))"
+						OnClickToFanPage="@(() => OnClickToOpenFanPage.InvokeAsync(fan.Id))"
+						Localizer="@Localizer"/>
+		
 	}
 </div>
 
@@ -20,4 +29,7 @@
 
 	[Parameter]
 	public EventCallback<int> OnClickToOpenFanPage { get; set; }
+
+	[Parameter]
+	public Func<string, string> Localizer { get; set; }
 }

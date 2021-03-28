@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FanLib\FanLib.csproj" />
     <ProjectReference Include="..\TitanicML.Model\TitanicML.Model.csproj" />
   </ItemGroup>
 

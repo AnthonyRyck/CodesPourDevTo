@@ -6,8 +6,12 @@
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<FanclubPage> localizer
 
+@*Pour avoir les ressouces de langue pour le composant*@
+@inject IStringLocalizer<FanComponent> LocalizerFanComposant
+
 @inject IFanClubViewModel viewModel
 @implements IAsyncDisposable
+
 
 <h3>@localizer["TitreFanclub"]</h3>
 
@@ -35,7 +39,8 @@
 
 <FanClubComposant FanCollection="@viewModel.AllFansCollection"
 				  GetSonClickCallBack="@viewModel.AddClick"
-				  OnClickToOpenFanPage="@viewModel.OpenFanPage" />
+				  OnClickToOpenFanPage="@viewModel.OpenFanPage"
+				  Localizer="@GetLocalisation" />
 
 @code {
 	protected override async Task OnInitializedAsync()
@@ -52,5 +57,10 @@
 	public async ValueTask DisposeAsync()
 	{
 		await viewModel.DisposeHubConnection();
+	}
+
+	private string GetLocalisation(string key)
+	{
+		return LocalizerFanComposant[key].Value;
 	}
 }
