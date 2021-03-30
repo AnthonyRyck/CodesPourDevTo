@@ -12,7 +12,7 @@
 	<button @onclick="ClickCallback"
 			@onclick:stopPropagation="true">
 		@(GetRessource("ClickOnMe"))
-		@*@(Localizer.Invoke("RessourceIdontKnow"))*@
+		@*@(GetRessource("RessourceIdontKnow"))*@
 	</button>
 </div>
 

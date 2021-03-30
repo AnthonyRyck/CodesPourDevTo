@@ -1,0 +1,11 @@
+﻿<button class="fanbutton"
+		onclick="@OnClick">@TextDansBouton</button>
+
+@code {
+
+	[Parameter]
+	public string TextDansBouton { get; set; }
+
+	[Parameter]
+	public EventCallback OnClick { get; set; }
+}
