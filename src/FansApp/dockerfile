@@ -4,6 +4,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
+COPY ["FanLib/FanLib.csproj", "FanLib/"]
 COPY ["FansApp/FansApp.csproj", "FansApp/"]
 COPY ["TitanicML.Model/TitanicML.Model.csproj", "TitanicML.Model/"]
 RUN dotnet restore "FansApp/FansApp.csproj"
