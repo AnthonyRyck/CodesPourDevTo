@@ -1,0 +1,24 @@
+﻿@page "/"
+
+
+@using ViewModels 
+@inject IRenderViewModel ViewModel
+
+<h1>Afficher dynamiquement des composants avec RenderFragment</h1>
+
+Exemple pour le post sur https://www.ctrl-alt-suppr.dev/
+
+<div>
+	<button @onclick="ViewModel.DisplayCounter">Affiche Counter</button>
+	<button @onclick="ViewModel.DisplayCompoAvecParam">Affiche composant avec paramètres</button>
+	<button @onclick="ViewModel.DisplayFetchData">Affiche FetchData</button>
+</div>
+
+<div style="border:2px solid black">
+
+@if(ViewModel.DisplayRenderFragment != null)
+{
+	@ViewModel.DisplayRenderFragment
+}
+
+</div>

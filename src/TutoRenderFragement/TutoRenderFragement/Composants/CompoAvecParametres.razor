@@ -1,0 +1,20 @@
+﻿@using Entities 
+
+<h3>Composant avec des paramètres</h3>
+
+<div>Numero du param : @UnNumero</div>
+
+<div>
+	<div>Nom : @User.Nom</div>
+	<div>Prenom : @User.Prenom</div>
+	<div>Age : @User.Age</div>
+</div>
+
+@code {
+
+	[Parameter]
+	public int UnNumero { get; set; }
+
+	[Parameter]
+	public Utilisateur User { get; set; }
+}
