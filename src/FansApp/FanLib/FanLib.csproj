@@ -8,6 +8,7 @@
     <Copyright>Copyright © Anthony Ryck 2021</Copyright>
     <PackageProjectUrl>https://github.com/AnthonyRyck/CodesPourDevTo/tree/master/src/FansApp</PackageProjectUrl>
     <PackageTags>sample</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   
