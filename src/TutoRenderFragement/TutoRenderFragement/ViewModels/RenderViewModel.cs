@@ -61,5 +61,16 @@ namespace TutoRenderFragement.ViewModels
 			DisplayRenderFragment = FetchDataDisplay();
 		}
 
+
+		public void DisplayPageWithViewModel()
+		{
+			RenderFragment Display() => builder =>
+			{
+				builder.OpenComponent(0, typeof(PageAvecViewModel));
+				builder.CloseComponent();
+			};
+
+			DisplayRenderFragment = Display();
+		}
 	}
 }

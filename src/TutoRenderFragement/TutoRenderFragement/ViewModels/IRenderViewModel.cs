@@ -23,5 +23,11 @@ namespace TutoRenderFragement.ViewModels
 		/// Affiche le composant FetchData (avec un @inject)
 		/// </summary>
 		void DisplayFetchData();
+
+		/// <summary>
+		/// Affiche un composant avec un ViewModel injecté
+		/// </summary>
+		void DisplayPageWithViewModel();
+
 	}
 }
