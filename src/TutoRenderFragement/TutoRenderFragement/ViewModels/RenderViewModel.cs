@@ -2,7 +2,8 @@
 using TutoRenderFragement.Pages;
 using TutoRenderFragement.Composants;
 using TutoRenderFragement.Entities;
-using Microsoft.AspNetCore.Components.Rendering;
+using HtmlAgilityPack;
+using System.Linq;
 
 namespace TutoRenderFragement.ViewModels
 {
@@ -72,5 +73,28 @@ namespace TutoRenderFragement.ViewModels
 
 			DisplayRenderFragment = Display();
 		}
+
+
+		public void DisplayHtml()
+		{
+			string urlFan = "https://fandemo.ctrl-alt-suppr.dev/FanclubPage";
+
+			var web = new HtmlWeb();
+			var doc = web.Load(urlFan);
+
+			var nodes = doc.DocumentNode.Descendants("div")
+						.ToList()
+						.Where(x => x.Attributes.Any() && x.Attributes["class"].Value == "main")
+						.FirstOrDefault();
+
+			RenderFragment Display(string html) => builder =>
+			{
+
+				builder.AddContent(0, new MarkupString(html));
+			};
+
+			DisplayRenderFragment = Display(nodes.InnerHtml);
+		}
+
 	}
 }

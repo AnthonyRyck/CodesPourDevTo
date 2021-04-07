@@ -29,5 +29,7 @@ namespace TutoRenderFragement.ViewModels
 		/// </summary>
 		void DisplayPageWithViewModel();
 
+
+		void DisplayHtml();
 	}
 }
