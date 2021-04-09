@@ -4,6 +4,8 @@ using TutoRenderFragement.Composants;
 using TutoRenderFragement.Entities;
 using HtmlAgilityPack;
 using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace TutoRenderFragement.ViewModels
 {
@@ -11,21 +13,27 @@ namespace TutoRenderFragement.ViewModels
 	{
 		/// <see cref="IRenderViewModel.DisplayRenderFragment"/>
 		public RenderFragment DisplayRenderFragment { get; set; }
+
+
+		private IReceiverViewModel AutreViewModel;
+
+		public RenderViewModel(IReceiverViewModel viewModel)
+		{
+			AutreViewModel = viewModel;
+		}
 				
 
 		/// <see cref="IRenderViewModel.DisplayCounter"/>
 		public void DisplayCounter()
 		{
-			DisplayRenderFragment = CreateDynamicComponent<Counter>();
+			RenderFragment CreateCompo() => builder =>
+			{
+				builder.OpenComponent(0, typeof(Counter));
+				builder.CloseComponent();
+			};
 
+			DisplayRenderFragment = CreateCompo();
 		}
-
-		private static RenderFragment CreateDynamicComponent<T>() => builder =>
-		{
-			builder.OpenComponent(0, typeof(T));
-			builder.CloseComponent();
-		};
-
 
 		/// <see cref="IRenderViewModel.DisplayCompoAvecParam"/>
 		public void DisplayCompoAvecParam()
@@ -41,15 +49,23 @@ namespace TutoRenderFragement.ViewModels
 			{
 				builder.OpenComponent(0, typeof(CompoAvecParametres));
 
-				builder.AddAttribute(1, "UnNumero", 13);
-				builder.AddAttribute(2, "User", utilisateur);
+				// Soit déclarer pour chaque paramètre.
+				//builder.AddAttribute(1, "UnNumero", 13);
+				//builder.AddAttribute(2, "User", utilisateur);
+
+				// Possible de faire aussi quand plusieurs paramètres
+				List<KeyValuePair<string,object>> attributes = new List<KeyValuePair<string, object>>();
+				attributes.Add(new KeyValuePair<string, object>("UnNumero", 13));
+				attributes.Add(new KeyValuePair<string, object>("User", utilisateur));
+
+				builder.AddMultipleAttributes(1, attributes);
 
 				builder.CloseComponent();
 			};
 
 			DisplayRenderFragment = CreateCompo();
 		}
-
+		
 		/// <see cref="IRenderViewModel.DisplayFetchData"/>
 		public void DisplayFetchData()
 		{
@@ -62,7 +78,7 @@ namespace TutoRenderFragement.ViewModels
 			DisplayRenderFragment = FetchDataDisplay();
 		}
 
-
+		/// <see cref="IRenderViewModel.DisplayPageWithViewModel"/>
 		public void DisplayPageWithViewModel()
 		{
 			RenderFragment Display() => builder =>
@@ -74,7 +90,7 @@ namespace TutoRenderFragement.ViewModels
 			DisplayRenderFragment = Display();
 		}
 
-
+		/// <see cref="IRenderViewModel.DisplayHtml"/>
 		public void DisplayHtml()
 		{
 			string urlFan = "https://fandemo.ctrl-alt-suppr.dev/FanclubPage";
@@ -94,6 +110,23 @@ namespace TutoRenderFragement.ViewModels
 			};
 
 			DisplayRenderFragment = Display(nodes.InnerHtml);
+		}
+
+		/// <see cref="IRenderViewModel.DisplayWithEventCallback"/>
+		public void DisplayWithEventCallback()
+		{
+			RenderFragment CreateCompo() => builder =>
+			{
+				builder.OpenComponent(0, typeof(CompoAvecEventCallBack));
+
+				// Ajout pour EventCallBack
+				var eventCallbackAddClick = EventCallback.Factory.Create(AutreViewModel, AutreViewModel.Click);
+				builder.AddAttribute(1, "ClickOnMe", eventCallbackAddClick);
+
+				builder.CloseComponent();
+			};
+
+			DisplayRenderFragment = CreateCompo();
 		}
 
 	}

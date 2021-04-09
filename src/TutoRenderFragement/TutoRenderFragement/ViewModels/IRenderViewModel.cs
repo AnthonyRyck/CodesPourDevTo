@@ -20,6 +20,11 @@ namespace TutoRenderFragement.ViewModels
 		void DisplayCompoAvecParam();
 
 		/// <summary>
+		/// Affiche un composant avec un paramètre EventCallback
+		/// </summary>
+		void DisplayWithEventCallback();
+
+		/// <summary>
 		/// Affiche le composant FetchData (avec un @inject)
 		/// </summary>
 		void DisplayFetchData();
@@ -29,7 +34,10 @@ namespace TutoRenderFragement.ViewModels
 		/// </summary>
 		void DisplayPageWithViewModel();
 
-
+		/// <summary>
+		/// Affiche du code HTML
+		/// </summary>
 		void DisplayHtml();
+				
 	}
 }

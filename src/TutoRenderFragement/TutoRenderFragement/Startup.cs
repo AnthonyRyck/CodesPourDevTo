@@ -34,6 +34,7 @@ namespace TutoRenderFragement
 
 			services.AddScoped<IRenderViewModel, RenderViewModel>();
 			services.AddScoped<ITestViewModel, TestViewModel>();
+			services.AddScoped<IReceiverViewModel, ReceiverViewModel>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

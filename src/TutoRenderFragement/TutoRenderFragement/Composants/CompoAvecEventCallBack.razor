@@ -1,0 +1,10 @@
+﻿<h3>Composant avec EventCallBack</h3>
+
+<button @onclick="ClickOnMe">CLICK</button>
+
+@code {
+
+	[Parameter]
+	public EventCallback ClickOnMe { get; set; }
+
+}
