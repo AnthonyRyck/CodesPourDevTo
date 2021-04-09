@@ -1,5 +1,4 @@
 ﻿@page "/"
-
 @using ViewModels 
 @inject IRenderViewModel ViewModel
 
@@ -24,3 +23,11 @@ Exemples pour le post sur https://www.ctrl-alt-suppr.dev/
 }
 
 </div>
+
+@code{
+	protected override void OnInitialized()
+	{
+		ViewModel.SetStateHasChanged(StateHasChanged);
+		base.OnInitialized();
+	}
+}

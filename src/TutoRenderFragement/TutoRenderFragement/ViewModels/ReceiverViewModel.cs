@@ -7,9 +7,11 @@ namespace TutoRenderFragement.ViewModels
 {
 	public class ReceiverViewModel : IReceiverViewModel
 	{
+		public int Counter { get; set; }
+
 		public void Click()
 		{
-			bool stop = true;
+			Counter++;
 		}
 	}
 }

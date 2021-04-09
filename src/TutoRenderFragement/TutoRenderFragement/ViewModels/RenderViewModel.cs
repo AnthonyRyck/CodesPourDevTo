@@ -16,12 +16,19 @@ namespace TutoRenderFragement.ViewModels
 
 
 		private IReceiverViewModel AutreViewModel;
+		private Action StateHasChanged;
 
 		public RenderViewModel(IReceiverViewModel viewModel)
 		{
 			AutreViewModel = viewModel;
 		}
-				
+		
+		/// <see cref="IRenderViewModel.SetStateHasChanged(Action)"/>
+		public void SetStateHasChanged(Action stateHasChanged)
+		{
+			StateHasChanged = stateHasChanged;
+		}
+
 
 		/// <see cref="IRenderViewModel.DisplayCounter"/>
 		public void DisplayCounter()
@@ -120,8 +127,9 @@ namespace TutoRenderFragement.ViewModels
 				builder.OpenComponent(0, typeof(CompoAvecEventCallBack));
 
 				// Ajout pour EventCallBack
-				var eventCallbackAddClick = EventCallback.Factory.Create(AutreViewModel, AutreViewModel.Click);
+				var eventCallbackAddClick = EventCallback.Factory.Create(AutreViewModel, CallClick);
 				builder.AddAttribute(1, "ClickOnMe", eventCallbackAddClick);
+				builder.AddAttribute(2, "CounterClick", AutreViewModel.Counter);
 
 				builder.CloseComponent();
 			};
@@ -129,5 +137,11 @@ namespace TutoRenderFragement.ViewModels
 			DisplayRenderFragment = CreateCompo();
 		}
 
+
+		private void CallClick()
+		{
+			AutreViewModel.Click();
+			StateHasChanged.Invoke();
+		}
 	}
 }

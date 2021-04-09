@@ -2,9 +2,15 @@
 
 <button @onclick="ClickOnMe">CLICK</button>
 
+<div>@CounterClick</div>
+
+
 @code {
 
 	[Parameter]
 	public EventCallback ClickOnMe { get; set; }
 
+
+	[Parameter]
+	public int CounterClick { get; set; }
 }

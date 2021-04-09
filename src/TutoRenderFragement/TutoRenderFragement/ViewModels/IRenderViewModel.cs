@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System;
 
 namespace TutoRenderFragement.ViewModels
 {
@@ -8,6 +9,12 @@ namespace TutoRenderFragement.ViewModels
 		/// Pour afficher un composant.
 		/// </summary>
 		RenderFragment DisplayRenderFragment { get; set; }
+
+		/// <summary>
+		/// Pour avoir accès à StateHasChanged depuis le ViewModel
+		/// </summary>
+		/// <param name="stateHasChanged"></param>
+		void SetStateHasChanged(Action stateHasChanged);
 
 		/// <summary>
 		/// Affiche le composant Counter
