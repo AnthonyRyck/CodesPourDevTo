@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp.Codes
+namespace RichLogger
 {
     public class LogInfo
     {
@@ -34,5 +34,4 @@ namespace WpfApp.Codes
         Warn,
         InfoGreen
     }
-
 }
