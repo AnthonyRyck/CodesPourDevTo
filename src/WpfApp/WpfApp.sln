@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csproj", "{6F3BE332-1D1A-43A3-B776-6B9C54446DA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichLogger", "RichLogger\RichLogger.csproj", "{60EAC5C5-0F71-425C-9CBE-F3F7C9C4AB27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppTestLogger", "AppTestLogger\AppTestLogger.csproj", "{66CCC38C-2980-4A4C-9687-0070519B509F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6F3BE332-1D1A-43A3-B776-6B9C54446DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F3BE332-1D1A-43A3-B776-6B9C54446DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F3BE332-1D1A-43A3-B776-6B9C54446DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F3BE332-1D1A-43A3-B776-6B9C54446DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60EAC5C5-0F71-425C-9CBE-F3F7C9C4AB27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60EAC5C5-0F71-425C-9CBE-F3F7C9C4AB27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60EAC5C5-0F71-425C-9CBE-F3F7C9C4AB27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60EAC5C5-0F71-425C-9CBE-F3F7C9C4AB27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66CCC38C-2980-4A4C-9687-0070519B509F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CCC38C-2980-4A4C-9687-0070519B509F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CCC38C-2980-4A4C-9687-0070519B509F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CCC38C-2980-4A4C-9687-0070519B509F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

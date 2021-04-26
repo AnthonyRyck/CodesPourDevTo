@@ -59,14 +59,6 @@
     <Compile Include="Codes\DelegateCommand.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Page Include="CustomControl\LoggerControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CustomControl\ProgressHexagon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -74,13 +66,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Codes\LogInfo.cs" />
-    <Compile Include="CustomControl\LoggerControl.xaml.cs">
-      <DependentUpon>LoggerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControl\ProgressHexagon.xaml.cs">
-      <DependentUpon>ProgressHexagon.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -112,6 +97,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomControl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RichLogger\RichLogger.csproj">
+      <Project>{60eac5c5-0f71-425c-9cbe-f3f7c9c4ab27}</Project>
+      <Name>RichLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
