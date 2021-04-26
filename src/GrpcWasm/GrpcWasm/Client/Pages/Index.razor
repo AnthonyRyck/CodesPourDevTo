@@ -1,0 +1,36 @@
+﻿@page "/"
+@using Services
+
+@inject ApiServices api; 
+
+<h1>GRPC performance</h1>
+
+<div>
+	<div>Télécharger via une API classique :</div>
+	<button @onclick="GetClassicApi">Télécharger</button>
+
+
+	<div>Nombre de ligne téléchargé : @RowNumber</div>
+	<div>Temps de téléchargement : @TempsApi.TotalMilliseconds ms</div>
+</div>
+
+
+
+@code{
+
+	public int RowNumber { get; set; }
+
+	public TimeSpan TempsApi { get; set; }
+
+
+	public TimeSpan TempsGrpc { get; set; }
+
+	public async Task GetClassicApi()
+	{
+		var start = DateTime.Now;
+		var allPeople = await api.GetAll();
+		RowNumber = allPeople.Count();
+		TempsApi = DateTime.Now.Subtract(start);
+	}
+
+}
