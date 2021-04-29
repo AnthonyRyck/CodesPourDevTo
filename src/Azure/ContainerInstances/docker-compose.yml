@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+   db:
+     image: mysql:5.7
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: SuperPassWord
+       MYSQL_DATABASE: hrdb
+       MYSQL_USER: adminhr
+       MYSQL_PASSWORD: SuperAdminPass
+
+   hrhelpers:
+     depends_on:
+       - db
+     image: anthonyryck/hrhelpers:latest
+     ports:
+       - "3030:80"
+     restart: always
+     environment:
+       database: db:3306
+       login: adminhr
+       password: SuperAdminPass
+       dbName: hrdb
+       
+
