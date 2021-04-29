@@ -15,7 +15,7 @@ services:
        - db
      image: anthonyryck/hrhelpers:latest
      ports:
-       - "3030:80"
+       - "80:80"
      restart: always
      environment:
        database: db:3306
