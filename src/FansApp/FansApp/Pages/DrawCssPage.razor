@@ -1,6 +1,6 @@
 ﻿@page "/drawcss"
 
-<h3>DrawCssPage</h3>
+<h3 class="monsupertitre">CSS Isolation</h3>
 
 @if (IsLoading)
 {
@@ -27,6 +27,4 @@ else
 		await Task.Delay(10000); //.ContinueWith(x => { IsLoading = true}). ;
 		IsLoading = false;
 	}
-
-
 }
