@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "Composants/Loading.razor.css",
+    "inputFile": "Composants/Loading.razor.scss"
+  },
+  {
+    "outputFile": "Composants/LoadingAtom.razor.css",
+    "inputFile": "Composants/LoadingAtom.razor.scss"
+  },
+  {
+    "outputFile": "Composants/LoadingAtom.razor.css",
+    "inputFile": "Composants/LoadingAtom.razor.less"
+  }
+]
