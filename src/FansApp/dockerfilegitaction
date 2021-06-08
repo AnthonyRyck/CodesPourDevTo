@@ -1,0 +1,22 @@
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+WORKDIR /src
+COPY ["./src/FansApp/FanLib/FanLib.csproj", "FanLib/"]
+COPY ["./src/FansApp/FansApp/FansApp.csproj", "FansApp/"]
+COPY ["./src/FansApp/TitanicML.Model/TitanicML.Model.csproj", "TitanicML.Model/"]
+
+RUN dotnet restore "FansApp/FansApp.csproj"
+COPY . .
+WORKDIR "/src/FansApp"
+RUN dotnet build "FansApp.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "FansApp.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "FansApp.dll"]
