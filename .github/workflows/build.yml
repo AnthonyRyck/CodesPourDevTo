@@ -16,6 +16,6 @@ jobs:
       - name: Login to DockerHub
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username anthonyryck --password-stdin
       - name: Build image
-        run: docker build --file ./src/FansApp/FansApp/dockerfile --tag anthonyryck/demofansapp:latest .
+        run: docker build --file ./src/FansApp/dockerfile --tag anthonyryck/demofansapp:latest .
       - name: Push to DockerHub
         run: docker push anthonyryck/demofansapp:latest
