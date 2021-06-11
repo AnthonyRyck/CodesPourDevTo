@@ -35,7 +35,7 @@ namespace FansApp.Services
 			AllInfo = new List<string>();
 
 			// 10 jours en millisecondes
-			var tempsEnMillisecond = Convert.ToInt32(TimeSpan.FromHours(3).TotalMilliseconds);
+			var tempsEnMillisecond = Convert.ToInt32(TimeSpan.FromHours(24).TotalMilliseconds);
 			_timerReset = new Timer(ResetCounter, null, 0, tempsEnMillisecond);
 		}
 
