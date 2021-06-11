@@ -17,6 +17,7 @@ Il y a un live de la demo sur [fandemo.ctrl-alt-suppr.dev](https://fandemo.ctrl-
 [Internationaliser son application Blazor Server](https://www.ctrl-alt-suppr.dev/2021/02/27/internationaliser-son-application-blazor-server/)  
 [Real-time avec Blazor Server et SignalR](https://www.ctrl-alt-suppr.dev/2021/03/11/real-time-avec-blazor-server-et-signalr/)  
 [Accès à une API via une autorisation basée sur les rôles](https://www.ctrl-alt-suppr.dev/2021/03/18/acces-a-une-api-via-une-autorisation-basee-sur-les-roles/)  
+[Blazor SCSS isolation](https://www.ctrl-alt-suppr.dev/2021/06/08/blazor-scss-isolation/)
 
 ## Une autre partie sur Xamarin.
 [Commencer avec Xamarin](https://www.ctrl-alt-suppr.dev/2021/03/09/commencer-avec-xamarin/)  

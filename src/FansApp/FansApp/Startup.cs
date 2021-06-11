@@ -37,7 +37,7 @@ namespace FansApp
 
 			services.AddTransient<IHubService, HubService>();
 
-			// Un service pour simuler l'accès à une base de données, ou un service API
+			// Un service pour simuler l'accÃ¨s Ã  une base de donnÃ©es, ou un service API
 			services.AddSingleton<IAccessDatabase, FakeAccessDatabase>();
 
 			// ViewModel pour le FanClub
@@ -46,7 +46,7 @@ namespace FansApp
 			// ViewModel pour un Fan
 			services.AddScoped<IFanViewModel, FanViewModel>();
 
-			// Service pour remettre à zéro
+			// Service pour remettre Ã  zÃ©ro
 			services.AddHostedService<ResetHostedService>();
 
 			// Titanic Model
@@ -56,14 +56,14 @@ namespace FansApp
 			services.AddLocalization(options => options.ResourcesPath = "Resources");
 			services.Configure<RequestLocalizationOptions>(options =>
 			{
-				// Définition de la liste de langue pris en charge.
+				// DÃ©finition de la liste de langue pris en charge.
 				var supportedCultures = new List<CultureInfo>()
 									{
 										 new CultureInfo("en-US"),
 										 new CultureInfo("fr-FR")
 									};
 
-				// Langue par défaut
+				// Langue par dÃ©faut
 				options.DefaultRequestCulture = new RequestCulture("en-US");
 
 				options.SupportedCultures = supportedCultures;
@@ -126,3 +126,5 @@ namespace FansApp
 		}
 	}
 }
+
+

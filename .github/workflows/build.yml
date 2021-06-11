@@ -1,0 +1,21 @@
+name: Build-Docker
+
+on:
+  push:
+    paths:
+     - 'src/FansApp/FansApp**'
+     - '!src/FansApp/FansApp/README.md'
+     - '!.github/workflows/**'
+     - '!README.md'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to DockerHub
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username anthonyryck --password-stdin
+      - name: Build image
+        run: docker build --file ./src/FansApp/dockerfilegitaction --tag anthonyryck/demofansapp:latest .
+      - name: Push to DockerHub
+        run: docker push anthonyryck/demofansapp:latest
