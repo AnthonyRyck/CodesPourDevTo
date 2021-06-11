@@ -1,21 +1,21 @@
+using FansApp.CustomMiddleware;
 using FansApp.Data;
 using FansApp.Hubs;
 using FansApp.Services;
 using FansApp.ViewModel;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FansApp
 {
@@ -77,6 +77,11 @@ namespace FansApp
 				opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
 					new[] { "application/octet-stream" });
 			});
+
+			// Service pour Info utilisateur
+			services.AddSingleton<ICounterUser, CounterUser>();
+
+			services.AddScoped<IMiddleViewModel, MiddleViewModel>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +104,16 @@ namespace FansApp
 
 			app.UseStaticFiles();
 			app.UseRouting();
+
+			// Middleware Compteur
+			app.UseForwardedHeaders(new ForwardedHeadersOptions
+			{
+				ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+			});
+
+			app.UseMiddleware<CounterMiddleware>();
+			app.UseMiddleware<SecondMiddleware>();
+
 			app.UseEndpoints(endpoints =>
 			{
 				// MapControllers - pour ajouter notre controller

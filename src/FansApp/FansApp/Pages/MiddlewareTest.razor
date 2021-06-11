@@ -1,0 +1,18 @@
+﻿@page "/intergiciel-Errrk-disgusting"
+
+@using FansApp.Services
+@inject ICounterUser counterUser
+
+<h3>Test des Middleware</h3>
+
+<p>Nombre IP unique : @counterUser.CounterIpUnique</p>
+
+<p><u>Liste des IPs</u> :</p>
+@foreach (var item in counterUser.LesIps)
+{
+	<div>@item</div>
+}
+
+@code {
+
+}

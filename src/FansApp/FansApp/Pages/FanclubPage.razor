@@ -11,9 +11,6 @@
 
 <div>
 	<span>
-		@*<button @onclick="@viewModel.DisplayNewFan">@localizer["AddNewMember"]</button>
-		<button @onclick="@viewModel.DisplayNewFanWithValidation">@localizer["AddNewMemberValidation"]</button>*@
-
 		<FanButton OnClick="@viewModel.DisplayNewFan" 
 					TextDansBouton="@localizer["AddNewMember"]" />
 		
