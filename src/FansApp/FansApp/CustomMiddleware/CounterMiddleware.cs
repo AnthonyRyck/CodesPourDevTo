@@ -11,7 +11,7 @@ namespace FansApp.CustomMiddleware
 	{
 		private readonly RequestDelegate _next;
 
-		public CounterMiddleware(RequestDelegate next)//, IUserInfo user)
+		public CounterMiddleware(RequestDelegate next)
 		{
 			_next = next;
 		}

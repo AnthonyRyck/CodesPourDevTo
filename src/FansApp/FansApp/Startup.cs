@@ -108,7 +108,7 @@ namespace FansApp
 			// Middleware Compteur
 			app.UseForwardedHeaders(new ForwardedHeadersOptions
 			{
-				ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+				ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedHost
 			});
 
 			app.UseMiddleware<CounterMiddleware>();

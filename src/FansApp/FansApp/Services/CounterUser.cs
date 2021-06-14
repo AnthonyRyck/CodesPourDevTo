@@ -62,6 +62,7 @@ namespace FansApp.Services
 		private void ResetCounter(object state)
 		{
 			IpList.Clear();
+			AllInfo.Clear();
 		}
 
 		#endregion
