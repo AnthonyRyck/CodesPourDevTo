@@ -38,21 +38,19 @@ namespace InversionControl
 				}
 			};
 			Calculator calculLambda = new Calculator(actionLog);
-			var result = calculLambda.Addition(3, 4);
+			calculLambda.Addition(3, 4);
 			Console.WriteLine("------------");
-
 			calculLambda.MethodWithError(1, 2);
 			calculLambda.MethodWithWarn(54);
 
+
 			Console.WriteLine("##### Autre manière ######");
-			Console.WriteLine("En passant par une class un peu élaborée.");
+			Console.WriteLine("En passant par une class un peu plus élaborée.");
 
 			InteractionUser user = new InteractionUser(new LoggerConsole());
 			Calculator calculator = new Calculator(user.LogMessage);
 			calculator.Addition(3, 4);
-
 			user.LogMessage(TypeLog.Info, "------------");
-
 			calculator.MethodWithError(1, 2);
 			calculator.MethodWithWarn(54);
 
@@ -63,9 +61,7 @@ namespace InversionControl
 
 			Calculator calculatorFile = new Calculator(userFile.LogMessage);
 			calculatorFile.Addition(3, 4);
-
 			userFile.LogMessage(TypeLog.Info, "------------");
-
 			calculatorFile.MethodWithError(1, 2);
 			calculatorFile.MethodWithWarn(54);
 
