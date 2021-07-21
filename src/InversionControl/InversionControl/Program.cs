@@ -11,10 +11,44 @@ namespace InversionControl
 			Console.WriteLine("#### Début de l'application ####");
 
 			Console.WriteLine("Les logs sont dans la Console.");
-			InteractionUser user = new InteractionUser(new LoggerConsole());
+			Console.WriteLine("En passant une expression lambda.");
+			Calculator calculLambda = new Calculator((TypeLog type, string message) => 
+														{
+															switch (type)
+															{
+																case TypeLog.Error:
+																	Console.WriteLine("ERROR-" + message);
+																	break;
 
+																case TypeLog.Warn:
+																	Console.WriteLine("WARN-" + message);
+																	break;
+
+																case TypeLog.Info:
+																	Console.WriteLine("INFO-" + message);
+																	break;
+
+																case TypeLog.Success:
+																	Console.WriteLine("SUCCESS-" + message);
+																	break;
+
+																default:
+																	Console.WriteLine("Euhhh... pas normal d'être là !");
+																	break;
+															}
+														});
+			var result = calculLambda.Addition(3, 4);
+			Console.WriteLine("------------");
+
+			calculLambda.MethodWithError(1, 2);
+			calculLambda.MethodWithWarn(54);
+
+			Console.WriteLine("##### Autre manière ######");
+			Console.WriteLine("En passant par une class un peu élaborée.");
+
+			InteractionUser user = new InteractionUser(new LoggerConsole());
 			Calculator calculator = new Calculator(user.LogMessage);
-			var resultat = calculator.Addition(3, 4);
+			calculator.Addition(3, 4);
 
 			user.LogMessage(TypeLog.Info, "------------");
 
@@ -27,7 +61,7 @@ namespace InversionControl
 			InteractionUser userFile = new InteractionUser(new LoggerFile(@"c:\123\log.txt"));
 
 			Calculator calculatorFile = new Calculator(userFile.LogMessage);
-			var resultatFile = calculatorFile.Addition(3, 4);
+			calculatorFile.Addition(3, 4);
 
 			userFile.LogMessage(TypeLog.Info, "------------");
 
@@ -36,9 +70,5 @@ namespace InversionControl
 
 			Console.WriteLine("#### Fin de l'application ####");
 		}
-
-
-
-
 	}
 }

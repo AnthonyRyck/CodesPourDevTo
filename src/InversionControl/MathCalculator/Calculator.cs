@@ -6,38 +6,34 @@ namespace MathCalculator
 	{
 		private Action<TypeLog, string> Logger;
 
-
-
 		public Calculator(Action<TypeLog, string> actionLogger)
 		{
 			Logger = actionLogger;
 		}
 
-
 		public int Addition(int a, int b)
 		{
-			Logger?.Invoke(TypeLog.Info, $"Appel Addition avec : {a} et {b}");
+			Log(TypeLog.Info, $"Appel Addition avec : {a} et {b}");
 
 			int resultat = a + b;
 			
-			Logger?.Invoke(TypeLog.Success, $"Résultat {resultat}.");
+			Log(TypeLog.Success, $"Résultat {resultat}.");
 
 			return resultat;
 		}
-
 
 		public void MethodWithError(int a, int b)
 		{
 			try
 			{
-				Logger?.Invoke(TypeLog.Info, $"Appel MethodWithError avec : {a} et {b}");
+				Log(TypeLog.Info, $"Appel MethodWithError avec : {a} et {b}");
 
 				throw new Exception("ERREUR levé dans la méthode !!!");
 			}
 			catch (Exception ex)
 			{
-				Logger?.Invoke(TypeLog.Error, "Exception levé sur la méthode : MethodWithError");
-				Logger?.Invoke(TypeLog.Error, $"StackTrace : {ex.Message}.");
+				Log(TypeLog.Error, "Exception levé sur la méthode : MethodWithError");
+				Log(TypeLog.Error, $"StackTrace : {ex.Message}.");
 			}
 		}
 
@@ -45,18 +41,21 @@ namespace MathCalculator
 		{
 			try
 			{
-				Logger?.Invoke(TypeLog.Info, $"Appel MethodWithWarn avec comme paramètre : {leparam}");
-				Logger?.Invoke(TypeLog.Warn, $"!!!!! WARNING {leparam} !!!!!");
+				Log(TypeLog.Info, $"Appel MethodWithWarn avec comme paramètre : {leparam}");
+				Log(TypeLog.Warn, $"!!!!! WARNING {leparam} !!!!!");
 			}
 			catch (Exception ex)
 			{
-				Logger?.Invoke(TypeLog.Error, "Exception levé sur la méthode : MethodWithWarn");
-				Logger?.Invoke(TypeLog.Error, $"StackTrace : {ex.Message}.");
+				Log(TypeLog.Error, "Exception levé sur la méthode : MethodWithWarn");
+				Log(TypeLog.Error, $"StackTrace : {ex.Message}.");
 			}
 		}
 
+		private void Log(TypeLog typeLog, string message)
+		{
+			Logger?.Invoke(typeLog, message);
+		}
 	}
-
 
 	public enum TypeLog
 	{
