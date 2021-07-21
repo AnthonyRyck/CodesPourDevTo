@@ -11,7 +11,7 @@ namespace FansApp.CustomMiddleware
 	{
 		private readonly RequestDelegate _next;
 
-		public CounterMiddleware(RequestDelegate next)//, IUserInfo user)
+		public CounterMiddleware(RequestDelegate next)
 		{
 			_next = next;
 		}
@@ -22,30 +22,31 @@ namespace FansApp.CustomMiddleware
 		{
 			string ipAppelant = httpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
 
-			if (!string.IsNullOrEmpty(ipAppelant))
-			{
-				counterUser.AddIp(ipAppelant);
-			}
-
-			// Recherche de "InfoFan"
-			GetInfo(httpContext);
-
 			// Appel au prochaine delegate/middleware du pipeline
 			// Si pas fait, tout s'arrête !
 			await _next(httpContext);
 
 			// Voir la réponse "RETOUR" de SecondMiddleware
-			GetInfo(httpContext);
+			var premierPassageDate = GetInfoDate(httpContext);
+
+			if (!string.IsNullOrEmpty(ipAppelant))
+			{
+				counterUser.AddIp(ipAppelant, premierPassageDate);
+			}
 		}
 
 
-		private void GetInfo(HttpContext httpContext)
+		private string GetInfoDate(HttpContext httpContext)
 		{
+			string datePremierPassage = string.Empty;
+
 			var haveInfo = httpContext.Items.Any(x => x.Key.ToString() == "InfoFanMiddleware");
 			if (haveInfo)
 			{
-				bool stop = true;
+				datePremierPassage = httpContext.Items.FirstOrDefault(x => x.Key.ToString() == "InfoFanMiddleware").Value.ToString();
 			}
+
+			return datePremierPassage;
 		}
 
 	}

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FansApp.CustomMiddleware
@@ -19,7 +17,7 @@ namespace FansApp.CustomMiddleware
 
 		public async Task Invoke(HttpContext httpContext)
 		{
-			httpContext.Items.Add("InfoFanMiddleware", "Ralalalala !!");	
+			httpContext.Items.Add("InfoFanMiddleware", DateTime.Now.ToString("g"));	
 			await _next(httpContext);
 		}
 	}

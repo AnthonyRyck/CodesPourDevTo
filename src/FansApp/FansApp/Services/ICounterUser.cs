@@ -11,7 +11,8 @@ namespace FansApp.Services
 		/// IP de l'appelant
 		/// </summary>
 		/// <param name="ipAppelant"></param>
-		void AddIp(string ipAppelant);
+		/// <param name="date"></param>
+		void AddIp(string ipAppelant, string date);
 
 		/// <summary>
 		/// Compteur d'IP unique.

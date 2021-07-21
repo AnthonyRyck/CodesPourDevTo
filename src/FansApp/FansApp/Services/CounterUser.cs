@@ -11,10 +11,12 @@ namespace FansApp.Services
 		/// <summary>
 		/// Liste des IPs
 		/// </summary>
-		public IEnumerable<string> LesIps { get { return IpList; } }
+		public IEnumerable<string> LesIps { get { return AllInfo; } }
 
 
 		private List<string> IpList;
+
+		private List<string> AllInfo;
 
 		/// <summary>
 		/// Compteur d'IP unique.
@@ -27,26 +29,27 @@ namespace FansApp.Services
 			}
 		}
 
-
 		public CounterUser()
 		{
 			IpList = new List<string>();
+			AllInfo = new List<string>();
 
 			// 10 jours en millisecondes
-			var tempsEnMillisecond = Convert.ToInt32(TimeSpan.FromHours(3).TotalMilliseconds);
+			var tempsEnMillisecond = Convert.ToInt32(TimeSpan.FromHours(24).TotalMilliseconds);
 			_timerReset = new Timer(ResetCounter, null, 0, tempsEnMillisecond);
 		}
-
 
 		/// <summary>
 		/// IP de l'appelant
 		/// </summary>
 		/// <param name="ipAppelant"></param>
-		public void AddIp(string ipAppelant)
+		/// <param name="date"></param>
+		public void AddIp(string ipAppelant, string date)
 		{
 			if (!IpList.Contains(ipAppelant))
 			{
 				IpList.Add(ipAppelant);
+				AllInfo.Add(ipAppelant + " - " + date);
 			}
 		}
 
@@ -59,6 +62,7 @@ namespace FansApp.Services
 		private void ResetCounter(object state)
 		{
 			IpList.Clear();
+			AllInfo.Clear();
 		}
 
 		#endregion
