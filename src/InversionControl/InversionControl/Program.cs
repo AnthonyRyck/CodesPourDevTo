@@ -12,31 +12,32 @@ namespace InversionControl
 
 			Console.WriteLine("Les logs sont dans la Console.");
 			Console.WriteLine("En passant une expression lambda.");
-			Calculator calculLambda = new Calculator((TypeLog type, string message) => 
-														{
-															switch (type)
-															{
-																case TypeLog.Error:
-																	Console.WriteLine("ERROR-" + message);
-																	break;
+			Action<TypeLog, string> actionLog = (TypeLog type, string message) =>
+			{
+				switch (type)
+				{
+					case TypeLog.Error:
+						Console.WriteLine("ERROR-" + message);
+						break;
 
-																case TypeLog.Warn:
-																	Console.WriteLine("WARN-" + message);
-																	break;
+					case TypeLog.Warn:
+						Console.WriteLine("WARN-" + message);
+						break;
 
-																case TypeLog.Info:
-																	Console.WriteLine("INFO-" + message);
-																	break;
+					case TypeLog.Info:
+						Console.WriteLine("INFO-" + message);
+						break;
 
-																case TypeLog.Success:
-																	Console.WriteLine("SUCCESS-" + message);
-																	break;
+					case TypeLog.Success:
+						Console.WriteLine("SUCCESS-" + message);
+						break;
 
-																default:
-																	Console.WriteLine("Euhhh... pas normal d'être là !");
-																	break;
-															}
-														});
+					default:
+						Console.WriteLine("Euhhh... pas normal d'être là !");
+						break;
+				}
+			};
+			Calculator calculLambda = new Calculator(actionLog);
 			var result = calculLambda.Addition(3, 4);
 			Console.WriteLine("------------");
 
