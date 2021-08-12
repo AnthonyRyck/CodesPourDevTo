@@ -1,0 +1,58 @@
+#!markdown
+
+# Découvrir les fonctionnalités du Notebook
+Ce Notebook fait référence à l'article sur [ctrl-alt-suppr](https://www.ctrl-alt-suppr.dev/).
+
+#!markdown
+
+# Markdown
+Pour mettre en forme le texte, le notebook utilise la syntaxe Markdown. Il est facile de trouver sur internet toutes les syntaxes.  
+Voici quelques exemples :  
+* ```# Un titre``` affiche un titre
+* ```_italique_``` s'affiche ainsi : _italique_
+* ```**gras**``` s'affiche ainsi : **gras**
+* ```**_gras-italique_**``` s'affiche ainsi : **_gras-italique_**
+* ```~~barré~~``` s'affiche ainsi : ~~barré~~
+* ```[nom du lien](http://www.google.com)``` pour un lien : [Google](https://www.google.com)
+
+#!markdown
+
+# Ajouter une image
+Un exemple avec un gif. Il faut écrire par exemple :  
+```![alt text](https://media.giphy.com/media/VTtANKl0beDFQRLDTh/giphy.gif "Affiche un tooltips")```  
+Quand vous passez le curseur sur l'image, un info bulle apparaitra avec le texte *Affiche un tooltips*  
+**Attention** : le **!** est **TRES** important. Si vous l'oubliez, ça devient juste un lien.
+
+![alt text](https://media.giphy.com/media/VTtANKl0beDFQRLDTh/giphy.gif "Affiche un tooltips")
+
+Cas ou l'image n'existe pas, par exemple :  
+```![la loose](https://www.urlquinexistepas.com "Perdu")```  
+![la loose](https://www.urlquinexistepas.com "Perdu")
+
+#!markdown
+
+# Cellule de code
+
+#!csharp
+
+string message = "Hello world !";
+Console.WriteLine(message);
+
+#!markdown
+
+# Ajout d'un package dans le Notebook
+Pour permettre l'ajout de package Nuget dans le Notebook, il faut utiliser la commande ***(la doc se trouve sur [github](https://github.com/dotnet/interactive/blob/main/docs/nuget-overview.md))*** :  
+```csharp
+#r "nuget:nomDuPackage,version"
+```
+comme par exemple :  
+```csharp
+#r "nuget:Newtonsoft.Json,13.0.1"
+```
+__Note__ : Il faut exécuter la cellule pour que le Notebook récupère le package. Une fois éxecutée, il doit y avoir en dessous de la cellule :  
+**Installed Packages**
+* Newtonsoft.Json, 13.0.1
+
+#!csharp
+
+#r "nuget:Newtonsoft.Json,13.0.1"
