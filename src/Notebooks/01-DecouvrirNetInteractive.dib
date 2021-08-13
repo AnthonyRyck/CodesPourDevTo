@@ -31,11 +31,14 @@ Cas ou l'image n'existe pas, par exemple :
 
 #!markdown
 
-# Cellule de code
+# Cellules de code
 
 #!csharp
 
-string message = "Hello world !";
+string message = "Hello world !!!";
+
+#!csharp
+
 Console.WriteLine(message);
 
 #!markdown
