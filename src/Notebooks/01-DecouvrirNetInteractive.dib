@@ -33,6 +33,20 @@ Cas ou l'image n'existe pas, par exemple :
 
 # Cellules de code
 
+#!markdown
+
+Il est possible de déclarer du code dans une cellule comme ceci :
+
+#!csharp
+
+string msg = "Hello de la cellule";
+Console.WriteLine(msg);
+
+#!markdown
+
+Ou d'avoir plusieurs cellule de code.  
+**A savoir** : les cellules de code fonctionnent entre elle, toujours du haut vers le bas. Celles du haut ne connaissent pas les cellules du bas. Ensuite il faut exécuter une fois la cellule pour que les variables par exemple, soient connu dans le contexte. Avec les 2 cellules d'en dessous, exécuté la 2eme cellule avant la première, et vous aurez une erreur.
+
 #!csharp
 
 string message = "Hello world !!!";
