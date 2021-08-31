@@ -81,7 +81,11 @@ namespace FansApp
 			// Service pour Info utilisateur
 			services.AddSingleton<ICounterUser, CounterUser>();
 
+			// Service pour le Middleware
 			services.AddScoped<IMiddleViewModel, MiddleViewModel>();
+
+			// Service pour la page de Chatbot
+			services.AddScoped<IWebChatViewModel, WebChatViewModel>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

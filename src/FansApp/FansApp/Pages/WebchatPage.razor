@@ -1,0 +1,70 @@
+﻿@page "/webchat"
+
+@inject IWebChatViewModel ViewModel
+
+<h3>Webchat</h3>
+
+<div>
+	<div>
+		<h5>Code Webchat "incorporé"</h5>
+		<div>Passe par le "BoT Service Azure" pour accéder aux Questions/Réponses.</div>
+	</div>
+
+	<div>
+		@*Mettre le iFrame*@
+		@*<iframe src='https://webchat.botframework.com/embed/***ID-BOT***?s=***THE-BIG-KEY*****'
+			style='min-width: 400px; width: 100%; min-height: 500px;' />*@
+	</div>
+</div>
+
+<hr />
+
+<div class="row">
+	<h4>Appel sur le service QnA Maker</h4>
+
+	<div class="row">
+		<div class="col">
+			<div>
+				<div>
+					@*Afficher le bot maison*@
+					@foreach (var message in ViewModel.TousLesMessages)
+					{
+						<div class="@ViewModel.GetClass(message.IsQuestion)"
+							 align="@ViewModel.GetAlign(message.IsQuestion)">
+							
+							@*@ViewModel.Markdown.Transform(message.TexteMessage)*@
+						</div>
+					}
+				</div>
+
+				<div>
+					<InputText @bind-Value="ViewModel.Question" 
+								@onkeydown="@Enter" />
+				</div>
+			</div>
+		</div>
+
+		<div class="col">
+			@*Afficher le code json*@
+			<pre>
+				<code>
+					@*Mettre le JSON*@
+					@ViewModel.LastMessageJson
+				</code>
+			</pre>
+		</div>
+	</div>
+</div>
+
+
+@code {
+
+	public async void Enter(KeyboardEventArgs e)
+	{
+		if (e.Code == "Enter" || e.Code == "NumpadEnter")
+		{
+			await ViewModel.PoserLaQuestion(ViewModel.Question);
+		}
+	}
+
+}

@@ -99,3 +99,19 @@ a, .btn-link {
     animation: dialog-entry 0.4s;
     animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000);
 }
+
+
+/**********************/
+/*CSS pour WebChat    */
+/**********************/
+.cardquestion {
+    border: 1px solid black;
+    background-color: lightgray;
+    color: black;
+}
+
+.cardanswer {
+    border: 1px solid black;
+    background-color: blue;
+    color: white;
+}
