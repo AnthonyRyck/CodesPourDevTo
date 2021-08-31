@@ -40,7 +40,7 @@ namespace FansApp.Models
     {
         public List<string> questions { get; set; }
         public string answer { get; set; }
-        public int score { get; set; }
+        public double score { get; set; }
         public int id { get; set; }
         public string source { get; set; }
         public bool isDocumentText { get; set; }

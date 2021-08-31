@@ -12,18 +12,18 @@
 
 	<div>
 		@*Mettre le iFrame*@
-		@*<iframe src='https://webchat.botframework.com/embed/***ID-BOT***?s=***THE-BIG-KEY*****'
-			style='min-width: 400px; width: 100%; min-height: 500px;' />*@
+		<iframe src='https://webchat.botframework.com/embed/***ID-BOT***?s=***THE-BIG-KEY*****'
+			style='min-width: 400px; width: 100%; max-height: 500px;' />
 	</div>
 </div>
 
 <hr />
 
-<div class="row">
+<div>
 	<h4>Appel sur le service QnA Maker</h4>
 
 	<div class="row">
-		<div class="col">
+		<div class="col-6">
 			<div>
 				<div>
 					@*Afficher le bot maison*@
@@ -32,19 +32,20 @@
 						<div class="@ViewModel.GetClass(message.IsQuestion)"
 							 align="@ViewModel.GetAlign(message.IsQuestion)">
 							
-							@*@ViewModel.Markdown.Transform(message.TexteMessage)*@
+							@message.TexteMessage.Replace("\"", string.Empty)
 						</div>
 					}
 				</div>
 
 				<div>
-					<InputText @bind-Value="ViewModel.Question" 
-								@onkeydown="@Enter" />
+					<input @bind-value="ViewModel.Question"
+								@onkeydown="@Enter"
+								type="text" />
 				</div>
 			</div>
 		</div>
 
-		<div class="col">
+		<div class="col-6">
 			@*Afficher le code json*@
 			<pre>
 				<code>
@@ -64,7 +65,11 @@
 		if (e.Code == "Enter" || e.Code == "NumpadEnter")
 		{
 			await ViewModel.PoserLaQuestion(ViewModel.Question);
+
+			StateHasChanged();
 		}
 	}
 
+
+	public string plouf { get; set; }
 }
