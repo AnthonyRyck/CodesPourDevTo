@@ -8,12 +8,12 @@
 	<div>
 		<h5>Code Webchat "incorporé"</h5>
 		<div>Passe par le "BoT Service Azure" pour accéder aux Questions/Réponses.</div>
+		<div>Utilise un : iframe src='https://webchat.botframework.com/embed/***ID-BOT***?s=***THE-BIG-KEY*****'</div>
 	</div>
 
 	<div>
-		@*Mettre le iFrame*@
-		<iframe src='https://webchat.botframework.com/embed/***ID-BOT***?s=***THE-BIG-KEY*****'
-			style='min-width: 400px; width: 100%; max-height: 500px;' />
+		<iframe src='https://webchat.botframework.com/embed/CtrlAltSupprBot?s=nzCbVrcVbrI.JJxTHnW7s2GdE_vrTUprf6y6Hy0gSJ_LhcTHRHfkUB4'
+				style='min-width: 400px; width: 100%; max-height: 500px;' />
 	</div>
 </div>
 
@@ -23,40 +23,43 @@
 	<h4>Appel sur le service QnA Maker</h4>
 
 	<div class="row">
-		<div class="col-6">
+		<div class="col-4">
 			<div>
-				<div>
+				<div class="max-height-250">
 					@*Afficher le bot maison*@
 					@foreach (var message in ViewModel.TousLesMessages)
 					{
-						<div class="@ViewModel.GetClass(message.IsQuestion)"
-							 align="@ViewModel.GetAlign(message.IsQuestion)">
-							
-							@message.TexteMessage.Replace("\"", string.Empty)
+					<div align="@ViewModel.GetAlign(message.IsQuestion)">
+						<div class="@ViewModel.GetClass(message.IsQuestion)">
+
+							@((MarkupString)message.TexteMessage)
 						</div>
+					</div>
 					}
 				</div>
 
 				<div>
-					<input @bind-value="ViewModel.Question"
+					<input @bind-value="@ViewModel.Question"
 								@onkeydown="@Enter"
+								placeholder="Quelle est votre question ?"
 								type="text" />
 				</div>
 			</div>
 		</div>
 
-		<div class="col-6">
-			@*Afficher le code json*@
-			<pre>
+		<div class="col-8">
+			Réponse JSON reçu de QnA Maker :
+			<div class="jsondisplay max-height-250">
 				<code>
-					@*Mettre le JSON*@
-					@ViewModel.LastMessageJson
+					<pre>
+
+					@((MarkupString)ViewModel.LastMessageJson)
+					</pre>
 				</code>
-			</pre>
+			</div>
 		</div>
 	</div>
 </div>
-
 
 @code {
 
@@ -69,7 +72,4 @@
 			StateHasChanged();
 		}
 	}
-
-
-	public string plouf { get; set; }
 }

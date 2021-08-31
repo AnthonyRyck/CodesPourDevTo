@@ -1,4 +1,5 @@
 ﻿using FansApp.Models;
+using HeyRed.MarkdownSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace FansApp.ViewModel
 		/// </summary>
 		List<Message> TousLesMessages { get; }
 
+
+		Markdown Markdown { get; }
 
 		string Question { get; set; }
 

@@ -108,10 +108,25 @@ a, .btn-link {
     border: 1px solid black;
     background-color: lightgray;
     color: black;
+    display: inline-block;
 }
 
 .cardanswer {
     border: 1px solid black;
-    background-color: blue;
+    background-color: lightsteelblue;
     color: white;
+    display: inline-block;
+    margin: 2px 5px 2px;
+}
+
+.max-height-250 {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.jsondisplay {
+    border: 1px solid black;
+    background-color: lightgray;
+    border-radius: 3px;
+    color:red;
 }

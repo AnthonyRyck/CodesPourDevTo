@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace FansApp.ViewModel
 {
@@ -21,8 +22,7 @@ namespace FansApp.ViewModel
 
 		public string Question { get; set; }
 
-		private Markdown _markdown;
-
+		public Markdown Markdown { get; private set; }
 
 		public WebChatViewModel()
 		{
@@ -31,10 +31,14 @@ namespace FansApp.ViewModel
 				AutoHyperlink = true,
 				LinkEmails = true,
 				QuoteSingleLine = true,
-				StrictBoldItalic = true
+				StrictBoldItalic = true,
+				DisableEncodeCodeBlock = true,
+				AutoNewLines = true
 			};
 
-			_markdown = new Markdown(options);
+			Markdown = new Markdown(options);
+
+			TousLesMessages = new List<Message>();
 		}
 
 
@@ -60,12 +64,17 @@ namespace FansApp.ViewModel
 
 		public async Task PoserLaQuestion(string question)
 		{
+			Message questionMsg = new Message();
+			questionMsg.IsQuestion = true;
+			questionMsg.TexteMessage = question;
+			TousLesMessages.Add(questionMsg);
+
 			string urlQnA = "https://qna-ctrlaltsuppr.azurewebsites.net/qnamaker/knowledgebases/****ID-APP*****/generateAnswer";
 
 			HttpWebRequest httpWebRequest = WebRequest.CreateHttp(urlQnA);
 			httpWebRequest.ContentType = "application/json";
 			httpWebRequest.Method = "POST";
-			httpWebRequest.Headers.Add("Authorization", " EndpointKey ***YOUR-ENDPOINT-KEY*** "); 
+			httpWebRequest.Headers.Add("Authorization", "EndpointKey ***YOUR-ENDPOINT-KEY*** "); 
 
 			using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
 			{
@@ -74,14 +83,24 @@ namespace FansApp.ViewModel
 				streamWriter.Write(json);
 				streamWriter.Flush();
 			}
-			var httpResponse = (HttpWebResponse) (await httpWebRequest.GetResponseAsync());
-
-			using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+			try
 			{
-				LastMessageJson = await streamReader.ReadToEndAsync();
+				var httpResponse = (HttpWebResponse)(await httpWebRequest.GetResponseAsync());
 
-				// Convertion en Message
-				ConvertToMessage(LastMessageJson);
+				using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+				{
+					string json = await streamReader.ReadToEndAsync();
+					// Convertion en Message
+					ConvertToMessage(json);
+					LastMessageJson = FormatJson(json);
+				}
+			}
+			catch (Exception ex)
+			{
+				Message nouveauMessage = new Message();
+				nouveauMessage.IsQuestion = false;
+				nouveauMessage.TexteMessage = ex.Message;
+				TousLesMessages.Add(nouveauMessage);
 			}
 		}
 
@@ -94,9 +113,84 @@ namespace FansApp.ViewModel
 
 				Message nouveauMessage = new Message();
 				nouveauMessage.IsQuestion = false;
-				nouveauMessage.TexteMessage = _markdown.Transform(answer.answers[0].answer);
+				nouveauMessage.TexteMessage = answer.answers[0].answer;
+				nouveauMessage.TexteMessage = Markdown.Transform(answer.answers[0].answer);
+
+				TousLesMessages.Add(nouveauMessage);
 			}
 
+		}
+
+
+
+		private const string INDENT_STRING = "    ";
+		public static string FormatJson(string str)
+		{
+			var indent = 0;
+			var quoted = false;
+			var sb = new StringBuilder();
+			for (var i = 0; i < str.Length; i++)
+			{
+				var ch = str[i];
+				switch (ch)
+				{
+					case '{':
+					case '[':
+						sb.Append(ch);
+						if (!quoted)
+						{
+							sb.AppendLine();
+							Enumerable.Range(0, ++indent).ForEach(item => sb.Append(INDENT_STRING));
+						}
+						break;
+					case '}':
+					case ']':
+						if (!quoted)
+						{
+							sb.AppendLine();
+							Enumerable.Range(0, --indent).ForEach(item => sb.Append(INDENT_STRING));
+						}
+						sb.Append(ch);
+						break;
+					case '"':
+						sb.Append(ch);
+						bool escaped = false;
+						var index = i;
+						while (index > 0 && str[--index] == '\\')
+							escaped = !escaped;
+						if (!escaped)
+							quoted = !quoted;
+						break;
+					case ',':
+						sb.Append(ch);
+						if (!quoted)
+						{
+							sb.AppendLine();
+							Enumerable.Range(0, indent).ForEach(item => sb.Append(INDENT_STRING));
+						}
+						break;
+					case ':':
+						sb.Append(ch);
+						if (!quoted)
+							sb.Append(" ");
+						break;
+					default:
+						sb.Append(ch);
+						break;
+				}
+			}
+			return sb.ToString();
+		}
+	}
+
+	static class Extensions
+	{
+		public static void ForEach<T>(this IEnumerable<T> ie, Action<T> action)
+		{
+			foreach (var i in ie)
+			{
+				action(i);
+			}
 		}
 	}
 }
