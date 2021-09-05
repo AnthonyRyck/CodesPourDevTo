@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text;
+using FansApp.Services;
 
 namespace FansApp.ViewModel
 {
@@ -20,11 +21,19 @@ namespace FansApp.ViewModel
 		/// <see cref="IWebChatViewModel.LastMessageJson"/>
 		public string LastMessageJson { get; private set; }
 
+		private InfoVariablesEnvironment VariablesEnvironment;
+
 		public string Question { get; set; }
 
 		public Markdown Markdown { get; private set; }
 
-		public WebChatViewModel()
+
+		public string UrlIframeWebBot { get; private set; }
+
+
+		public bool HaveServiceQnAMaker { get; private set; }
+
+		public WebChatViewModel(InfoVariablesEnvironment variablesEnvironment)
 		{
 			var options = new MarkdownOptions
 			{
@@ -39,9 +48,15 @@ namespace FansApp.ViewModel
 			Markdown = new Markdown(options);
 
 			TousLesMessages = new List<Message>();
+			VariablesEnvironment = variablesEnvironment;
+
+			if(!string.IsNullOrEmpty(variablesEnvironment.QnaIdApp)
+				&& !string.IsNullOrEmpty(variablesEnvironment.QnaMakerEndPoint)
+				&& !string.IsNullOrEmpty(variablesEnvironment.QnaMakerKey))
+			{
+				HaveServiceQnAMaker = true;
+			}
 		}
-
-
 
 
 		/// <see cref="IWebChatViewModel.GetClass(bool)"/>
@@ -69,12 +84,12 @@ namespace FansApp.ViewModel
 			questionMsg.TexteMessage = question;
 			TousLesMessages.Add(questionMsg);
 
-			string urlQnA = "https://qna-ctrlaltsuppr.azurewebsites.net/qnamaker/knowledgebases/****ID-APP*****/generateAnswer";
+			string urlQnA = $"https://{VariablesEnvironment.QnaMakerEndPoint}.azurewebsites.net/qnamaker/knowledgebases/{VariablesEnvironment.QnaIdApp}/generateAnswer";
 
 			HttpWebRequest httpWebRequest = WebRequest.CreateHttp(urlQnA);
 			httpWebRequest.ContentType = "application/json";
 			httpWebRequest.Method = "POST";
-			httpWebRequest.Headers.Add("Authorization", "EndpointKey ***YOUR-ENDPOINT-KEY*** "); 
+			httpWebRequest.Headers.Add("Authorization", $"EndpointKey {VariablesEnvironment.QnaMakerKey} "); 
 
 			using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
 			{

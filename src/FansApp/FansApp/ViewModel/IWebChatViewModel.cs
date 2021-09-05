@@ -1,4 +1,5 @@
 ﻿using FansApp.Models;
+using FansApp.Services;
 using HeyRed.MarkdownSharp;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,20 @@ namespace FansApp.ViewModel
 		/// </summary>
 		List<Message> TousLesMessages { get; }
 
-
+		/// <summary>
+		/// Permet de transformer du Markdown to Html
+		/// </summary>
 		Markdown Markdown { get; }
 
+		/// <summary>
+		/// Question à poser à QnAMaker
+		/// </summary>
 		string Question { get; set; }
+
+		/// <summary>
+		/// Indique si un service QnAMaker est configuré.
+		/// </summary>
+		bool HaveServiceQnAMaker { get; }
 
 		/// <summary>
 		/// C'est le dernier message JSON reçu.
@@ -45,5 +56,6 @@ namespace FansApp.ViewModel
 		/// <returns></returns>
 		Task PoserLaQuestion(string question);
 
+		
 	}
 }

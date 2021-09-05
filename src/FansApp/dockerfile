@@ -1,6 +1,9 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
+ENV QNA_ENDPOINT="QNA_ENDPOINT"
+ENV QNA_ENDPOINT_KEY="QNA_ENDPOINT_KEY"
+ENV QNA_ID_APP="QNA_ID_APP"
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
