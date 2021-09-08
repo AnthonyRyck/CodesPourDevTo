@@ -86,10 +86,15 @@ namespace FansApp
 			services.AddScoped<IMiddleViewModel, MiddleViewModel>();
 
 			// Récupération des informations.
-			// NOTE : A remplacer si pas utilisateur dans une image DOCKER !
+			// NOTE : A remplacer si pas d'utilisation dans une image DOCKER !
 			string qnaEndPoint = Environment.GetEnvironmentVariable("QNA_ENDPOINT");
 			string qnaEndPointKey = Environment.GetEnvironmentVariable("QNA_ENDPOINT_KEY");
 			string qnaIdApp = Environment.GetEnvironmentVariable("QNA_ID_APP");
+
+			// Dans le cas si l'utilisation ne se fait pas avec Docker.
+			//string qnaEndPoint = "METTRE lE ENDPOINT";
+			//string qnaEndPointKey = "METTRE LA KEY DU ENDPOINT";
+			//string qnaIdApp = "ID DE LA BASE";
 
 			// Service pour la page de Chatbot
 			services.AddSingleton(new InfoVariablesEnvironment(qnaEndPoint, qnaEndPointKey, qnaIdApp));

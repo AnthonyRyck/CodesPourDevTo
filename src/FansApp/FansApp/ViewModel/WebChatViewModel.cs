@@ -15,6 +15,8 @@ namespace FansApp.ViewModel
 {
 	public class WebChatViewModel : IWebChatViewModel
 	{
+		#region Properties
+
 		/// <see cref="IWebChatViewModel.TousLesMessages"/>
 		public List<Message> TousLesMessages { get; set; }
 
@@ -27,11 +29,10 @@ namespace FansApp.ViewModel
 
 		public Markdown Markdown { get; private set; }
 
-
-		public string UrlIframeWebBot { get; private set; }
-
-
 		public bool HaveServiceQnAMaker { get; private set; }
+
+		#endregion
+
 
 		public WebChatViewModel(InfoVariablesEnvironment variablesEnvironment)
 		{
@@ -58,7 +59,8 @@ namespace FansApp.ViewModel
 			}
 		}
 
-
+		
+		#region Public Methods
 		/// <see cref="IWebChatViewModel.GetClass(bool)"/>
 		public string GetClass(bool isQuestion)
 		{
@@ -75,8 +77,7 @@ namespace FansApp.ViewModel
 				: "right";
 		}
 
-
-
+		/// <see cref="IWebChatViewModel.PoserLaQuestion(string)"/>
 		public async Task PoserLaQuestion(string question)
 		{
 			Message questionMsg = new Message();
@@ -119,7 +120,14 @@ namespace FansApp.ViewModel
 			}
 		}
 
+		#endregion
 
+		#region Private Methods
+
+		/// <summary>
+		/// Convertit le string en "Message" et l'ajoute à la collection de message.
+		/// </summary>
+		/// <param name="lastMessageJson"></param>
 		private void ConvertToMessage(string lastMessageJson)
 		{
 			if(!string.IsNullOrEmpty(lastMessageJson))
@@ -137,9 +145,13 @@ namespace FansApp.ViewModel
 		}
 
 
-
 		private const string INDENT_STRING = "    ";
-		public static string FormatJson(string str)
+		/// <summary>
+		/// Pour mettre en forme en hauteur, et non en ligne un flux json.
+		/// </summary>
+		/// <param name="str"></param>
+		/// <returns></returns>
+		private static string FormatJson(string str)
 		{
 			var indent = 0;
 			var quoted = false;
@@ -196,6 +208,8 @@ namespace FansApp.ViewModel
 			}
 			return sb.ToString();
 		}
+
+		#endregion
 	}
 
 	static class Extensions

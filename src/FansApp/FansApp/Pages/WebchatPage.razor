@@ -11,77 +11,77 @@
 		<div>Utilise un : iframe src='https://webchat.botframework.com/embed/***ID-BOT***?s=***THE-BIG-KEY*****'</div>
 	</div>
 
-	@if (ViewModel.HaveServiceQnAMaker)
-	{
+@if (ViewModel.HaveServiceQnAMaker)
+{
 <div>
 	<iframe src='https://webchat.botframework.com/embed/CtrlAltSupprBot?s=nzCbVrcVbrI.JJxTHnW7s2GdE_vrTUprf6y6Hy0gSJ_LhcTHRHfkUB4'
 		style='min-width: 400px; width: 100%; max-height: 500px;' />
 </div>
-	}
-	else
-	{
-		<div>
-			Aucun service QnA n'a été configuré dans l'image Docker, ou dans le Startup.cs
-		</div>
-	}
-	</div>
-
-	<hr />
-
+}
+else
+{
 	<div>
-		<h4>Appel sur le service QnA Maker</h4>
+		Aucun service QnA n'a été configuré dans l'image Docker, ou dans le Startup.cs
+	</div>
+}
+</div>
 
-		<div class="row">
-			<div class="col-4">
+<hr />
+
+<div>
+	<h4>Appel sur le service QnA Maker</h4>
+
+	<div class="row">
+		<div class="col-4">
+			<div>
 				<div>
-					<div>
-						Le premier appel lève une erreur 400 (Bad request), reposer la question.
-					</div>
-					<div class="max-height-250 formwebchat">
-						@*Afficher le bot maison*@
-						@foreach (var message in ViewModel.TousLesMessages)
-						{
-							<div align="@ViewModel.GetAlign(message.IsQuestion)">
-								<div class="@ViewModel.GetClass(message.IsQuestion)">
-
-									@((MarkupString)message.TexteMessage)
-								</div>
-							</div>
-						}
-					</div>
-
-					<div>
-						<input @bind-value="@ViewModel.Question"
-							   @onkeydown="@Enter"
-							   placeholder="Quelle est votre question ?"
-							   type="text" />
-					</div>
+					Le premier appel lève une erreur 400 (Bad request), reposer la question.
 				</div>
-			</div>
+				<div class="max-height-250 formwebchat">
+					@*Afficher le bot maison*@
+					@foreach (var message in ViewModel.TousLesMessages)
+					{
+						<div align="@ViewModel.GetAlign(message.IsQuestion)">
+							<div class="@ViewModel.GetClass(message.IsQuestion)">
 
-			<div class="col-8">
-				Réponse JSON reçu de QnA Maker :
-				<div class="jsondisplay max-height-250">
-					<code>
-						<pre>
+								@((MarkupString)message.TexteMessage)
+							</div>
+						</div>
+					}
+				</div>
 
-					@((MarkupString)ViewModel.LastMessageJson)
-					</pre>
-					</code>
+				<div>
+					<input @bind-value="@ViewModel.Question"
+						   @onkeydown="@Enter"
+						   placeholder="Quelle est votre question ?"
+						   type="text" />
 				</div>
 			</div>
 		</div>
+
+		<div class="col-8">
+			Réponse JSON reçu de QnA Maker :
+			<div class="jsondisplay max-height-250">
+				<code>
+					<pre>
+
+				@((MarkupString)ViewModel.LastMessageJson)
+				</pre>
+				</code>
+			</div>
+		</div>
 	</div>
+</div>
 
-	@code {
+@code {
 
-		public async void Enter(KeyboardEventArgs e)
+	public async void Enter(KeyboardEventArgs e)
+	{
+		if (e.Code == "Enter" || e.Code == "NumpadEnter")
 		{
-			if (e.Code == "Enter" || e.Code == "NumpadEnter")
-			{
-				await ViewModel.PoserLaQuestion(ViewModel.Question);
+			await ViewModel.PoserLaQuestion(ViewModel.Question);
 
-				StateHasChanged();
-			}
+			StateHasChanged();
 		}
 	}
+}

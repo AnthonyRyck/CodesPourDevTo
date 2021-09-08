@@ -55,7 +55,5 @@ namespace FansApp.ViewModel
 		/// <param name="question"></param>
 		/// <returns></returns>
 		Task PoserLaQuestion(string question);
-
-		
 	}
 }
