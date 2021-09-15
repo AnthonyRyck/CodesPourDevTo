@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -84,7 +85,19 @@ namespace FansApp
 			// Service pour le Middleware
 			services.AddScoped<IMiddleViewModel, MiddleViewModel>();
 
+			// Récupération des informations.
+			// NOTE : A remplacer si pas d'utilisation dans une image DOCKER !
+			string qnaEndPoint = Environment.GetEnvironmentVariable("QNA_ENDPOINT");
+			string qnaEndPointKey = Environment.GetEnvironmentVariable("QNA_ENDPOINT_KEY");
+			string qnaIdApp = Environment.GetEnvironmentVariable("QNA_ID_APP");
+
+			// Dans le cas si l'utilisation ne se fait pas avec Docker.
+			//string qnaEndPoint = "METTRE lE ENDPOINT";
+			//string qnaEndPointKey = "METTRE LA KEY DU ENDPOINT";
+			//string qnaIdApp = "ID DE LA BASE";
+
 			// Service pour la page de Chatbot
+			services.AddSingleton(new InfoVariablesEnvironment(qnaEndPoint, qnaEndPointKey, qnaIdApp));
 			services.AddScoped<IWebChatViewModel, WebChatViewModel>();
 		}
 

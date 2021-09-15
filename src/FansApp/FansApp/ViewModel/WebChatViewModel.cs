@@ -9,22 +9,32 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text;
+using FansApp.Services;
 
 namespace FansApp.ViewModel
 {
 	public class WebChatViewModel : IWebChatViewModel
 	{
+		#region Properties
+
 		/// <see cref="IWebChatViewModel.TousLesMessages"/>
 		public List<Message> TousLesMessages { get; set; }
 
 		/// <see cref="IWebChatViewModel.LastMessageJson"/>
 		public string LastMessageJson { get; private set; }
 
+		private InfoVariablesEnvironment VariablesEnvironment;
+
 		public string Question { get; set; }
 
 		public Markdown Markdown { get; private set; }
 
-		public WebChatViewModel()
+		public bool HaveServiceQnAMaker { get; private set; }
+
+		#endregion
+
+
+		public WebChatViewModel(InfoVariablesEnvironment variablesEnvironment)
 		{
 			var options = new MarkdownOptions
 			{
@@ -39,11 +49,18 @@ namespace FansApp.ViewModel
 			Markdown = new Markdown(options);
 
 			TousLesMessages = new List<Message>();
+			VariablesEnvironment = variablesEnvironment;
+
+			if(!string.IsNullOrEmpty(variablesEnvironment.QnaIdApp)
+				&& !string.IsNullOrEmpty(variablesEnvironment.QnaMakerEndPoint)
+				&& !string.IsNullOrEmpty(variablesEnvironment.QnaMakerKey))
+			{
+				HaveServiceQnAMaker = true;
+			}
 		}
 
-
-
-
+		
+		#region Public Methods
 		/// <see cref="IWebChatViewModel.GetClass(bool)"/>
 		public string GetClass(bool isQuestion)
 		{
@@ -60,8 +77,7 @@ namespace FansApp.ViewModel
 				: "right";
 		}
 
-
-
+		/// <see cref="IWebChatViewModel.PoserLaQuestion(string)"/>
 		public async Task PoserLaQuestion(string question)
 		{
 			Message questionMsg = new Message();
@@ -69,12 +85,12 @@ namespace FansApp.ViewModel
 			questionMsg.TexteMessage = question;
 			TousLesMessages.Add(questionMsg);
 
-			string urlQnA = "https://qna-ctrlaltsuppr.azurewebsites.net/qnamaker/knowledgebases/****ID-APP*****/generateAnswer";
+			string urlQnA = $"https://{VariablesEnvironment.QnaMakerEndPoint}.azurewebsites.net/qnamaker/knowledgebases/{VariablesEnvironment.QnaIdApp}/generateAnswer";
 
 			HttpWebRequest httpWebRequest = WebRequest.CreateHttp(urlQnA);
 			httpWebRequest.ContentType = "application/json";
 			httpWebRequest.Method = "POST";
-			httpWebRequest.Headers.Add("Authorization", "EndpointKey ***YOUR-ENDPOINT-KEY*** "); 
+			httpWebRequest.Headers.Add("Authorization", $"EndpointKey {VariablesEnvironment.QnaMakerKey} "); 
 
 			using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
 			{
@@ -104,7 +120,14 @@ namespace FansApp.ViewModel
 			}
 		}
 
+		#endregion
 
+		#region Private Methods
+
+		/// <summary>
+		/// Convertit le string en "Message" et l'ajoute à la collection de message.
+		/// </summary>
+		/// <param name="lastMessageJson"></param>
 		private void ConvertToMessage(string lastMessageJson)
 		{
 			if(!string.IsNullOrEmpty(lastMessageJson))
@@ -122,9 +145,13 @@ namespace FansApp.ViewModel
 		}
 
 
-
 		private const string INDENT_STRING = "    ";
-		public static string FormatJson(string str)
+		/// <summary>
+		/// Pour mettre en forme en hauteur, et non en ligne un flux json.
+		/// </summary>
+		/// <param name="str"></param>
+		/// <returns></returns>
+		private static string FormatJson(string str)
 		{
 			var indent = 0;
 			var quoted = false;
@@ -181,6 +208,8 @@ namespace FansApp.ViewModel
 			}
 			return sb.ToString();
 		}
+
+		#endregion
 	}
 
 	static class Extensions

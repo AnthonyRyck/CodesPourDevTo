@@ -104,6 +104,12 @@ a, .btn-link {
 /**********************/
 /*CSS pour WebChat    */
 /**********************/
+.formwebchat {
+    border-width: 2px;
+    border-style: inset;
+    border-color:gray;
+}
+
 .cardquestion {
     border: 1px solid black;
     background-color: lightgray;
