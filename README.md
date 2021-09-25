@@ -3,7 +3,7 @@ Codes d'exemple pour les articles que j'écris sur [**ctrl-alt-suppr.dev**](http
 
 ## Articles
 
-## Une partie sur Blazor Server
+## Blazor Server
 [Blazor – Créer un utilisateur Root au démarrage de l’application](https://www.ctrl-alt-suppr.dev/2020/12/17/blazor-creer-un-utilisateur-root-au-demarrage-de-lapplication/)  
 [Communiquer entre composants avec Blazor – Part 1](https://www.ctrl-alt-suppr.dev/2020/12/23/communiquer-entre-composants-avec-blazor-part-1/)  
 [MVVM avec Blazor](https://www.ctrl-alt-suppr.dev/2021/01/01/mvvm-avec-blazor/)  
@@ -21,11 +21,19 @@ Codes d'exemple pour les articles que j'écris sur [**ctrl-alt-suppr.dev**](http
 [JWT coté serveur](https://www.ctrl-alt-suppr.dev/2021/05/26/jwt-cote-serveur/)  
 [Blazor SCSS isolation](https://www.ctrl-alt-suppr.dev/2021/06/08/blazor-scss-isolation/)  
 [Les Middleware](https://www.ctrl-alt-suppr.dev/2021/06/14/les-middlewares/)  
+[QnA Maker – Implémenter un ChatBoT dans Blazor](https://www.ctrl-alt-suppr.dev/2021/09/07/qna-maker-azure-bot-implementer-un-chatbot-dans-blazor/)
 
-## Une autre partie sur Xamarin.
+## Xamarin.
 [Commencer avec Xamarin](https://www.ctrl-alt-suppr.dev/2021/03/09/commencer-avec-xamarin/)  
 [Real-time avec Xamarin](https://www.ctrl-alt-suppr.dev/2021/03/15/real-time-avec-xamarin/)  
 [Xamarin et JWT](https://www.ctrl-alt-suppr.dev/2021/05/17/xamarin-android-et-jwt/)  
+
+## Du "code".
+[Inversion de contrôle avec Action/Func en .Net](https://www.ctrl-alt-suppr.dev/2021/07/22/inversion-de-controle-avec-action-func-en-net/)  
+[Notebooks avec .NET Interactive](https://www.ctrl-alt-suppr.dev/2021/08/16/notebooks-avec-net-interactive/)  
+
+## Azure
+[Azure AI – l’IA conversationnelle](https://www.ctrl-alt-suppr.dev/2021/09/07/azure-ai-lia-conversationnelle/)
 
 ## Quelques Tips & Tricks.
 [Tips & Tricks – Extract Interface](https://www.ctrl-alt-suppr.dev/2021/02/23/tips-extract-interface/)  
@@ -33,6 +41,7 @@ Codes d'exemple pour les articles que j'écris sur [**ctrl-alt-suppr.dev**](http
 [Tips & Tricks – Gérer les fichiers de ressources.](https://www.ctrl-alt-suppr.dev/2021/02/27/tips-tricks-gerer-les-fichiers-de-ressources/)  
 [Tips & Tricks – Xamarin Debug en Local](https://www.ctrl-alt-suppr.dev/2021/03/07/tips-tricks-xamarin-debug-en-local/)  
 [Tips & Tricks - Les fichiers statiques Asp.Net Core](https://www.ctrl-alt-suppr.dev/2021/06/02/tips-tricks-fichiers-statiques-asp-net-core/)
+[Tips & Tricks - Notebooks - Faire de la datavisualisation](https://www.ctrl-alt-suppr.dev/2021/09/16/tips-tricks-notebooks-faire-de-la-datavisualisation/)
 
 ## FanApp
 C'est un projet de demo pour mes posts sur [www.ctrl-alt-suppr.dev](https://www.ctrl-alt-suppr.dev/)  
