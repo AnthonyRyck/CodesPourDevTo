@@ -32,9 +32,6 @@ Cas ou l'image n'existe pas, par exemple :
 #!markdown
 
 # Cellules de code
-
-#!markdown
-
 Il est possible de déclarer du code dans une cellule comme ceci :
 
 #!csharp
