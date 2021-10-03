@@ -34,7 +34,7 @@ namespace EveCosmoGremlin.Models
 	{
 		public static string ToQueryAddEdge(this Jumps jump)
 		{
-			return $"g.V({jump.FromSystemID}).addE('jumpTo').to(g.V({jump.ToSystemID}))";
+			return $"g.V().has('solar',{jump.FromSystemID}).addE('jumpTo').to(g.V().has('solar',{jump.ToSystemID}))";
 		}
 	}
 }
