@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,8 +42,11 @@ namespace EveCosmoGremlin.Models
 	{
 		public static string ToQueryAddVertex(this SolarSystem system)
 		{
-			//return $"g.addV('solar').property('id', '{system.solarSystemID}').property('name', '{system.solarSystemName}').property('securite', {system.securite}).property('region', '{system.regionName}')";
-			return $"g.addV('SystemSolar').property('solar', {system.solarSystemID}).property('name', '{system.solarSystemName}').property('region', '{system.regionName}')"; //.property('securite', {system.securite}).property('region', '{system.regionName}')";
+			return $"g.addV('SystemSolar')"
+				+ $".property('solar', {system.solarSystemID})"
+				+ $".property('name', '{system.solarSystemName}')"
+				+ $".property('security', {system.securite.ToString(CultureInfo.InvariantCulture)})"
+				+ $".property('region', '{system.regionName}')";
 		}
 	}
 }
