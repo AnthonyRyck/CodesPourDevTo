@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace EveCosmoGremlin
 {
@@ -15,8 +15,8 @@ namespace EveCosmoGremlin
 			Console.WriteLine("# Appuyer sur une touche pour commencer l'injection.");
 			Console.ReadKey();
 
-			string pathSolarSystem = @"PATH_OF_FILE\systemSolar.json";
-			string pathJumps = @"PATH_OF_FILE\Jumps.json";
+			string pathSolarSystem = @"F:\_CodeSource\GitHub\CodesPourDevTo\src\Files\EveOnline\systemSolar.json";
+			string pathJumps = @"F:\_CodeSource\GitHub\CodesPourDevTo\src\Files\EveOnline\Jumps.json";
 
 			Console.WriteLine("Chargement du fichier des systèmes solaires...");
 			string jsonContentSystems = File.ReadAllText(pathSolarSystem);
@@ -30,14 +30,17 @@ namespace EveCosmoGremlin
 
 			Console.WriteLine("Fin du chargement des fichiers...");
 			Console.WriteLine("# Début de la création du Graph !");
-			
-			
+						
 			Loader loadData = new Loader();
 
-			Console.WriteLine("#--> Création des systèmes (Vertex)");
+			Console.WriteLine("#--> Création des systèmes (un Vertex / des Vertices !)");
+			Console.WriteLine("Petite pause.....");
+			Task.Delay(1000).Wait();
 			loadData.CreateAllSystems(allSolarSystems).Wait();
 
 			Console.WriteLine("#--> Création des liens (Edge)");
+			Console.WriteLine("Petite pause.....");
+			Task.Delay(1000).Wait();
 			loadData.CreateEdges(allJumps).Wait();
 
 			Console.WriteLine("##### FIN de l'application ######");
