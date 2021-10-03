@@ -15,8 +15,8 @@ namespace EveCosmoGremlin
 			Console.WriteLine("# Appuyer sur une touche pour commencer l'injection.");
 			Console.ReadKey();
 
-			string pathSolarSystem = @"F:\_CodeSource\GitHub\CodesPourDevTo\src\Files\EveOnline\systemSolar.json";
-			string pathJumps = @"F:\_CodeSource\GitHub\CodesPourDevTo\src\Files\EveOnline\Jumps.json";
+			string pathSolarSystem = @"PATH_OF_FILE\systemSolar.json";
+			string pathJumps = @"PATH_OF_FILE\Jumps.json";
 
 			Console.WriteLine("Chargement du fichier des systèmes solaires...");
 			string jsonContentSystems = File.ReadAllText(pathSolarSystem);
@@ -34,9 +34,8 @@ namespace EveCosmoGremlin
 			
 			Loader loadData = new Loader();
 
-			//Console.WriteLine("#--> Création des systèmes (Vertex)");
-			//loadData.CreateAllSystems(allSolarSystems).Wait();
-
+			Console.WriteLine("#--> Création des systèmes (Vertex)");
+			loadData.CreateAllSystems(allSolarSystems).Wait();
 
 			Console.WriteLine("#--> Création des liens (Edge)");
 			loadData.CreateEdges(allJumps).Wait();
