@@ -15,8 +15,8 @@ namespace EveCosmoGremlin
 			Console.WriteLine("# Appuyer sur une touche pour commencer l'injection.");
 			Console.ReadKey();
 
-			string pathSolarSystem = @"F:\_CodeSource\GitHub\CodesPourDevTo\src\Files\EveOnline\systemSolar.json";
-			string pathJumps = @"F:\_CodeSource\GitHub\CodesPourDevTo\src\Files\EveOnline\Jumps.json";
+			string pathSolarSystem = @"C:\CodeSource\Github\AnthonyRyck\CodesPourDevTo\src\Files\EveOnline\systemSolar.json";
+			string pathJumps = @"C:\CodeSource\Github\AnthonyRyck\CodesPourDevTo\src\Files\EveOnline\Jumps.json";
 
 			Console.WriteLine("Chargement du fichier des systèmes solaires...");
 			string jsonContentSystems = File.ReadAllText(pathSolarSystem);
@@ -30,18 +30,33 @@ namespace EveCosmoGremlin
 
 			Console.WriteLine("Fin du chargement des fichiers...");
 			Console.WriteLine("# Début de la création du Graph !");
-						
-			Loader loadData = new Loader();
 
-			Console.WriteLine("#--> Création des systèmes (un Vertex / des Vertices !)");
-			Console.WriteLine("Petite pause.....");
-			Task.Delay(1000).Wait();
-			loadData.CreateAllSystems(allSolarSystems).Wait();
+			//Loader loadData = new Loader();
+			//
+			//Console.WriteLine("#--> Création des systèmes (un Vertex / des Vertices !)");
+			//Console.WriteLine("Petite pause.....");
+			//Task.Delay(1000).Wait();
+			//loadData.CreateAllSystems(allSolarSystems).Wait();
+			//
+			//Console.WriteLine("#--> Création des liens (Edge)");
+			//Console.WriteLine("Petite pause.....");
+			//Task.Delay(1000).Wait();
+			//loadData.CreateEdges(allJumps).Wait();
 
-			Console.WriteLine("#--> Création des liens (Edge)");
-			Console.WriteLine("Petite pause.....");
-			Task.Delay(1000).Wait();
-			loadData.CreateEdges(allJumps).Wait();
+
+			LoaderToDocker loadData = new LoaderToDocker();
+
+			//Console.WriteLine("#--> Création des systèmes (un Vertex / des Vertices !)");
+			//Console.WriteLine("Petite pause.....");
+			//Task.Delay(1000).Wait();
+			//loadData.CreateAllSystems(allSolarSystems).Wait();
+
+			//Console.WriteLine("#--> Création des liens (Edge)");
+			//Console.WriteLine("Petite pause.....");
+			//Task.Delay(1000).Wait();
+			//loadData.CreateEdges(allJumps).Wait();
+
+			loadData.GetRegion("The Forge").Wait();
 
 			Console.WriteLine("##### FIN de l'application ######");
 			Console.ReadKey();
