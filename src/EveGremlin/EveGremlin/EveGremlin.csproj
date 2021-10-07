@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="ExRam.Gremlinq.Providers.GremlinServer" Version="8.6.0" />
+    <PackageReference Include="ExRam.Gremlinq.Providers.JanusGraph" Version="8.6.0" />
   </ItemGroup>
 
 </Project>

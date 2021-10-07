@@ -1,19 +1,10 @@
 ﻿
-using ExRam.Gremlinq.Core.GraphElements;
 
-namespace EveCosmoGremlin.Models
+namespace EveGremlin.Models.Graph
 {
 	
-	public class SolarSystemVertex : Vertex
+	public class SystemSolar : Vertex
 	{
-		//public SolarSystemVertex(int solar, string name, string security, string region)
-		//{
-		//	this.solar = solar;
-		//	this.name = name;
-		//	this.security = security;
-		//	this.region = region;
-		//}
-
 		/// <summary>
 		/// ID du système solaire
 		/// </summary>

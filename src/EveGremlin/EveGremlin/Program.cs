@@ -1,5 +1,4 @@
-﻿using EveCosmoGremlin;
-using EveCosmoGremlin.Models;
+﻿using EveGremlin.Models;
 using ExRam.Gremlinq.Core;
 using ExRam.Gremlinq.Providers.WebSocket;
 using Gremlin.Net.Structure;
@@ -9,7 +8,8 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using static ExRam.Gremlinq.Core.GremlinQuerySource;
-using Vertex = EveCosmoGremlin.Models.Vertex;
+//using Edge = EveGremlin.Models.Edge;
+//using Vertex = EveGremlin.Models.Vertex;
 
 namespace EveGremlin
 {
@@ -21,45 +21,51 @@ namespace EveGremlin
 			Console.WriteLine("# Appuyer sur une touche pour commencer l'injection.");
 			Console.ReadKey();
 
-			string pathSolarSystem = @"F:\_CodeSource\GitHub\CodesPourDevTo\src\Files\EveOnline\systemSolar.json";
-			string pathJumps = @"F:\_CodeSource\Github\CodesPourDevTo\src\Files\EveOnline\Jumps.json";
-
-			Console.WriteLine("Chargement du fichier des systèmes solaires...");
-			string jsonContentSystems = File.ReadAllText(pathSolarSystem);
-			List<SolarSystem> allSolarSystems = JsonSerializer.Deserialize<List<SolarSystem>>(jsonContentSystems);
-			Console.WriteLine($"# Il y a {allSolarSystems.Count} systèmes solaires.");
-
-			Console.WriteLine("Chargement du fichier des jumps...");
-			string jsonContentJumps = File.ReadAllText(pathJumps);
-			List<Jumps> allJumps = JsonSerializer.Deserialize<List<Jumps>>(jsonContentJumps);
-			Console.WriteLine($"# Il y a {allJumps.Count} sauts interstellaires possibles.");
-
-			Console.WriteLine("Fin du chargement des fichiers...");
 
 
-			Console.WriteLine("# Début de la création du Graph !");
+			//string pathSolarSystem = @"C:\CodeSource\Github\AnthonyRyck\CodesPourDevTo\src\Files\EveOnline\systemSolar.json";
+			//string pathJumps = @"C:\CodeSource\Github\AnthonyRyck\CodesPourDevTo\src\Files\EveOnline\Jumps.json";
+
+			//Console.WriteLine("Chargement du fichier des systèmes solaires...");
+			//string jsonContentSystems = File.ReadAllText(pathSolarSystem);
+			//List<SolarSystem> allSolarSystems = JsonSerializer.Deserialize<List<SolarSystem>>(jsonContentSystems);
+			//Console.WriteLine($"# Il y a {allSolarSystems.Count} systèmes solaires.");
+
+			//Console.WriteLine("Chargement du fichier des jumps...");
+			//string jsonContentJumps = File.ReadAllText(pathJumps);
+			//List<Jumps> allJumps = JsonSerializer.Deserialize<List<Jumps>>(jsonContentJumps);
+			//Console.WriteLine($"# Il y a {allJumps.Count} sauts interstellaires possibles.");
+
+			//Console.WriteLine("Fin du chargement des fichiers...");
+
+
+			//Console.WriteLine("# Début de la création du Graph !");
 
 			var gremlinQuerySource = g.ConfigureEnvironment(env => env.UseModel(GraphModel
-															.FromBaseTypes<Vertex, Edge>(lookup => lookup.IncludeAssembliesOfBaseTypes()))
-				.UseGremlinServer(builder => builder
+															.FromBaseTypes<Models.Graph.Vertex, Models.Graph.Edge>(lookup => lookup.IncludeAssembliesOfBaseTypes()))
+				.UseJanusGraph(builder => builder
 						.AtLocalhost()));
 
 			LoaderToDocker loadData = new LoaderToDocker(gremlinQuerySource);
 
-			Console.WriteLine("#--> Drop e la base");
-			loadData.DropBase().Wait();
+			//Console.WriteLine("#--> Drop e la base");
+			//loadData.DropBase().Wait();
 
-			Console.WriteLine("#--> Création des systèmes (un Vertex / des Vertices !)");
-			Console.WriteLine("Petite pause.....");
-			Task.Delay(1000).Wait();
-			loadData.CreateAllSystems(allSolarSystems).Wait();
+			//Console.WriteLine("#--> Création des systèmes (un Vertex / des Vertices !)");
+			//Console.WriteLine("Petite pause.....");
+			//Task.Delay(1000).Wait();
+			//loadData.CreateAllSystems(allSolarSystems).Wait();
 
-			Console.WriteLine("#--> Création des liens (Edge)");
-			Console.WriteLine("Petite pause.....");
-			Task.Delay(1000).Wait();
-			loadData.CreateEdges(allJumps).Wait();
+			//Console.WriteLine("#--> Création des liens (Edge)");
+			//Console.WriteLine("Petite pause.....");
+			//Task.Delay(1000).Wait();
+			//loadData.CreateEdges(allJumps).Wait();
 
-			loadData.GetRegion("The Forge").Wait();
+			//loadData.GetRegion("The Forge").Wait();
+			//loadData.GetRegion("The Forge", 0.5).Wait();
+			loadData.GetSystemVoisin("Jita").Wait();
+			loadData.GetSystemVoisin("Itamo").Wait();
+			loadData.GetItineraire("Jita", "Itamo").Wait();
 
 			Console.WriteLine("##### FIN de l'application ######");
 			Console.ReadKey();

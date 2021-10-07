@@ -1,26 +1,14 @@
-﻿using EveCosmoGremlin.Models;
-using Gremlin.Net.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Gremlin.Net.Process;
-using Gremlin.Net.Process.Traversal;
-using Gremlin.Net.Driver.Remote;
-using Gremlin.Net.Structure;
-using Gremlin.Net.Process.Traversal.Step.Util;
-using ExRam.Gremlinq.Providers.WebSocket;
-using Microsoft.Extensions.Logging;
-using ExRam.Gremlinq.Core;
 using EveGremlin.Models;
+using EveGremlin.Models.Graph;
+using ExRam.Gremlinq.Core;
 
-namespace EveCosmoGremlin
+namespace EveGremlin
 {
-	using static Gremlin.Net.Process.Traversal.AnonymousTraversalSource;
-
-	using static ExRam.Gremlinq.Core.GremlinQuerySource;
-
 	public class LoaderToDocker
 	{
 		private readonly IGremlinQuerySource _g;
@@ -43,7 +31,7 @@ namespace EveCosmoGremlin
 			{
 				foreach (var system in solarSystems)
 				{
-					await _g.AddV(new SolarSystemVertex
+					await _g.AddV(new SystemSolar
 					{
 						SolarSystemID = system.solarSystemID,
 						SolarSystemName = system.solarSystemName,
@@ -72,8 +60,8 @@ namespace EveCosmoGremlin
 			{
 				foreach (var jump in allJumps)
 				{
-					var systemDepart = await _g.V<SolarSystemVertex>().Where(x => x.SolarSystemID == jump.FromSystemID);
-					var systemArrive = await _g.V<SolarSystemVertex>().Where(x => x.SolarSystemID == jump.ToSystemID);
+					var systemDepart = await _g.V<SystemSolar>().Where(x => x.SolarSystemID == jump.FromSystemID);
+					var systemArrive = await _g.V<SystemSolar>().Where(x => x.SolarSystemID == jump.ToSystemID);
 
 					if(systemDepart.Length == 0 || systemArrive.Length == 0)
 					{
@@ -94,11 +82,15 @@ namespace EveCosmoGremlin
 			}
 		}
 
-
+		/// <summary>
+		/// Retourne tous les systèmes qui sont dans la région donnée.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
 		internal async Task GetRegion(string name)
 		{
 
-			var test = await _g.V<SolarSystemVertex>().Where(x => x.RegionName == name).ToArrayAsync();
+			var test = await _g.V<SystemSolar>().Where(x => x.RegionName == name).ToArrayAsync();
 
 			Console.WriteLine("Il y a " + test.Length + " systèmes dans la région : " + name);
 			await Task.Delay(2000);
@@ -106,6 +98,101 @@ namespace EveCosmoGremlin
 			{
 				Console.WriteLine("Nom système : " + item.SolarSystemName);
 			}
+		}
+
+		/// <summary>
+		/// Retourne tous les systèmes qui sont dans la région donnée et avec
+		/// une sécurité minimum.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		internal async Task GetRegion(string name, double securiteMin)
+		{
+
+			var test = await _g.V<SystemSolar>().Where(x => x.RegionName == name && x.Securite >= securiteMin).ToArrayAsync();
+
+			Console.WriteLine("Il y a " + test.Length + " systèmes dans la région : " + name);
+			await Task.Delay(2000);
+			foreach (var item in test)
+			{
+				Console.WriteLine($"Nom système : {item.SolarSystemName} - sécurité : {item.Securite}");
+			}
+		}
+
+		internal async Task GetItineraire(string departSystem, string arriveSystem)
+		{
+			try
+			{
+				// Requête Gremlin !
+				//g.V().has('name', 'Airaken')
+				//.repeat(out ().simplePath())
+				//.until(has('name', 'Reisen'))
+				//.path().limit(1)
+
+				//var tt = await _g.V<SystemSolar>(57456).FirstAsync();
+				//Console.WriteLine("--> " + tt.SolarSystemName);
+				//var tt2 = await _g.V<SystemSolar>(45280).FirstAsync();
+				//Console.WriteLine("--> " + tt2.SolarSystemName);
+				//var tt3 = await _g.V<SystemSolar>(69640).FirstAsync();
+				//Console.WriteLine("--> " + tt3.SolarSystemName);
+
+				var depart = await _g.V<SystemSolar>().Where(x => x.SolarSystemName == departSystem)
+									.FirstAsync();
+				var arrive = await _g.V<SystemSolar>().Where(x => x.SolarSystemName == arriveSystem)
+									.FirstAsync();
+
+				//var requete = _g.V<SystemSolar>(depart.Id)
+				//					.RepeatUntil(rep => rep.Out().SimplePath().Cast<SystemSolar>(),
+				//								until => until.Where(x => x.SolarSystemName == arriveSystem))
+				//					.Path().Limit(1)//;
+				//.Debug();
+
+				var temtt = await _g.V<SystemSolar>().Where(x => x.SolarSystemName == departSystem)
+									.RepeatUntil(repeat => repeat.Out().SimplePath().Cast<SystemSolar>(),
+												until => until.Where(x => x.SolarSystemName == arriveSystem))
+									.Path().Limit(1);
+
+				foreach (var item in temtt)
+				{
+					//item.Objects
+					//foreach (var pp in item.Objects)
+					//{
+					//	var tt = (SystemSolar)pp;
+					//	Console.WriteLine("TROUVE : " + tt.SolarSystemName);
+					//}
+				}
+
+			}
+			catch (Exception ex)
+			{
+				bool excep = true;
+			}
+		}
+
+		/// <summary>
+		/// Permet de récupérer les systèmes qui sont connectés au système demandé.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		internal async Task GetSystemVoisin(string name)
+		{
+			Console.WriteLine($"Système connecté à {name}");
+
+			var test = await _g.V<SystemSolar>().Where(x => x.SolarSystemName == name)
+								.Out<JumpEdge>()
+								.OfType<SystemSolar>()
+								.ToArrayAsync();
+
+			foreach (var item in test)
+			{
+				Console.WriteLine("Nom système : " + item.SolarSystemName);
+			}
+		}
+
+
+		internal async Task Get()
+		{
+
 		}
 	}
 }

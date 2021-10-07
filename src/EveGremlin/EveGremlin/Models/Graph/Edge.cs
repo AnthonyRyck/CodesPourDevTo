@@ -1,4 +1,4 @@
-﻿namespace EveGremlin.Models
+﻿namespace EveGremlin.Models.Graph
 {
     public class Edge
     {
