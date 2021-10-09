@@ -5,7 +5,7 @@ namespace ConsoleMongo.Models
 {
     public class Client : MongoId
     {
-        [BsonElement("Prenom")]
+		[BsonElement("Prenom")]
         public string Prenom { get; set; }
 
         [BsonElement("Nom")]
@@ -22,6 +22,22 @@ namespace ConsoleMongo.Models
 
         [BsonElement("Telephone")]
         public List<Telephone> Telephone { get; set; }
+
+        [BsonConstructor]
+        public Client(string prenom, string nom, string genre, int age, Adresse adresse, List<Telephone> telephone)
+        {
+            Prenom = prenom;
+            Nom = nom;
+            Genre = genre;
+            Age = age;
+            Adresse = adresse;
+            Telephone = telephone;
+        }
+
+		public Client()
+		{
+
+		}
     }
 
     public class Adresse

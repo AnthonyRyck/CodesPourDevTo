@@ -140,8 +140,8 @@ namespace ConsoleMongo.Mongo
 		{
 			IMongoCollection<BsonDocument> collection = MongoDatabase.GetCollection<BsonDocument>(collectionName);
 
-			string jsonString = JsonSerializer.Serialize(client);
-			BsonDocument bsonElement = BsonDocument.Parse(jsonString);
+			//string jsonString = JsonSerializer.Serialize(client);
+			BsonDocument bsonElement = client.ToBsonDocument();  //BsonDocument.Create(client);
 			await collection.InsertOneAsync(bsonElement);
 		}
 
@@ -207,8 +207,8 @@ namespace ConsoleMongo.Mongo
 			{
 				Console.WriteLine(doc.ToJson());
 				Console.WriteLine();
-				
-				Client client = BsonSerializer.Deserialize<Client>(doc,);
+
+				Client client = BsonSerializer.Deserialize<Client>(doc);
 				clients.Add(client);
 			}
 

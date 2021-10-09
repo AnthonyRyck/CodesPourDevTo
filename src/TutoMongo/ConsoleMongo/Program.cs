@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MongoDB.Bson.Serialization;
 
 namespace ConsoleMongo
 {
@@ -19,18 +20,25 @@ namespace ConsoleMongo
 			string databaseName = "ctrlaltsupprDb";
 			string collectionClient = "clients";
 
-			Console.WriteLine("#:> Première étape : Connexion à MongoDb.");
-			Console.WriteLine("#:> Connexion à la base : " + databaseName + $" sur : mongodb://{urlMongo}:27017" );
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("######################################################");
+			Console.WriteLine("####### 1ere étape : Connexion à MongoDb. #######");
+			Console.WriteLine("----> Connexion à la base : " + databaseName + $" sur : mongodb://{urlMongo}:27017" );
 			MongoConnecteur mongo = new MongoConnecteur(urlMongo, 27017, databaseName);
 
-			Console.WriteLine("#:> Suppressions de toutes les collections.");
+			Console.WriteLine("----> Suppressions de toutes les collections.");
 			mongo.DropCollectionsAsync(collectionClient).Wait();
 
-			Console.WriteLine("#:> Ajoutons des données.");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("######################################################");
+			Console.WriteLine("####### 2eme étape : Connexion à MongoDb. #######");
+			Console.WriteLine("----> Ajoutons des données.");
 			Console.WriteLine("#:> Appuyer sur une touche pour commencer.");
 			Console.ReadKey();
 
-			Console.WriteLine("#:> Ajout de 5 fichiers json dans la .");
+			Console.WriteLine($"----> Ajout de 5 fichiers json dans la collection {collectionClient}.");
 			string pathBase = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "JsonFiles");
 			mongo.ImportFiles(collectionClient,
 								Path.Combine(pathBase, "client1.json"),
@@ -38,11 +46,12 @@ namespace ConsoleMongo
 								Path.Combine(pathBase, "client3.json"),
 								Path.Combine(pathBase, "client4.json"),
 								Path.Combine(pathBase, "client5.json")).Wait();
-			Console.WriteLine("#:> Done !");
+			Console.WriteLine("#:> Terminé !");
 			long nbreDocument = mongo.GetCountDocument(collectionClient);
 			Console.WriteLine($"#:> Il y a {nbreDocument} documents dans la collection {collectionClient}.");
 
-			Console.WriteLine("#:> Ajout d'un nouveau client, via un objet Client");
+			Console.WriteLine();
+			Console.WriteLine("----> Ajout d'un nouveau client, via une instance Client");
 			Console.WriteLine("#:> Appuyer sur une touche pour commencer.");
 			Console.ReadKey();
 
@@ -68,12 +77,16 @@ namespace ConsoleMongo
 			await mongo.AddClientAsync(collectionClient, unNouveauClient);
 			Console.WriteLine(await mongo.GetClientDocument(collectionClient, unNouveauClient.Nom, unNouveauClient.Prenom));
 			Console.WriteLine($"#:> Done ! Client : {unNouveauClient.Nom} ajouté.");
+			
 			Console.WriteLine();
-
-			Console.WriteLine("##:> Faire une mise à jour d'une propriété sur un client. Changer l'age du client qu'on vient de créer");
+			Console.WriteLine();
+			Console.WriteLine("######################################################");
+			Console.WriteLine("####### 3eme étape : Mette à jour les données. #######");
+			Console.WriteLine("----> Faire une mise à jour d'une propriétée sur un client. Changer l'age du client qu'on vient de créer");
 			Console.WriteLine("de 18 à 21 ans.");
 			Console.WriteLine("#:> Appuyer sur une touche pour commencer.");
 			Console.ReadKey();
+
 			await mongo.UpdateClientAsync(collectionClient, "Lepetitnouveau", "coucou", 21);
 			Console.WriteLine(await mongo.GetClientDocument(collectionClient, "Lepetitnouveau", "coucou"));
 			Console.WriteLine($"#:> Done ! Age modifié.");
@@ -82,15 +95,19 @@ namespace ConsoleMongo
 			long nbre = mongo.GetCountDocument(collectionClient);
 			Console.WriteLine($"#:> Il y a {nbre} documents dans la collection {collectionClient}.");
 
-			Console.WriteLine("##:> Maintenant faisons des requêtes trouver un client particulier.");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("############################################################");
+			Console.WriteLine("####### 4eme étape : Faire des requêtes sur la base. #######");
+			Console.WriteLine("#-----> Maintenant faisons des requêtes trouver un client particulier.");
 			Console.WriteLine("#:> Appuyer sur une touche pour commencer.");
 			Console.ReadKey();
 
-			Console.WriteLine("#:> Récupération de tous les clients.");
+			Console.WriteLine("-----> Récupération de tous les clients.");
 			var allClients = await mongo.GetClients(collectionClient);
 			Console.WriteLine($"#:>{allClients.Count} clients en mémoire.");
 			Console.WriteLine($"#:>Voilà à quoi cela ressemble.");
-			Console.WriteLine("#:> Appuyer sur une touche pour commencer.");
+			Console.WriteLine("#:> Appuyer sur une touche pour voir.");
 			Console.ReadKey();
 			foreach (var client in allClients)
 			{
@@ -99,21 +116,22 @@ namespace ConsoleMongo
 			}
 
 			Console.WriteLine();
-			Console.WriteLine("#:> Appuyer sur une touche pour commencer.");
+			Console.WriteLine("#:> Appuyer sur une touche pour continuer.");
 			Console.ReadKey();
 
-			Console.WriteLine("#:> Récupération des clientes. Recherche sur la propriétée genre=female");
+			Console.WriteLine("#:> Récupération des clientes. Recherche sur la propriétée \"genre=female\"");
 			Console.WriteLine("#:> Appuyer sur une touche pour commencer.");
 			Console.ReadKey();
 
 			IEnumerable<Client> clientes = await mongo.GetFemaleClients(collectionClient);
 			foreach (var cliente in clientes)
 			{
-				Console.WriteLine($"Cliente trouvée : {cliente.Nom} {cliente.Prenom}.");
+				Console.WriteLine($"Clientes trouvées : {cliente.Nom} {cliente.Prenom}.");
 			}
 
-			Console.WriteLine("#:> Récupération des clients qui ont un age inférieur ou égal à 30 ans");
-			Console.WriteLine("#:> Recherche sur la propriété Age.");
+			Console.WriteLine();
+			Console.WriteLine("----> Récupération des clients qui ont un age inférieur ou égal à 30 ans");
+			Console.WriteLine("----> Recherche sur la propriété Age.");
 			Console.WriteLine("#:> Appuyer sur une touche pour commencer.");
 			Console.ReadKey();
 			IEnumerable<Client> clientsAgeSup = await mongo.GetAgeClientsInfOuEgalTo(collectionClient, 30);
@@ -122,8 +140,10 @@ namespace ConsoleMongo
 				Console.WriteLine($"Client trouvé : {client.Nom} {client.Prenom} et son age : {client.Age}.");
 			}
 
-
-			Console.WriteLine("#:> Nettoyage : suppression de la base de donnée.");
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("###############################################################");
+			Console.WriteLine("####### Dernière étape : Suppression de la base donnée. #######");
 			Console.WriteLine("#:> Appuyer sur une touche pour commencer.");
 			Console.ReadKey();
 			await mongo.DropDatabaseAsync();

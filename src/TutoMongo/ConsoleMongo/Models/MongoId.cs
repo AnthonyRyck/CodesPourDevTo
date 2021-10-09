@@ -6,7 +6,7 @@ namespace ConsoleMongo.Models
 	public class MongoId
 	{
 		[BsonId]
-		public ObjectId Id { get; set; }
+		public ObjectId IdMongo { get; set; }
 
 	}
 }
