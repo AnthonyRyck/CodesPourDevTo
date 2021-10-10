@@ -140,8 +140,7 @@ namespace ConsoleMongo.Mongo
 		{
 			IMongoCollection<BsonDocument> collection = MongoDatabase.GetCollection<BsonDocument>(collectionName);
 
-			//string jsonString = JsonSerializer.Serialize(client);
-			BsonDocument bsonElement = client.ToBsonDocument();  //BsonDocument.Create(client);
+			BsonDocument bsonElement = client.ToBsonDocument();
 			await collection.InsertOneAsync(bsonElement);
 		}
 
@@ -232,8 +231,6 @@ namespace ConsoleMongo.Mongo
 		{
 			throw new NotImplementedException();
 		}
-
-
 
 		/// <summary>
 		/// Supprime la base de donnée.

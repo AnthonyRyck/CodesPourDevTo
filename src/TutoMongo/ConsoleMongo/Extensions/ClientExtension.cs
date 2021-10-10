@@ -27,6 +27,7 @@ namespace ConsoleMongo.Extensions
 
 			return new BsonDocument
 			{
+				{ "ClientId", source.ClientId },
 				{ "Prenom", source.Prenom },
 				{ "Nom", source.Nom },
 				{ "Genre", source.Genre },

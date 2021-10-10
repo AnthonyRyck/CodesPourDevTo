@@ -57,6 +57,7 @@ namespace ConsoleMongo
 
 			Client unNouveauClient = new Client()
 			{
+				ClientId=159,
 				Nom = "Lepetitnouveau",
 				Prenom = "coucou",
 				Age = 18,
