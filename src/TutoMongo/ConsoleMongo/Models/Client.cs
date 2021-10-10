@@ -5,8 +5,8 @@ namespace ConsoleMongo.Models
 {
     public class Client : MongoId
     {
-        [BsonElement("ClientId")]
-		public int ClientId { get; set; }
+        [BsonElement("IdClient")]
+		public int IdClient { get; set; }
 
 		[BsonElement("Prenom")]
         public string Prenom { get; set; }
@@ -27,9 +27,9 @@ namespace ConsoleMongo.Models
         public List<Telephone> Telephone { get; set; }
 
         [BsonConstructor]
-        public Client(int clientId, string prenom, string nom, string genre, int age, Adresse adresse, List<Telephone> telephone)
+        public Client(int idClient, string prenom, string nom, string genre, int age, Adresse adresse, List<Telephone> telephone)
         {
-            ClientId = clientId;
+            IdClient = idClient;
             Prenom = prenom;
             Nom = nom;
             Genre = genre;

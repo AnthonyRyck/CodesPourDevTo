@@ -1,9 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleMongo.Models
 {
@@ -12,6 +8,11 @@ namespace ConsoleMongo.Models
 		[BsonElement("ClientId")]
 		public string ClientId { get; set; }
 
+		[BsonElement("IdCommand")]
+		public int IdCommand { get; set; }
+
+		[BsonElement("Panier")]
+		public List<Panier> Panier { get; set; }
 
 	}
 }

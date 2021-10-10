@@ -87,15 +87,15 @@ namespace ConsoleMongo.Mongo
 		{
 			IMongoCollection<BsonDocument> collection = MongoDatabase.GetCollection<BsonDocument>(collectionName);
 
-			List<BsonDocument> nouveauxClients = new List<BsonDocument>();
+			List<BsonDocument> nouveauDoc = new List<BsonDocument>();
 			foreach (var file in pathFiles)
 			{
 				string content = await File.ReadAllTextAsync(file);
 				var document = BsonDocument.Parse(content);
-				nouveauxClients.Add(document);
+				nouveauDoc.Add(document);
 			}
 
-			await collection.InsertManyAsync(nouveauxClients);
+			await collection.InsertManyAsync(nouveauDoc);
 		}
 
 		/// <summary>
@@ -225,11 +225,43 @@ namespace ConsoleMongo.Mongo
 			return await collection.Find(new BsonDocument()).ToListAsync();
 		}
 
-
-
-		public void FaireJointureDeuxCollections(string collection1, string collection2)
+		/// <summary>
+		/// Requête de jointure
+		/// </summary>
+		/// <param name="collectionClient"></param>
+		/// <param name="collectionCommande"></param>
+		/// <returns></returns>
+		public async Task<List<ClientCommandes>> JointureEntreDeuxCollections(string collectionClient, string collectionCommande)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				var command = new BsonDocument
+				{
+					{ "$lookup", new BsonDocument
+						{
+							{"from", collectionCommande },
+							{"localField", "IdClient" },
+							{"foreignField", "ClientId" },
+							{"as", "CommandsAssociees" },
+						}
+					}
+				};
+
+				Console.WriteLine();
+				Console.WriteLine(command.ToJson());
+				// La requête en JSON:
+				//{ "$lookup" : { "from" : "commandes", "localField" : "IdClient", "foreignField" : "ClientId", "as" : "commandsAssociees" } }
+				Console.WriteLine();
+
+				IMongoCollection<BsonDocument> collClient = MongoDatabase.GetCollection<BsonDocument>(collectionClient);
+				var pipeline = new[] { command };
+				return await collClient.Aggregate<ClientCommandes>(pipeline).ToListAsync();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"ERROR - {ex.Message}");
+				return new List<ClientCommandes>();
+			}
 		}
 
 		/// <summary>
