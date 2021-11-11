@@ -1,4 +1,5 @@
 # FanApp
+*Note : Code migré (Blazor Server) en **.Net 6**
 C'est un projet de demo pour mes posts sur [www.ctrl-alt-suppr.dev](https://www.ctrl-alt-suppr.dev/)  
 Il y a un live de la demo sur [fandemo.ctrl-alt-suppr.dev](https://fandemo.ctrl-alt-suppr.dev/), et pour l'application Xamarin sur le [Playstore](https://play.google.com/store/apps/details?id=com.anthonyryck.fansmobile)
 
