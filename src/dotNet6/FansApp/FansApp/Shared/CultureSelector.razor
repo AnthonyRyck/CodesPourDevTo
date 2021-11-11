@@ -1,0 +1,44 @@
+﻿@using  System.Globalization
+@inject NavigationManager NavigationManager
+
+@using System.Threading
+
+<div>@SelectedCulture  </div>
+
+<select value="@SelectedCulture" @onchange="OnSelected">
+	@foreach (var culture in Cultures)
+	{
+		<option value="@culture.Value">@culture.Caption</option>
+	}
+</select>
+
+
+@code {
+
+	private void OnSelected(ChangeEventArgs e)
+	{
+		var culture = (string)e.Value;
+
+		var uri = new Uri(NavigationManager.Uri)
+			.GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+
+		var query = $"?culture={Uri.EscapeDataString(culture)}&" +
+			$"redirectUri={Uri.EscapeDataString(uri)}";
+
+		NavigationManager.NavigateTo("/Culture/SetCulture" + query, forceLoad: true);
+	}
+
+	public string SelectedCulture { get; set; } = Thread.CurrentThread.CurrentUICulture.Name;
+
+	public class CultureData
+	{
+		public string Caption { get; set; }
+		public string Value { get; set; }
+	}
+
+	public List<CultureData> Cultures { get; set; } = new List<CultureData>()
+	{
+		new  CultureData() { Caption = "English", Value = "en-US" },
+		new  CultureData() { Caption = "Français", Value = "fr-FR" }
+	};
+}

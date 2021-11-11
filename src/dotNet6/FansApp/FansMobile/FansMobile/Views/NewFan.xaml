@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FansMobile.Views.NewFan">
+
+	<StackLayout Margin="10">
+		<Label Text="Nom du Fan" />
+		<Entry Text="{Binding Path=NomFan}"
+                    Placeholder="Nom du fan"/>
+
+		<Label Text="{Binding Path=ErrorMsgNomFan}"
+				TextColor="Red">
+			<Label.Triggers>
+				<DataTrigger TargetType="Label" 
+							Binding="{Binding Path=ErrorMsgNomFan}"
+							Value="{x:Null}">
+					<Setter Property="IsVisible" Value="False"></Setter>
+				</DataTrigger>
+			</Label.Triggers>
+		</Label>
+
+		<Label Text="Infos" />
+		<Entry Text="{Binding Path=InfoDiverses}"
+                    Placeholder="Info sur le fan"/>
+		<Label Text="{Binding Path=ErrorMsgInfoDiverses}"
+				TextColor="Red">
+			<Label.Triggers>
+				<DataTrigger TargetType="Label" 
+							Binding="{Binding Path=ErrorMsgInfoDiverses}"
+							Value="{x:Null}">
+					<Setter Property="IsVisible" Value="False"></Setter>
+				</DataTrigger>
+			</Label.Triggers>
+		</Label>
+
+		<Button Text="Ajouter" 
+                Clicked="OnAjouterButtonClicked">
+			<Button.Triggers>
+				<DataTrigger TargetType="Button"
+							Binding="{Binding Path=HasErrors}"
+							Value="True">
+					<Setter Property="IsEnabled" Value="False" />
+				</DataTrigger>
+			</Button.Triggers>
+		</Button>
+
+		<Button Text="Annuler" 
+                Clicked="OnCancelButtonClicked" />
+	</StackLayout>
+</ContentPage>

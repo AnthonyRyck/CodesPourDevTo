@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FansMobile.Views.ClubPage"
+			 xmlns:vm="clr-namespace:FansMobile.ViewModels"
+             Title="{Binding Title}">
+	<ContentPage.BindingContext>
+		<vm:ClubViewModel />
+	</ContentPage.BindingContext>
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="+" Clicked="AddFan_ToolbarItem_Clicked">
+			<ToolbarItem.IconImageSource>
+				<OnPlatform x:TypeArguments="ImageSource">
+					<On Platform="Android" Value="plus.png" />
+				</OnPlatform>
+			</ToolbarItem.IconImageSource>
+		</ToolbarItem>
+	</ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<Label Text="Bienvenu sur le Club"
+					HorizontalOptions="Center"
+					Grid.Row="0" />
+
+			<ListView Grid.Row="1"
+						Margin="10"
+						ItemsSource="{Binding AllFans, Mode=OneWay}"
+						ItemSelected="OnFanSelected">
+
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+							
+
+								<StackLayout Orientation="Vertical"
+											Grid.Column="0">
+									<Label Text="Nom du fan" FontAttributes="Bold" />
+									<Label Text="{Binding Nom}"  />
+								</StackLayout>
+
+								<StackLayout Orientation="Vertical"
+											Grid.Column="1">
+									<Label Text="Nombre de Click" 
+												FontAttributes="Bold" />
+									<Label Text="{Binding NombreDeClickRecu}" />
+								</StackLayout>
+
+							</Grid>
+							<!--<StackLayout Padding="20,0,0,0"
+										VerticalOptions="Center"
+										Orientation="Vertical">
+								<StackLayout Orientation="Vertical">
+									<Label Text="Nom du fan" FontAttributes="Bold" />
+									<Label Text="{Binding Nom}"  />
+								</StackLayout>
+
+								<StackLayout Orientation="Vertical">
+									<Label Text="Nombre de Click" 
+											FontAttributes="Bold" />
+									<Label Text="{Binding NombreDeClickRecu}" />
+								</StackLayout>
+							</StackLayout>-->
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

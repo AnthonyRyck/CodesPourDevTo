@@ -1,0 +1,24 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<NewFanComponent> localizer
+
+<div>
+	<label>@localizer["NomFan"] :</label>
+	<input type="text"
+		   @bind="NameFan"
+		   @oninput="(ui => { NameFan = ui.Value.ToString(); })" />
+
+	<div class="row margin-5px">
+		<button @onclick="@(() => GetNameFanCallBack.InvokeAsync(NameFan))">@localizer["Ok"]</button>
+		<button @onclick="OnCancel">@localizer["Cancel"]</button>
+	</div>
+</div>
+
+@code {
+	public string NameFan { get; set; }
+
+	[Parameter]
+	public EventCallback<string> GetNameFanCallBack { get; set; }
+
+	[Parameter]
+	public EventCallback OnCancel { get; set; }
+}

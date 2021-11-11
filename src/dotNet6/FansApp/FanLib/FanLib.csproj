@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Authors>Anthony Ryck</Authors>
+    <Description>Une petite lib pour faire mes posts sur https://www.ctrl-alt-suppr.dev/</Description>
+    <Company>Anthony Ryck</Company>
+    <Copyright>Copyright © Anthony Ryck 2021</Copyright>
+    <PackageProjectUrl>https://github.com/AnthonyRyck/CodesPourDevTo/tree/master/src/FansApp</PackageProjectUrl>
+    <PackageTags>sample</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>

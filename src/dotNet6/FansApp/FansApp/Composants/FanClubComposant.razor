@@ -1,0 +1,42 @@
+﻿@using FansApp.Data
+@using FanLibRessource
+
+@using Microsoft.Extensions.Localization
+@*Pour avoir les ressouces de langue pour le composant*@
+@inject IStringLocalizer<AllComposantsFanLib> LocalizerFanComposant
+
+
+<div class="fanClub">
+	@foreach (var fan in FanCollection)
+	{
+		@*<FanComponent EtreFan="fan"
+			ClickCallback="@(() => GetSonClickCallBack.InvokeAsync(fan.Id))"
+			OnClickToFanPage="@(() => OnClickToOpenFanPage.InvokeAsync(fan.Id))" />*@
+
+		//Voir le post sur Créer une Library Razor
+		<FanComposant Nom="@fan.Nom"
+					  Id="@fan.Id"
+					  NombreDeClickRecu="@fan.NombreDeClickRecu"
+					  ClickCallback="@(() => GetSonClickCallBack.InvokeAsync(fan.Id))"
+					  OnClickToFanPage="@(() => OnClickToOpenFanPage.InvokeAsync(fan.Id))"
+					  Localizer="@GetLocalisation" />
+	}
+</div>
+
+@code {
+
+	[Parameter]
+	public IEnumerable<Fan> FanCollection { get; set; }
+
+	[Parameter]
+	public EventCallback<int> GetSonClickCallBack { get; set; }
+
+	[Parameter]
+	public EventCallback<int> OnClickToOpenFanPage { get; set; }
+
+
+	private string GetLocalisation(string key)
+	{
+		return LocalizerFanComposant[key].Value;
+	}
+}

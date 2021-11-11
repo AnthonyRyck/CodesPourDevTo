@@ -1,0 +1,30 @@
+﻿@page "/drawcss"
+
+<h3 class="monsupertitre">CSS Isolation</h3>
+
+@if (IsLoading)
+{
+<div>
+	<Loading /> 
+</div>
+
+<div>
+	<LoadingAtom />
+</div>
+}
+else
+{
+	<div>C'est chargé !</div>
+}
+
+@code {
+
+	public bool IsLoading { get; private set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		IsLoading = true;
+		await Task.Delay(10000); //.ContinueWith(x => { IsLoading = true}). ;
+		IsLoading = false;
+	}
+}

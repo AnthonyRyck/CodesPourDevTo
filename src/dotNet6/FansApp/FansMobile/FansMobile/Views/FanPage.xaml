@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FansMobile.Views.FanPage"
+			 xmlns:vm="clr-namespace:FansMobile.ViewModels">
+
+	<!--<ContentPage.BindingContext>
+		<vm:FanViewModel />
+	</ContentPage.BindingContext>-->
+
+	<ContentPage.Content>
+        <StackLayout Margin="10">
+			<StackLayout Orientation="Horizontal">
+				<Label Text="Nom : " FontAttributes="Bold"></Label>
+				<Label Text="{Binding FanSelected.Nom}"></Label>
+			</StackLayout>
+
+			<StackLayout Orientation="Horizontal">
+				<Label Text="Click reçu : " FontAttributes="Bold"></Label>
+				<Label Text="{Binding FanSelected.NombreDeClickRecu}"></Label>
+			</StackLayout>
+
+			<StackLayout Orientation="Horizontal">
+				<Label Text="Inscritpion : " FontAttributes="Bold"></Label>
+				<Label Text="{Binding FanSelected.DateInscription, StringFormat='{0:d}'}"></Label>
+			</StackLayout>
+
+			<Label Text="Information : " FontAttributes="Bold"></Label>
+			<Label Text="{Binding FanSelected.InfoDiverses}"></Label>
+
+			<Button Text="Ajouter un click"
+					Clicked="AddClick_Clicked"/>
+
+			<Button Text="Fermer"
+					Clicked="ButtonClose_Clicked"/>
+		</StackLayout>
+    </ContentPage.Content>
+</ContentPage>

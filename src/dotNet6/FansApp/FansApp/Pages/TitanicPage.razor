@@ -1,0 +1,67 @@
+﻿@page "/titanic"
+
+@using FansApp.ViewModel
+
+@inject ITitanicViewModel ViewModel
+
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<TitanicPage> localizer
+
+<h3>@localizer["TitreTitanic"]</h3>
+
+<div class="border-rounded margin-5px">
+	<EditForm OnValidSubmit="@ViewModel.OnValidSubmit"
+			  Model="@ViewModel.PassageModel">
+		<div>
+			@* Super IMPORTANT !!! *@
+			<DataAnnotationsValidator />
+
+			<div>
+				<ValidationMessage For="@(() => ViewModel.PassageModel.Classe)" />
+			</div>
+			<label>@localizer["ChoixClasse"]:</label>
+			<InputNumber @bind-Value="ViewModel.PassageModel.Classe"></InputNumber>
+		</div>
+
+		<div>
+			<div>
+				<ValidationMessage For="@(() => ViewModel.PassageModel.Sexe)" />
+			</div>
+			<div>
+				<label id="sexe">@localizer["ChoixSexe"] :</label>
+				<InputSelect @bind-Value=ViewModel.PassageModel.Sexe>
+					<option value=""></option>
+					<option value="male">@localizer["Homme"]</option>
+					<option value="female">@localizer["Femme"]</option>
+				</InputSelect>
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<ValidationMessage For="@(() => ViewModel.PassageModel.Age)" />
+			</div>
+			<div>
+				<label>@localizer["AgePassager"] :</label>
+				<InputNumber @bind-Value="ViewModel.PassageModel.Age"></InputNumber>
+			</div>
+		</div>
+
+		<div class="row margin-5px">
+			<button type="submit">@localizer["Tester"]</button>
+			<button @onclick="ViewModel.OnCancel">@localizer["Annuler"]</button>
+		</div>
+	</EditForm>
+</div>
+
+<div class="margin-5px border-rounded">
+	<span>@localizer["ChanceSurvie"] : @ViewModel.PourcentageSurvie</span>
+
+</div>
+
+
+
+
+@code {
+
+}

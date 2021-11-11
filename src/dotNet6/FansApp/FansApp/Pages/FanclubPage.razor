@@ -1,0 +1,57 @@
+﻿@page "/FanclubPage"
+
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<FanclubPage> localizer
+
+@inject IFanClubViewModel viewModel
+@implements IAsyncDisposable
+
+
+<h3>@localizer["TitreFanclub"]</h3>
+
+<div>
+	<span>
+		<FanButton OnClick="@viewModel.DisplayNewFan" 
+					TextDansBouton="@localizer["AddNewMember"]" />
+		
+		<FanButton OnClick="@viewModel.DisplayNewFanWithValidation"
+					TextDansBouton="@localizer["AddNewMemberValidation"]"/>
+	</span>
+</div>
+
+@*Sans validation*@
+<TemplatedDialog Show="viewModel.CanDisplayNewFan">
+	<NewFanComponent GetNameFanCallBack="viewModel.AddFan"
+					 OnCancel="viewModel.CancelNewFan" />
+</TemplatedDialog>
+
+@*Avec validation des champs*@
+<TemplatedDialog Show="viewModel.CanDisplayNewFanWithValidation">
+	<NewFanComponentWithEditForms EditContextValidation="viewModel.EditContextValidationFan"
+								  FanModel="viewModel.FanModelValidation"
+								  OnCancel="viewModel.CancelNewFan"
+								  OnValidSubmit="viewModel.ValidNewFan" />
+</TemplatedDialog>
+
+<FanClubComposant FanCollection="@viewModel.AllFansCollection"
+				  GetSonClickCallBack="@viewModel.AddClick"
+				  OnClickToOpenFanPage="@viewModel.OpenFanPage" />
+
+@code {
+	protected override async Task OnInitializedAsync()
+	{
+		viewModel.SetStateHasChanged(StateHasChanged);
+		await viewModel.InitHub();
+	}
+
+	/// <summary>
+	/// Libère les ressources du HubConnection,
+	/// quand l'utilisateur quitte la vue.
+	/// </summary>
+	/// <returns></returns>
+	public async ValueTask DisposeAsync()
+	{
+		await viewModel.DisposeHubConnection();
+	}
+
+}
