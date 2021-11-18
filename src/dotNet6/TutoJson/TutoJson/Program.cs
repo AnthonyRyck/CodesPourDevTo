@@ -1,7 +1,4 @@
-﻿using System.Text.Encodings.Web;
-using System.Text.Unicode;
-
-"######## Début de l'application Démo ########".ToConsoleInfo();
+﻿"######## Début de l'application Démo ########".ToConsoleInfo();
 "######## pour JSON en .Net 6         ########".ToConsoleInfo();
 "#:> Appuyer sur une touche pour commencer.".ToConsoleInfo();
 ReadKey();
