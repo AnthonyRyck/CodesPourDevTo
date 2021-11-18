@@ -6,6 +6,60 @@ using System.Text.Unicode;
 "#:> Appuyer sur une touche pour commencer.".ToConsoleInfo();
 ReadKey();
 
+"######## LECTURE d'un JSON à partir d'objets ###########".ToConsoleInfo();
+"#:> Appuyer sur une touche pour commencer.".ToConsoleInfo();
+ReadKey();
+WriteLine();
+
+
+
+
+
+
+
+"######## CREATION d'un JSON à partir d'objets ###########".ToConsoleInfo();
+"#:> Appuyer sur une touche pour commencer.".ToConsoleInfo();
+ReadKey();
+WriteLine();
+
+List<Incident> incidentsObject = new List<Incident>();
+for (int i = 0; i <= 10; i++)
+{
+	incidentsObject.Add(new Incident() { Id = i, Titre = $"Problème num {i}" });
+}
+
+string contentInString = JsonSerializer.Serialize(incidentsObject);
+
+contentInString.ToConsoleResult();
+WriteLine();
+
+"Raahhh beurk, ce n'est pas indenté".ToConsoleInfo();
+"Faisons en sorte que le JSON soit indenté".ToConsoleInfo();
+"#:> Appuyer sur une touche pour commencer.".ToConsoleInfo();
+ReadKey();
+WriteLine();
+
+JsonSerializerOptions options = new() { WriteIndented = true };
+contentInString = JsonSerializer.Serialize(incidentsObject, options);
+contentInString.ToConsoleResult();
+
+WriteLine();
+"Raahhh encore beurk ! Les caractères avec des accents ne sortent pas comme il faut.".ToConsoleInfo();
+"Modifions cela.".ToConsoleInfo();
+"#:> Appuyer sur une touche pour commencer.".ToConsoleInfo();
+ReadKey();
+WriteLine();
+
+JsonSerializerOptions optionSpecial = new()
+{
+	Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+	WriteIndented = true
+};
+
+contentInString = JsonSerializer.Serialize(incidentsObject, optionSpecial);
+contentInString.ToConsoleResult();
+WriteLine();
+
 "######## Création d'un JSON à la \"main\" ###########".ToConsoleInfo();
 "#:> Appuyer sur une touche pour commencer.".ToConsoleInfo();
 ReadKey();
@@ -24,14 +78,13 @@ jsonIncidents.Add("description", "Liste des incidents pour un problème");
 jsonIncidents.Add("incidents", incidents);
 
 "Retourne l'objet en string, mais non indenté.".ToConsoleInfo();
-string contentNonIndente = jsonIncidents.ToJsonString();
+string contentNonIndente = jsonIncidents.ToJsonString(optionSpecial);
 contentNonIndente.ToConsoleResult();
 
 WriteLine();
 "Faisons en sorte que la sortie en string, soit déjà indenté".ToConsoleInfo();
 
-var options = new JsonSerializerOptions { WriteIndented = true };
-string contentIndente = jsonIncidents.ToJsonString(options);
+string contentIndente = jsonIncidents.ToJsonString(optionSpecial);
 contentIndente.ToConsoleResult();
 
 WriteLine();
@@ -39,13 +92,11 @@ WriteLine();
 "#:> Appuyer sur une touche pour commencer.".ToConsoleInfo();
 ReadKey();
 
-string pathSave = Path.Combine(AppContext.BaseDirectory, "FileAppend.json");
+string pathSave = Path.Combine(AppContext.BaseDirectory, "MyJsonFile.json");
 await File.AppendAllTextAsync(pathSave, contentIndente);
 
 WriteLine();
 "######## Fin de l'application Démo ########".ToConsoleInfo();
-
-//\u00E9
 
 public static class ConsoleExtension
 {
