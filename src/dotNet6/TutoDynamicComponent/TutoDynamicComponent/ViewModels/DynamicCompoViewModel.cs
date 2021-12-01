@@ -6,11 +6,28 @@ namespace TutoDynamicComponent.ViewModels
 {
     public class DynamicCompoViewModel : IDynamicCompoViewModel
     {
+        IReceiverViewModel AutreViewModel;
+        private Action StateHasChanged;
+
+        public DynamicCompoViewModel(IReceiverViewModel receiverViewModel)
+	    {
+            AutreViewModel = receiverViewModel;
+        }
+
+
+
+
         /// <see cref="IDynamicCompoViewModel.TypeCompo"/>
         public Type TypeCompo { get; private set; }
 
         /// <see cref="IDynamicCompoViewModel.Properties"/>
         public Dictionary<string, object> Properties { get; private set;  } = new Dictionary<string, object>();
+
+        /// <see cref="IRenderViewModel.SetStateHasChanged(Action)"/>
+		public void SetStateHasChanged(Action stateHasChanged)
+        {
+            StateHasChanged = stateHasChanged;
+        }
 
 
         /// <see cref="IDynamicCompoViewModel.DisplayCounter"/>
@@ -51,32 +68,23 @@ namespace TutoDynamicComponent.ViewModels
             TypeCompo = typeof(PageAvecViewModel);
         }
 
-
-
-        public void DisplayHtml()
+        public void DisplayWithEventCallback()
         {
-            string urlFan = "https://fandemo.ctrl-alt-suppr.dev/FanclubPage";
-
-            var web = new HtmlWeb();
-            var doc = web.Load(urlFan);
-
-            var nodes = doc.DocumentNode.Descendants("div")
-                        .ToList()
-                        .Where(x => x.Attributes.Any() && x.Attributes["class"].Value == "main")
-                        .FirstOrDefault();
-
             Properties.Clear();
-            var test = new MarkupString(nodes.InnerHtml);
-            TypeCompo = typeof(test);
 
-            //RenderFragment Display(string html) => builder =>
-            //{
-            //
-            //    builder.AddContent(0, new MarkupString(html));
-            //};
-            //
-            //DisplayRenderFragment = Display(nodes.InnerHtml);
+            var eventCallbackAddClick = EventCallback.Factory.Create(AutreViewModel, CallClick);
+            
+            Properties.Add("ClickOnMe", eventCallbackAddClick);
+            Properties.Add("CounterClick", monCompteur);
+            TypeCompo = typeof(CompoAvecEventCallback);
         }
 
+        int monCompteur;
+
+        private void CallClick()
+        {
+            monCompteur++;
+            StateHasChanged.Invoke();
+        }
     }
 }

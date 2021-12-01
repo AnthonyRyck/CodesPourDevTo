@@ -16,9 +16,7 @@
 	<button @onclick="ViewModel.DisplayCompoAvecParam">Affiche composant avec paramètres</button>
 	<button @onclick="ViewModel.DisplayFetchDataPage">Affiche Page FetchData</button>
 	<button @onclick="ViewModel.DisplayPageWithViewModel">Affiche page avec ViewModel</button>
-	@*
-	<button @onclick="ViewModel.DisplayHtml">Affiche HTML</button>
-	<button @onclick="ViewModel.DisplayWithEventCallback">Affiche compo avec Eventcallback</button>*@
+	<button @onclick="ViewModel.DisplayWithEventCallback">Affiche compo avec Eventcallback</button>
 </div>
 
 <div style="border:2px solid black; margin:5px;" />
@@ -33,3 +31,11 @@
 		<DynamicComponent Type=@ViewModel.TypeCompo Parameters=@ViewModel.Properties />
 	}
 </div>
+
+@code{
+	protected override void OnInitialized()
+	{
+		ViewModel.SetStateHasChanged(StateHasChanged);
+		base.OnInitialized();
+	}
+}

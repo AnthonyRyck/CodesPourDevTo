@@ -9,7 +9,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddScoped<IDynamicCompoViewModel, DynamicCompoViewModel>();
 builder.Services.AddScoped<ITestViewModel, TestViewModel>();
-
+builder.Services.AddScoped<IReceiverViewModel, ReceiverViewModel>();
 
 var app = builder.Build();
 

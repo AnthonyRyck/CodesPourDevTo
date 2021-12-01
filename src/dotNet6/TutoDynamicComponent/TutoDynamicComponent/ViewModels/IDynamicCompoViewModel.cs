@@ -12,7 +12,6 @@
         /// </summary>
         Dictionary<string, object> Properties { get; }
 
-
         /// <summary>
         /// Permet d'afficer le composant Counter.razor
         /// </summary>
@@ -32,5 +31,16 @@
         /// Affiche un composant avec son ViewModel
         /// </summary>
         void DisplayPageWithViewModel();
+
+        /// <summary>
+        /// Affiche un composant avec un EventCallback
+        /// </summary>
+        void DisplayWithEventCallback();
+
+        /// <summary>
+		/// Pour avoir accès à StateHasChanged depuis le ViewModel
+		/// </summary>
+		/// <param name="stateHasChanged"></param>
+		void SetStateHasChanged(Action stateHasChanged);
     }
 }
