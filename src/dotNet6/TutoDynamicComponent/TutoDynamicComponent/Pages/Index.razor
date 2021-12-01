@@ -1,0 +1,35 @@
+﻿@page "/"
+
+@*Nouveauté .Net 6*@
+<PageTitle>DynamicComponent</PageTitle>
+
+@inject IDynamicCompoViewModel ViewModel
+
+<h1>Afficher dynamiquement des composants avec <b>DynamicComponent</b> </h1>
+
+<div>
+	Exemples pour le post sur https://www.ctrl-alt-suppr.dev/
+</div>
+
+<div>
+	<button @onclick="ViewModel.DisplayCounter">Affiche Counter</button>
+	<button @onclick="ViewModel.DisplayCompoAvecParam">Affiche composant avec paramètres</button>
+	<button @onclick="ViewModel.DisplayFetchDataPage">Affiche Page FetchData</button>
+	<button @onclick="ViewModel.DisplayPageWithViewModel">Affiche page avec ViewModel</button>
+	@*
+	<button @onclick="ViewModel.DisplayHtml">Affiche HTML</button>
+	<button @onclick="ViewModel.DisplayWithEventCallback">Affiche compo avec Eventcallback</button>*@
+</div>
+
+<div style="border:2px solid black; margin:5px;" />
+
+<div>
+	@if(ViewModel.TypeCompo is null)
+	{
+		<div>Faites votre choix.</div>
+	}
+	else
+	{
+		<DynamicComponent Type=@ViewModel.TypeCompo Parameters=@ViewModel.Properties />
+	}
+</div>

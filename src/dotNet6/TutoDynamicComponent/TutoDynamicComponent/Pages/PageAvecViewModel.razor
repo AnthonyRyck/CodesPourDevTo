@@ -1,0 +1,18 @@
+﻿@page "/pageviewmodel"
+
+@inject ITestViewModel ViewModel
+
+<h3>Page avec ViewModel</h3>
+
+@foreach (var user in ViewModel.Utilisateurs)
+{
+	<div style="border:1px solid black; padding:2px; margin:2px;">
+		<div>Nom : @user.Nom</div>
+		<div>Prenom : @user.Prenom</div>
+		<div>Age : @user.Age</div>
+	</div>
+}
+
+<div><button @onclick="ViewModel.AddClick">Ajoute Click !</button></div>
+
+<div>@ViewModel.NombreClic</div>
