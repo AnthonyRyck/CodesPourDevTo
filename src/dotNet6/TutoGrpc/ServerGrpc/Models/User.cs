@@ -1,9 +1,3 @@
-
-public class UsersCollection
-{
-    public User[] Users { get; set; }
-}
-
 public class User
 {
     public string _id { get; set; }

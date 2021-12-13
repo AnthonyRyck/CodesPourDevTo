@@ -3,7 +3,7 @@ using System.Text.Json;
 public class DataService : IDataService
 {
 
-    private UsersCollection AllUsers;
+    private List<User> AllUsers;
 
 
     public DataService()
@@ -14,15 +14,17 @@ public class DataService : IDataService
     }
 
 
-    private async Task<UsersCollection> LoadData()
+    private async Task<List<User>> LoadData()
     {
         string pathFile = Path.Combine(AppContext.BaseDirectory, "Data", "Users.json");
+        List<User> result = new List<User>();
 
-        // En utilisant un stream.
-        using(var stream = File.OpenRead(pathFile))
+        using (var stream = File.OpenRead(pathFile))
         {
-            return await JsonSerializer.DeserializeAsync<UsersCollection>(stream);
+            result = await JsonSerializer.DeserializeAsync<List<User>>(stream);
         }
+
+        return result;
     }
 
 
@@ -31,19 +33,19 @@ public class DataService : IDataService
     /// <see cref="IDataService.GetAllUser"/>
     public User[] GetAllUser()
     {
-        return AllUsers.Users;
+        return AllUsers.ToArray();
     }
 
     /// <see cref="IDataService.GetCountUser"/>
     public int GetCountUser()
     {
-        return AllUsers.Users.Length;
+        return AllUsers.Count;
     }
 
     /// <see cref="IDataService.GetUser(string)"/>
     public User GetUser(string id)
     {
-        return AllUsers.Users.FirstOrDefault(x => x._id == id);
+        return AllUsers.FirstOrDefault(x => x._id == id);
     }
 
     #endregion

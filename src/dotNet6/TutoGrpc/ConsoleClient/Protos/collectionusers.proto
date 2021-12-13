@@ -1,7 +1,7 @@
 // déclare la version de la syntax
 syntax = "proto3";
 
-option csharp_namespace = "ServerGrpc";
+option csharp_namespace = "ClientGrpc";
 
 package collectionusers;
 
