@@ -1,0 +1,28 @@
+// déclare la version de la syntax
+syntax = "proto3";
+
+option csharp_namespace = "ServerGrpc";
+
+package utilisateurs;
+
+// déclaration des services/ contrats.
+service Utilisateurs {
+	// prend un arg "WF"
+	rpc GetUserById (string) returns (User);
+	
+	// prend un argument Empty
+	rpc GetAll (Empty) returns (User[]);
+}
+
+message Empty();
+
+message WeatherForecast(){
+	// le 1 et 2, ce n'est pas la valeur,
+	// MAIS l'ordre d'envoie des propriétés.
+	string Summary = 1;
+	string Temperature = 2;
+}
+
+message StatusResponse {
+	bool success = 1;
+}
