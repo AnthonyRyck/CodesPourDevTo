@@ -31,19 +31,19 @@ public class DataService : IDataService
     /// <see cref="IDataService.GetAllUser"/>
     public User[] GetAllUser()
     {
-        throw new NotImplementedException();
+        return AllUsers.Users;
     }
 
     /// <see cref="IDataService.GetCountUser"/>
     public int GetCountUser()
     {
-        throw new NotImplementedException();
+        return AllUsers.Users.Length;
     }
 
     /// <see cref="IDataService.GetUser(string)"/>
     public User GetUser(string id)
     {
-        throw new NotImplementedException();
+        return AllUsers.Users.FirstOrDefault(x => x._id == id);
     }
 
     #endregion

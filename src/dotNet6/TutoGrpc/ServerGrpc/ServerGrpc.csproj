@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.41.0" />
+  </ItemGroup>
 
+  <ItemGroup>
     <None Update="Data\Users.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
 
-  	<Protobuf Include="Protos\utilisateurs.proto" GrpcServices="Server" />
+  <ItemGroup>
+  	<Protobuf Include="Protos\collectionusers.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

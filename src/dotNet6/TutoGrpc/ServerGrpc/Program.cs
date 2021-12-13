@@ -1,5 +1,4 @@
-//using GrpcServer.Services;
-
+using ServerGrpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +9,7 @@ builder.Services.AddGrpc();
 
 var app = builder.Build();
 
-//app.MapGrpcService<Dat>();
+app.MapGrpcService<UtilisateursService>();
 app.MapGet("/", () => "C'est la loose...");
 
 app.Run();
