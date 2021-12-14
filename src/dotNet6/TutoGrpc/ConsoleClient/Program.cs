@@ -1,5 +1,6 @@
 ﻿using Grpc.Net.Client;
 using ClientGrpc;
+using System.Diagnostics;
 
 "##### Début de l'application de test #####".ToConsoleInfo();
 
@@ -18,8 +19,13 @@ WriteLine();
 ":> Récupération de tous les clients".ToConsoleInfo();
 "Appuyer sur une touche pour continuer".ToConsoleInfo();
 ReadKey();
+
+var chrono = new Stopwatch();
+chrono.Start();
 var allClients = await client.GetAllAsync(empty);
-"Récupération OK".ToConsoleResult();
+chrono.Stop();
+
+$"Récupération OK en {chrono.ElapsedMilliseconds} millisecondes".ToConsoleResult();
 ":> Comparaison entre le nombre de client reçu et toute la liste.".ToConsoleInfo();
 $"--> Compteur à {countUser.NombreUser} et nombre dans la liste : {allClients.AllUsers.Count}".ToConsoleInfo();
 WriteLine();
