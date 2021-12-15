@@ -4,15 +4,6 @@ using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.ConfigureKestrel((context, options) =>
-{
-    options.Listen(IPAddress.Any, 5001, listenOptions =>
-    {
-        listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-    });
-});
-
-builder.Services.AddSingleton<IDataService, DataService>();
 
 // Ajout du service Grpc
 builder.Services.AddGrpc(options =>
@@ -20,6 +11,16 @@ builder.Services.AddGrpc(options =>
     // Pour l'envoie de message sans limite de taille
     options.MaxSendMessageSize = null;
 });
+builder.WebHost.ConfigureKestrel((context, options) =>
+{
+    options.Listen(IPAddress.Any, 5001, listenOptions =>
+    {
+        listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+        listenOptions.UseHttps();
+    });
+});
+
+builder.Services.AddSingleton<IDataService, DataService>();
 
 builder.Services.AddControllers();
 

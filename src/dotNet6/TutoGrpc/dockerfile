@@ -1,19 +1,20 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-RUN apt update
+
+# Pour l'installtion de libmsquic (Http3)
+RUN apt update -y
 RUN apt -y install software-properties-common
 RUN apt -y install curl
 RUN apt -y install gnupg
 RUN apt -y install gnupg2
 RUN apt -y install gnupg1
 RUN apt update -y
-# Pour l'installtion de libmsquic (Http3)
 RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN apt-add-repository https://packages.microsoft.com/debian/11/prod
 RUN apt update -y
 RUN apt -y install libmsquic
 
 WORKDIR /app
-EXPOSE 80
+EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
