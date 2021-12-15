@@ -1,0 +1,32 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+RUN apt update
+RUN apt -y install software-properties-common
+RUN apt -y install curl
+RUN apt -y install gnupg
+RUN apt -y install gnupg2
+RUN apt -y install gnupg1
+RUN apt update -y
+# Pour l'installtion de libmsquic (Http3)
+RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN apt-add-repository https://packages.microsoft.com/debian/11/prod
+RUN apt update -y
+RUN apt -y install libmsquic
+
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["ServerGrpc/ServerGrpc.csproj", "ServerGrpc/"]
+RUN dotnet restore "ServerGrpc/ServerGrpc.csproj"
+COPY . .
+WORKDIR "/src/ServerGrpc"
+RUN dotnet build "ServerGrpc.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "ServerGrpc.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "ServerGrpc.dll"]
