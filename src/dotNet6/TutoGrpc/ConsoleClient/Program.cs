@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using System.Net;
 
-const string BASE_ADDRESS = "https://localhost:1212";
+const string BASE_ADDRESS = "https://localhost:5001";
 
 "##### Début de l'application de test #####".ToConsoleInfo();
 "Appuyer sur une touche pour continuer".ToConsoleInfo();

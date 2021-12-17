@@ -19,7 +19,7 @@ namespace ServerGrpc.Controllers
         public int GetCountUser()
         {
             // requête :
-            // https://localhost:7222/api/tutogrpcusers/count
+            // https://localhost:5001/api/tutogrpcusers/count
             return DataService.GetCountUser();
         }
 
@@ -27,7 +27,7 @@ namespace ServerGrpc.Controllers
         public IEnumerable<User> GetUsers()
         {
             // requête :
-            // https://localhost:7222/api/tutogrpcusers/all
+            // https://localhost:5001/api/tutogrpcusers/all
             return DataService.GetAllUser();
         }
 
@@ -35,7 +35,7 @@ namespace ServerGrpc.Controllers
         public User GetUser(string id)
         {
             // requête :
-            // https://localhost:7222/api/tutogrpcusers/user?id=61b6c9ceb0b039f7477bedef
+            // https://localhost:5001/api/tutogrpcusers/user?id=61b6c9ceb0b039f7477bedef
             return DataService.GetUser(id);
         }
     }
