@@ -11,12 +11,13 @@ builder.Services.AddGrpc(options =>
     // Pour l'envoie de message sans limite de taille
     options.MaxSendMessageSize = null;
 });
+string pathCertifFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Certif", "tutogrpc.pfx");
 builder.WebHost.ConfigureKestrel((context, options) =>
 {
     options.Listen(IPAddress.Any, 5001, listenOptions =>
     {
         listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-        listenOptions.UseHttps();
+        listenOptions.UseHttps(pathCertifFile, "PassCtrlAltSuppr");
     });
 });
 
