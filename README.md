@@ -32,6 +32,7 @@ Codes d'exemple pour les articles que j'écris sur [**ctrl-alt-suppr.dev**](http
 ## Du "code".
 [Inversion de contrôle avec Action/Func en .Net](https://www.ctrl-alt-suppr.dev/2021/07/22/inversion-de-controle-avec-action-func-en-net/)  
 [Notebooks avec .NET Interactive](https://www.ctrl-alt-suppr.dev/2021/08/16/notebooks-avec-net-interactive/)  
+[Découverte de gRPC avec .Net 6](https://www.ctrl-alt-suppr.dev/2021/12/20/decouverte-de-grpc-avec-dotnet-6/)  
 
 ## Azure
 [Azure AI – l’IA conversationnelle](https://www.ctrl-alt-suppr.dev/2021/09/07/azure-ai-lia-conversationnelle/)
