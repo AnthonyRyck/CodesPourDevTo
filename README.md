@@ -43,7 +43,8 @@ Codes d'exemple pour les articles que j'écris sur [**ctrl-alt-suppr.dev**](http
 [Tips & Tricks – Gérer les fichiers de ressources.](https://www.ctrl-alt-suppr.dev/2021/02/27/tips-tricks-gerer-les-fichiers-de-ressources/)  
 [Tips & Tricks – Xamarin Debug en Local](https://www.ctrl-alt-suppr.dev/2021/03/07/tips-tricks-xamarin-debug-en-local/)  
 [Tips & Tricks - Les fichiers statiques Asp.Net Core](https://www.ctrl-alt-suppr.dev/2021/06/02/tips-tricks-fichiers-statiques-asp-net-core/)  
-[Tips & Tricks - Notebooks - Faire de la datavisualisation](https://www.ctrl-alt-suppr.dev/2021/09/16/tips-tricks-notebooks-faire-de-la-datavisualisation/)
+[Tips & Tricks - Notebooks - Faire de la datavisualisation](https://www.ctrl-alt-suppr.dev/2021/09/16/tips-tricks-notebooks-faire-de-la-datavisualisation/)  
+[Tips & Tricks - Windows Terminal](https://www.ctrl-alt-suppr.dev/2021/11/24/tips-trick-windows-terminal/)  
 
 ## FanApp
 C'est un projet de demo pour mes posts sur [www.ctrl-alt-suppr.dev](https://www.ctrl-alt-suppr.dev/)  
