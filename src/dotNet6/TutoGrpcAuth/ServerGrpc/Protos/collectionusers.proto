@@ -1,0 +1,60 @@
+// déclare la version de la syntax
+syntax = "proto3";
+
+option csharp_namespace = "ServerGrpc";
+
+package collectionusers;
+
+// déclaration des services/ contrats.
+service Utilisateurs {
+	rpc GetUserById (UserIdRequest) returns (UserResponse);
+	rpc GetCountUser(Empty) returns (CountUser);
+
+	// prend un argument Empty
+	rpc GetAll (Empty) returns (AllUsersResponse);
+}
+
+message Empty {};
+
+message CountUser{
+    int32 nombreUser = 1;
+}
+
+// Le message de requête contient l'ID de l'utilisateur.
+message UserIdRequest {
+	string idUser = 1;
+}
+
+message UserResponse {
+	string id = 1; 
+    int32 index = 2;
+    string guid = 3;
+    bool isActive = 4;
+    string balance = 5;
+    string picture = 6;
+    int32 age = 7;
+    string eyeColor = 8; 
+    string name = 9;
+    string gender = 10;
+    string company = 11;
+    string email = 12;
+    string phone = 13;
+    string address = 14;
+    string about = 15;
+    string registered = 16;
+    float latitude = 17;
+    float longitude = 18;
+    repeated string tags = 19;
+    repeated Friends friends = 20;
+    string greeting = 21;
+    string favoriteFruit = 22;
+}
+
+message Friends {
+    int32 id = 1;
+    string name = 2;
+}
+
+message AllUsersResponse {
+    repeated UserResponse AllUsers = 1;
+}
