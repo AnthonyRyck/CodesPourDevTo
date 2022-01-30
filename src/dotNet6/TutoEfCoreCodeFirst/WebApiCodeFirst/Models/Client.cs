@@ -17,5 +17,7 @@
         public Adresse Adresse { get; set; }
 
         public ICollection<Telephone> Telephones { get; set; }
+
+        public ICollection<Commande> Commandes { get; set; }
     }
 }
