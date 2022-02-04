@@ -5,7 +5,7 @@ namespace WebApiGraphQl.Data
 {
     public class DataAccess : IDataAccess
     {
-        private IEnumerable<Personne> Personnes;
+        private IEnumerable<Personne> AllPeople;
 
         public DataAccess()
         {
@@ -13,12 +13,20 @@ namespace WebApiGraphQl.Data
             string pathJson = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "JsonFile", "personnes.json");
 
             StreamReader reader = new StreamReader(pathJson);
-            Personnes = JsonSerializer.Deserialize<IEnumerable<Personne>>(reader.ReadToEnd());
+            AllPeople = JsonSerializer.Deserialize<IEnumerable<Personne>>(reader.ReadToEnd());
         }
 
+		/// <inheritdoc cref="IDataAccess.GetAll"/>
         public IEnumerable<Personne> GetAll()
         {
-            return Personnes;
+            return AllPeople;
         }
+
+		/// <inheritdoc cref="IDataAccess.GetPersone(Guid)"/>
+		public Personne GetPersonne(Guid id)
+		{
+			return AllPeople.FirstOrDefault(x => x.id == id);
+		}
+		
     }
 }

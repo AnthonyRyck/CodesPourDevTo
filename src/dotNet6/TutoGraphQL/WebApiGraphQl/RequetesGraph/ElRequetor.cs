@@ -16,5 +16,11 @@ namespace WebApiGraphQl.RequetesGraph
         {
             return _access.GetAll();
         }
+
+		public Personne GetPersonneById(Guid id)
+		{
+			return _access.GetPersonne(id);
+		}
+
     }
 }
