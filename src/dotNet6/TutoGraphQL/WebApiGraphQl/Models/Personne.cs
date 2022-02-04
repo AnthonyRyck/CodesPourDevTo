@@ -20,11 +20,4 @@
         public string greeting { get; set; }
         public string favoriteFruit { get; set; }
     }
-
-    public class Friend
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-    }
-
 }

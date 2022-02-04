@@ -1,6 +1,4 @@
-﻿using TutoGraphQl.Models;
-
-namespace WebApiGraphQl.RequetesGraph
+﻿namespace WebApiGraphQl.RequetesGraph
 {
     public class ElRequetor
     {
@@ -11,16 +9,15 @@ namespace WebApiGraphQl.RequetesGraph
             _access = dataAccess;
         }
 
-
+		[UseSorting]
         public IEnumerable<Personne> GetPersonnesAsync()
         {
             return _access.GetAll();
         }
-
+		
 		public Personne GetPersonneById(Guid id)
 		{
 			return _access.GetPersonne(id);
 		}
-
     }
 }

@@ -2,15 +2,15 @@ using WebApiGraphQl.RequetesGraph;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add Application Db Context options
+// Service pour "gerer" les donnees
 builder.Services.AddSingleton<IDataAccess, DataAccess>();
 
-// Creation de la base SQLite et ajout des donnees.
 builder.Services.AddGraphQLServer()
-				.AddQueryType<ElRequetor>();
+				.AddQueryType<ElRequetor>()
+				.AddSorting();
 
 var app = builder.Build();
 
-app.MapGraphQL("/graphql");
+app.MapGraphQL("/");
 
 app.Run();
