@@ -19,5 +19,11 @@
 		{
 			return _access.GetPersonne(id);
 		}
+
+		[UseSorting]
+		public Personne GetFriendsById(Guid id)
+		{
+			return _access.GetPersonne(id);
+		}
     }
 }
