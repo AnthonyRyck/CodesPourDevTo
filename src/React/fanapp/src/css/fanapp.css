@@ -1,0 +1,17 @@
+/*******************/
+/*CSS pour FansApp*/
+/*******************/
+.border-rounded {
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+.margin-5px {
+    margin: 5px;
+    padding: 2px;
+}
+
+.fanClub {
+    display: flex;
+    flex-wrap: wrap;
+}
