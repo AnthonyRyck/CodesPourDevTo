@@ -1,27 +1,30 @@
 import React, { Component, MouseEventHandler } from 'react';
 import FanComponent from '../components/FanComponent';
 import '../css/fanapp.css';
+import AccessData from '../data/FakeAccessData';
 
-// import FanClubViewModel from '../ViewModels/FanClubViewModel';
-
-// interface Props {
-//   viewModel: FanClubViewModel;
-// }
-
-function FanClub() {
-	return(
-<div className="fanClub">
-	<div>Blablabla</div>
-	{/* foreach (var fan in FanCollection)
-	
-		<FanComponent nom="@fan.Nom"
-					  id="@fan.Id"
-					  nombreClick="@fan.NombreDeClickRecu"
-					  onClickCounter={}
-					  onClickToFanPage={} />
-	 */}
-</div>
-	);
+type FanClubState = {
+	viewModel: AccessData
 }
 
-export default FanClub;
+export default class FanClub extends React.Component<{}, FanClubState> {
+	
+	render() {
+	return (
+		<div className="fanClub">
+			
+			{ 
+			(await this.state.viewModel.GetAllFans()).map((fan, index) =>
+			{
+				<FanComponent nom="{fan.nom}"
+							  id="{fan.id}"
+							  nombreClick="{fan.nombreClick}"
+							   />
+							//    onClickCounter={}
+							//   onClickToFanPage={}
+			}) 
+			};
+		</div>
+	);
+	}
+}
