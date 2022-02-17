@@ -2,33 +2,31 @@ import React, { Component, MouseEventHandler } from 'react';
 import './FanComponent.css';
 
 interface FanComponentProps {
-  id: string;
+  id: number;
   nom: string;
-  nombreClick: string;
+  nombreClick: number;
   // onClickCounter: MouseEventHandler;
   // onClickToFanPage: MouseEventHandler;
 }
 
 export default class FanComponent extends Component<FanComponentProps> {
+  
   render() {
     const { id, nom, nombreClick,  } = this.props;
-    // onClickCounter, onClickToFanPage
+    
     return (
-      <>
-        <div id="openFanPage" className="fan grow" >
-        {/* onClick={onClickToFanPage} */}
-			<div>
-				<div>ID : {id}</div>
-				<div id="iam">Nom : {nom}</div>
-				<div>Nombre de click : {nombreClick}</div>
-			</div>
+      <div id="openFanPage" className="fan grow">
 
-			<button >
-      {/* onClick={onClickCounter} */}
-				Click sur Moi
-			</button>
+			  <div>
+			  	<div>ID : {id}</div>
+			  	<div id="iam">Nom : {nom}</div>
+			  	<div>Nombre de click : {nombreClick}</div>
+			  </div>
+      
+			  <button >
+			  	Click sur Moi
+			  </button>
 		</div>
-      </>
     );
   }
 }
