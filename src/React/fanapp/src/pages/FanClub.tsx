@@ -16,7 +16,7 @@ const FanClub: React.FC = () => {
 		console.log(allFans.length + " éléments");
 	  }, [allFans]);
 
-	const { refetch: getAllData } = useQuery<Fan[]>(
+	useQuery<Fan[]>(
 		"query-fans",
 		async () => {
 			console.log("Coucou, je suis ici : query-fans !");
@@ -35,25 +35,12 @@ const FanClub: React.FC = () => {
 		}
 	  );
 
-	//   function getFans() {
-	// 	try {
-	// 		getAllData();
-	// 	} catch (err) {
-	// 		console.error("ERREUR 13 - " + err);
-	// 	  setAllFans([]);
-	// 	}
-	//   }
-
-
 	return (		
 		<div className="page">
         	<div className="sidebar">
         	    <Navbar />
         	</div>
         	<div>Coucou de la FanClub page</div>
-			{/* <button className="btn btn-sm btn-primary" onClick={getFans}>
-              Get All
-            </button> */}
 
 			<div className="fanClub">
 				{allFans.map((fan) => 
