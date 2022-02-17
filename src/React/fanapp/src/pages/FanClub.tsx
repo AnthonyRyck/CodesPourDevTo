@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from "react-query";
 
 import FanComponent from '../components/FanComponent';
@@ -21,11 +21,7 @@ const FanClub: React.FC = () => {
 		async () => {
 			console.log("Coucou, je suis ici : query-fans !");
 			// Oui, je sais, mais rien ne vaut un "coucou je suis ici"
-		  let tempResult = await AccessDataService.GetAllFans();
-		
-		  // J'ai bien l'information !
-		  console.log(tempResult[0]);
-		  return tempResult;
+		  return await AccessDataService.GetAllFans();
 		},
 		{
 		  enabled: true,
@@ -39,14 +35,14 @@ const FanClub: React.FC = () => {
 		}
 	  );
 
-	  function getFans() {
-		try {
-			getAllData();
-		} catch (err) {
-			console.error("ERREUR 13 - " + err);
-		  setAllFans([]);
-		}
-	  }
+	//   function getFans() {
+	// 	try {
+	// 		getAllData();
+	// 	} catch (err) {
+	// 		console.error("ERREUR 13 - " + err);
+	// 	  setAllFans([]);
+	// 	}
+	//   }
 
 
 	return (		
@@ -62,7 +58,8 @@ const FanClub: React.FC = () => {
 			<div className="fanClub">
 				{allFans.map((fan) => 
 				(
-					<FanComponent nom={fan.Nom}
+					<FanComponent key={fan.Id}
+								nom={fan.Nom}				
 								id={fan.Id}
 								nombreClick={fan.NombreDeClickRecu} />
 				))
