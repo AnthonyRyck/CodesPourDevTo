@@ -23,6 +23,9 @@ namespace FansWasm.Server
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddCors(o =>
+				o.AddDefaultPolicy(b =>
+					b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
 			services.AddControllersWithViews();
 			services.AddRazorPages();
@@ -50,6 +53,8 @@ namespace FansWasm.Server
 			app.UseStaticFiles();
 
 			app.UseRouting();
+
+			app.UseCors();
 
 			app.UseEndpoints(endpoints =>
 			{
