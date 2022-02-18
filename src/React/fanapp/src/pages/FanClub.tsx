@@ -40,17 +40,20 @@ const FanClub: React.FC = () => {
         	<div className="sidebar">
         	    <Navbar />
         	</div>
-        	<div>Coucou de la FanClub page</div>
 
-			<div className="fanClub">
-				{allFans.map((fan) => 
-				(
-					<FanComponent key={fan.Id}
-								nom={fan.Nom}				
-								id={fan.Id}
-								nombreClick={fan.NombreDeClickRecu} />
-				))
-				}
+			<div className='row'>
+        		<div>Coucou de la FanClub page</div>
+
+				<div className="fanClub">
+					{allFans.map((fan) => 
+					(
+						<FanComponent key={fan.Id}
+						nom={fan.Nom}				
+						id={fan.Id}
+						nombreClick={fan.NombreDeClickRecu} />
+						))
+					}
+				</div>
 			</div>
 		</div>
 	);
