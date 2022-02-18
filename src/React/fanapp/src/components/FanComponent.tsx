@@ -1,4 +1,4 @@
-import React, { Component, MouseEventHandler } from 'react';
+import { Component } from 'react';
 import './FanComponent.css';
 
 interface FanComponentProps  {
@@ -9,9 +9,15 @@ interface FanComponentProps  {
 
 export default class FanComponent extends Component<FanComponentProps> {
   
+  constructor(props: FanComponentProps)
+  {
+    super(props);
+  }
+
   render() {
-    let { id, nom, nombreClick } = this.props;
-    
+
+    const { id, nom, nombreClick } = this.props;
+
     return (
       <div className="fan grow">
 			  <div>
