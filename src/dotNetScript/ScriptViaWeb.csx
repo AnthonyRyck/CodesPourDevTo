@@ -3,10 +3,6 @@
 using AlienFruit.FluentConsole.AsciiArt;
 using AlienFruit.FluentConsole;
 
-// Console.WriteLine("Utilisation d'un script en \"Remote\" !");
-// Console.WriteLine(">Appuyer sur une touche pour continuer.");
-// Console.ReadKey();
-
 Info("Utilisation d'un script en \"Remote\" !");
 Pause();
 
