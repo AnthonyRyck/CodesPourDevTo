@@ -7,8 +7,8 @@ Console.WriteLine("Utilisation d'un script en \"Remote\" !");
 Console.WriteLine(">Appuyer sur une touche pour continuer.");
 Console.ReadKey();
 
-ConsoleExtension.Info("Exemple :");
+Console.WriteLine("Exemple :");
 FConsole.GetInstance().DrawDemo(DemoPicture.RainbowPukeSkull);
-ConsoleExtension.Espace();
+Console.WriteLine();
 
-ConsoleExtension.Info("Voilà, à vos Script !");
+Console.WriteLine("Voilà, à vos Script !");
