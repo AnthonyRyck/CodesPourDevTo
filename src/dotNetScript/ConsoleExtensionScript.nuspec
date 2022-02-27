@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>ConsoleExtensionScript</id>
+    <version>1.0.0</version>
+    <authors>Anthony Ryck</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/AnthonyRyck/CodesPourDevTo/tree/master/src/dotNetScript</projectUrl>
+    <description>Pour montrer comment utiliser un package dans un script C#</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright Anthony Ryck 2022</copyright>
+    <tags>csx</tags>
+
+    <!-- <contentFiles>
+       <files include="contentFiles/csx/netstandard2.0/main.csx" buildAction="EmbeddedResource" />
+    </contentFiles> -->
+  </metadata>
+  <files>
+    <file src="contentFiles/csx/netstandard2.0/main.csx" target="contentFiles/csx/netstandard2.0/main.csx" />
+  </files>
+</package>
