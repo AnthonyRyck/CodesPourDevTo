@@ -1,4 +1,3 @@
-#load "ConsoleExtension.csx"
 #r "nuget: AlienFruit.FluentConsole.AsciiArt, 1.0.10"
 using AlienFruit.FluentConsole.AsciiArt;
 using AlienFruit.FluentConsole;
