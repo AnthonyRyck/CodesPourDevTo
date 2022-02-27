@@ -7,9 +7,9 @@ Console.WriteLine("Le fameux Hello World !");
 Console.WriteLine(">Appuyer sur une touche pour continuer.");
 Console.ReadKey();
 
-Console.WriteLine("######## Utilisation d'un autre script ########");
-Console.WriteLine(">Appuyer sur une touche pour continuer.");
-Console.ReadKey();
+// A partir d'ici, l'appel à Console se fait avec un autre script
+Title("Utilisation d'un autre script");
+Pause();
 Info("Il est possible d'utiliser un autre fichier script en utilisant");
 Result("#load \"nomdufichier.csx\"");
 SautDeLigne();
