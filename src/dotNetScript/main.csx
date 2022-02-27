@@ -10,20 +10,20 @@ Console.ReadKey();
 Console.WriteLine("######## Utilisation d'un autre script ########");
 Console.WriteLine(">Appuyer sur une touche pour continuer.");
 Console.ReadKey();
-ConsoleExtension.Info("Il est possible d'utiliser un autre fichier script en utilisant");
-ConsoleExtension.Result("#load \"nomdufichier.csx\"");
-ConsoleExtension.Espace();
+Info("Il est possible d'utiliser un autre fichier script en utilisant");
+Result("#load \"nomdufichier.csx\"");
+SautDeLigne();
 
-ConsoleExtension.Title("Utilisation d'un package Nuget");
-ConsoleExtension.Pause();
+Title("Utilisation d'un package Nuget");
+Pause();
 
-ConsoleExtension.Info("Il faut utiliser la commande :");
-ConsoleExtension.Info("#r \"nuget: nomDuPackage, version\"");
-ConsoleExtension.Espace();
-ConsoleExtension.Pause();
+Info("Il faut utiliser la commande :");
+Info("#r \"nuget: nomDuPackage, version\"");
+SautDeLigne();
+Pause();
 
-ConsoleExtension.Info("Exemple :");
+Info("Exemple :");
 FConsole.GetInstance().DrawDemo(DemoPicture.RainbowPukeSkull);
-ConsoleExtension.Espace();
+SautDeLigne();
 
-ConsoleExtension.Info("Voilà, à vos Script !");
+Info("Voilà, à vos Script !");
