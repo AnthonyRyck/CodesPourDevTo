@@ -11,11 +11,8 @@
     <releaseNotes></releaseNotes>
     <copyright>Copyright Anthony Ryck 2022</copyright>
     <tags>csx</tags>
-
-    <!-- <contentFiles>
-       <files include="contentFiles/csx/netstandard2.0/main.csx" buildAction="EmbeddedResource" />
-    </contentFiles> -->
   </metadata>
+  
   <files>
     <file src="contentFiles/csx/netstandard2.0/main.csx" target="contentFiles/csx/netstandard2.0/main.csx" />
   </files>
