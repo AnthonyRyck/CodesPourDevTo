@@ -9,7 +9,7 @@ import AccessDataService from '../Services/AccessDataService';
 
 const FanClub: React.FC = () => {
 		
-	const [allFans, setAllFans] = useState<Fan[]>([]);
+	let [allFans, setAllFans] = useState<Fan[]>([]);
 	
 	useEffect(() => {
 		console.log("Je suis dans useEffect, et allFans contient :")
@@ -26,6 +26,7 @@ const FanClub: React.FC = () => {
 		{
 		  enabled: true,
 		  onSuccess: (res) => {
+			  res.map((fan) => (console.log("Le nom est : " + fan.nom)));
 			setAllFans(res);
 		  },
 		  onError: (err: any) => {
@@ -47,10 +48,12 @@ const FanClub: React.FC = () => {
 				<div className="fanClub">
 					{allFans.map((fan) => 
 					(
-						<FanComponent key={fan.Id}
-						nom={fan.Nom}				
-						id={fan.Id}
-						nombreClick={fan.NombreDeClickRecu} />
+						<div>
+							<FanComponent key={fan.id}
+								nom={fan.nom}				
+								id={fan.id}
+								nombreClick={fan.nombreDeClickRecu} />
+						</div>
 						))
 					}
 				</div>
