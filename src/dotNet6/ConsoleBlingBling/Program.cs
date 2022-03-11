@@ -13,8 +13,6 @@ var sousTitre = new FigletText("Partager du code")
 AnsiConsole.Write(sousTitre);
 
 // Affichage des 10 derniers articles du blog.
-Markup markup = new Markup("");
-
 List<PostWordPress> posts = new List<PostWordPress>();
 
 await AnsiConsole.Status()
@@ -27,30 +25,55 @@ await AnsiConsole.Status()
 					posts = await JsonSerializer.DeserializeAsync<List<PostWordPress>>(streamPosts);
 				}
 				// Si ça va trop vite pour la récupération
-				await Task.Delay(10000);
+				await Task.Delay(5000);
 				AnsiConsole.MarkupLine("Terminé");
     		});
 
-// Affichage des posts.
-for (var i = 0; i < posts.Count; i++)
+string cmdQuit = "/quit";
+string selection = string.Empty;
+
+ShowPosts();
+
+while(selection != cmdQuit)
 {
-	AnsiConsole.MarkupLine($"{i + 1} - {posts[i].title.rendered}");
+	selection = AnsiConsole.Ask<string>("Quel est votre choix ?");
+
+	switch (selection)
+	{
+		case "/quit":
+			Environment.Exit(0);
+			break;
+		case "/posts":
+			ShowPosts();
+			break;
+		case "/post1":
+		case "/post2":
+		case "/post3":
+		case "/post4":
+		case "/post5":
+		case "/post6":
+		case "/post7":
+		case "/post8":
+		case "/post9":
+		case "/post10":
+			int index = int.Parse(selection.Replace("/post", string.Empty));
+			string urlPost = posts[index - 1].link;
+			System.Diagnostics.Process.Start(urlPost);
+			break;
+		default:
+			AnsiConsole.MarkupLine("[red]Euuhhh le choix n'est pas compliqué...[/] :angry_face:");
+			AnsiConsole.MarkupLine(string.Empty);
+			break;
+	}
 }
 
-AnsiConsole.Write("FIN");
-Console.ReadKey();
-
-// Markup ShowMarkup()
-// {
-// 	 return new Markup(
-//             "[bold fuchsia]/help[/]: Shows this [underline green]help[/] text.\n"
-//             + "[bold fuchsia]/user[/] [aqua]<username>[/]: Switches to the specified [underline green]user[/] account.\n"
-//             + "[bold fuchsia]/chirp[/] [aqua]<message>[/]: [underline green]Chirps[/] a [aqua]message[/] from the active account.\n"
-//             + "[bold fuchsia]/follow[/] [aqua]<username>[/]: [underline green]Follows[/] the account with the specified [aqua]username[/].\n"
-//             + "[bold fuchsia]/unfollow[/] [aqua]<username>[/]: [underline green]Unfollows[/] the account with the specified [aqua]username[/].\n"
-//             + "[bold fuchsia]/following[/]: Lists the accounts that the active account is [underline green]following[/].\n"
-//             + "[bold fuchsia]/followers[/]: Lists the accounts [underline green]followers[/] the active account.\n"
-//             + "[bold fuchsia]/observe[/]: [underline green]Start observing[/] the active account.\n"
-//             + "[bold fuchsia]/unobserve[/]: [underline green]Stop observing[/] the active account.\n"
-//             + "[bold fuchsia]/quit[/]: Closes this client.\n");
-// }
+void ShowPosts()
+{
+	// Affichage des posts.
+	for (var i = 0; i < posts.Count; i++)
+	{
+		AnsiConsole.MarkupLine($"/post{i + 1} - {posts[i].title.rendered}");
+	}
+	AnsiConsole.MarkupLine("/posts : pour réafficher la liste des articles.");
+	AnsiConsole.MarkupLine("/quit : pour quitter.");
+}
