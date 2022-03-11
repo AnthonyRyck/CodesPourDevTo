@@ -10,7 +10,7 @@ using Spectre.Console;
 // Téléchargement de l'image sur Git
 using(var clientImg = new HttpClient())
 {
-	string url = @"https://raw.githubusercontent.com/AnthonyRyck/CodesPourDevTo/master/src/dotNet6/ConsoleBlingBling/testlogo.jpg";
+	string url = @"https://raw.githubusercontent.com/AnthonyRyck/CodesPourDevTo/master/src/dotNet6/ConsoleBlingBling/logo.jpg";
 	var streamImg = await clientImg.GetStreamAsync(url);
 	
 	var logo = new CanvasImage(streamImg);
@@ -39,7 +39,7 @@ await AnsiConsole.Status()
 					posts = await JsonSerializer.DeserializeAsync<List<PostWordPress>>(streamPosts);
 				}
 				// Si ça va trop vite pour la récupération
-				await Task.Delay(2000);
+				await Task.Delay(10000);
 				AnsiConsole.MarkupLine("Terminé");
     		});
 
@@ -51,25 +51,6 @@ for (var i = 0; i < posts.Count; i++)
 
 AnsiConsole.Write("FIN");
 Console.ReadKey();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

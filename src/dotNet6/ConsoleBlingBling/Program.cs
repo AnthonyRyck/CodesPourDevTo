@@ -1,9 +1,8 @@
 ﻿using System.Text.Json;
 using Spectre.Console;
 
-
- // Image pour le logo
-var logo = new CanvasImage("testlogo.jpg");
+// Image pour le logo
+var logo = new CanvasImage("logo.jpg");
 AnsiConsole.Write(logo);
 AnsiConsole.WriteLine();
 
@@ -28,7 +27,7 @@ await AnsiConsole.Status()
 					posts = await JsonSerializer.DeserializeAsync<List<PostWordPress>>(streamPosts);
 				}
 				// Si ça va trop vite pour la récupération
-				await Task.Delay(2000);
+				await Task.Delay(10000);
 				AnsiConsole.MarkupLine("Terminé");
     		});
 
