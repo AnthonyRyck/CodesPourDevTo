@@ -8,7 +8,7 @@
   </PropertyGroup>
 
 <ItemGroup>
-	<None Include="testlogo.jpg">
+	<None Include="logo.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
 </ItemGroup>
