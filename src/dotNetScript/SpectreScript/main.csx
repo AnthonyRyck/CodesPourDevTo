@@ -72,7 +72,12 @@ while(selection != cmdQuit)
 		case "/post10":
 			int index = int.Parse(selection.Replace("/post", string.Empty));
 			string urlPost = posts[index - 1].link;
-			System.Diagnostics.Process.Start(urlPost);
+			AnsiConsole.MarkupLine("[green]Bonne lecture[/] :grinning_face_with_big_eyes:");
+
+			ProcessStartInfo startInfo = new ProcessStartInfo(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe");
+            startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            startInfo.Arguments = urlPost;
+            Process.Start(startInfo);
 			break;
 		default:
 			AnsiConsole.MarkupLine("[red]Euuhhh le choix n'est pas compliqué...[/] :angry_face:");
