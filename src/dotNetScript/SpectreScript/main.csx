@@ -43,14 +43,54 @@ await AnsiConsole.Status()
 				AnsiConsole.MarkupLine("Terminé");
     		});
 
-// Affichage des posts.
-for (var i = 0; i < posts.Count; i++)
+string cmdQuit = "/quit";
+string selection = string.Empty;
+
+ShowPosts();
+
+while(selection != cmdQuit)
 {
-	AnsiConsole.MarkupLine($"{i + 1} - {posts[i].title.rendered}");
+	selection = AnsiConsole.Ask<string>("Quel est votre choix ?");
+
+	switch (selection)
+	{
+		case "/quit":
+			Environment.Exit(0);
+			break;
+		case "/posts":
+			ShowPosts();
+			break;
+		case "/post1":
+		case "/post2":
+		case "/post3":
+		case "/post4":
+		case "/post5":
+		case "/post6":
+		case "/post7":
+		case "/post8":
+		case "/post9":
+		case "/post10":
+			int index = int.Parse(selection.Replace("/post", string.Empty));
+			string urlPost = posts[index - 1].link;
+			System.Diagnostics.Process.Start(urlPost);
+			break;
+		default:
+			AnsiConsole.MarkupLine("[red]Euuhhh le choix n'est pas compliqué...[/] :angry_face:");
+			AnsiConsole.MarkupLine(string.Empty);
+			break;
+	}
 }
 
-AnsiConsole.Write("FIN");
-Console.ReadKey();
+void ShowPosts()
+{
+	// Affichage des posts.
+	for (var i = 0; i < posts.Count; i++)
+	{
+		AnsiConsole.MarkupLine($"/post{i + 1} - {posts[i].title.rendered}");
+	}
+	AnsiConsole.MarkupLine("/posts : pour réafficher la liste des articles.");
+	AnsiConsole.MarkupLine("/quit : pour quitter.");
+}
 
 
 
