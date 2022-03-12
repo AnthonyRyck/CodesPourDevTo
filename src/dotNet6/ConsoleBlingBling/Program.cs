@@ -7,11 +7,11 @@ var logo = new CanvasImage("logo.jpg");
 AnsiConsole.Write(logo);
 AnsiConsole.WriteLine();
 
-// Sous titre
-var sousTitre = new FigletText("Partager du code")
+// Slogan
+var slogan = new FigletText("Partager du code")
 					.RightAligned()
 					.Color(Color.White);
-AnsiConsole.Write(sousTitre);
+AnsiConsole.Write(slogan);
 
 // Affichage des 10 derniers articles du blog.
 List<PostWordPress> posts = new List<PostWordPress>();
@@ -30,7 +30,7 @@ await AnsiConsole.Status()
 				}
 				// Pour avoir le temps de voir le "waiting".
 				await Task.Delay(5000);
-				AnsiConsole.MarkupLine("Terminé");
+				AnsiConsole.MarkupLine(":check_mark: Terminé " + Emoji.Known.CheckMark);
     		});
 
 string cmdQuit = "quit";
@@ -40,12 +40,15 @@ ShowPosts();
 
 while(selection != cmdQuit)
 {
+	AnsiConsole.WriteLine();
 	selection = AnsiConsole.Ask<string>("Quel est votre choix ?");
 
 	switch (selection)
 	{
 		case "quit":
+			AnsiConsole.WriteLine();
 			AnsiConsole.MarkupLine("See you soon " + Emoji.Known.OkHand);
+			AnsiConsole.WriteLine();
 			Environment.Exit(0);
 			break;
 		case "posts":
@@ -82,7 +85,7 @@ void ShowPosts()
 	// Affichage des posts.
 	for (var i = 0; i < posts.Count; i++)
 	{
-		AnsiConsole.MarkupLine($"[purple]{i + 1}[/] - {posts[i].title.rendered}");
+		AnsiConsole.MarkupLine($"[purple]{i + 1}[/] - {posts[i].date.ToString("d")} - {posts[i].title.rendered}");
 	}
 	AnsiConsole.MarkupLine("[green]posts[/] : pour réafficher la liste des articles.");
 	AnsiConsole.MarkupLine("[red]quit[/] : pour quitter.");
