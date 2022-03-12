@@ -77,12 +77,21 @@ while(selection != cmdQuit)
 		case "10":
 			int index = int.Parse(selection);
 			string urlPost = posts[index - 1].link;
-			AnsiConsole.MarkupLine("[green]Bonne lecture[/] :grinning_face_with_big_eyes:");
-
-			ProcessStartInfo startInfo = new ProcessStartInfo(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe");
-            startInfo.WindowStyle = ProcessWindowStyle.Maximized;
-            startInfo.Arguments = urlPost;
-            Process.Start(startInfo);
+			try
+			{
+				ProcessStartInfo startInfo = new ProcessStartInfo(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe");
+            	startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            	startInfo.Arguments = urlPost;
+            	Process.Start(startInfo);
+                
+				AnsiConsole.MarkupLine("[green]Bonne lecture[/] :grinning_face_with_big_eyes:");
+			}
+			catch (System.Exception ex)
+			{
+				AnsiConsole.MarkupLine("[red]ERREUR [/] :angry_face:");
+				AnsiConsole.MarkupLine("Edge n'a pas pu être ouvert, du coup voici l'URL de l'article choisi :");
+				AnsiConsole.MarkupLine(urlPost);
+			}
 			break;
 		default:
 			AnsiConsole.MarkupLine("[red]Euuhhh le choix n'est pas compliqué...[/] :angry_face:");
