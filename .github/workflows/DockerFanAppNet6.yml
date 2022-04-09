@@ -3,9 +3,8 @@ name: Build-Docker
 on:
   push:
     paths:
-     - 'src/FansApp/FansApp**'
-     - '!src/dotNet6**'
-     - '!src/FansApp/FansApp/README.md'
+     - 'src/dotNet6/FansApp/FansApp**'
+     - '!src/dotNet6/FansApp/FansApp/README.md'
      - '!.github/workflows/**'
      - '!README.md'
 
@@ -17,6 +16,6 @@ jobs:
       - name: Login to DockerHub
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username anthonyryck --password-stdin
       - name: Build image
-        run: docker build --file ./src/FansApp/dockerfilegitaction --tag anthonyryck/demofansapp:latest .
+        run: docker build --file ./src/dotNet6/FansApp/dockerfilegitaction --tag anthonyryck/demofansapp:latest .
       - name: Push to DockerHub
         run: docker push anthonyryck/demofansapp:latest
