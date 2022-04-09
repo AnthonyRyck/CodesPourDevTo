@@ -8,7 +8,6 @@ namespace FansApp.ViewModel
 		private NavigationManager navigationManager;
 		private HotKeys HotKeysContext;
 
-
 		public IndexViewModel(HotKeys hotKeys, NavigationManager navigation)
 		{
 			navigationManager = navigation;
