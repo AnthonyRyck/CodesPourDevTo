@@ -4,12 +4,12 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0.1-bullseye-slim AS build
 WORKDIR /src
-COPY ["./src/FansApp/FanLib/FanLib.csproj", "FanLib/"]
-COPY ["./src/FansApp/FansApp/FansApp.csproj", "FansApp/"]
-COPY ["./src/FansApp/TitanicML.Model/TitanicML.Model.csproj", "TitanicML.Model/"]
+COPY ["./src/dotNet6/FansApp/FanLib/FanLib.csproj", "FanLib/"]
+COPY ["./src/dotNet6/FansApp/FansApp/FansApp.csproj", "FansApp/"]
+COPY ["./src/dotNet6/FansApp/TitanicML.Model/TitanicML.Model.csproj", "TitanicML.Model/"]
 
 RUN dotnet restore "FansApp/FansApp.csproj"
-COPY ./src/FansApp/. .
+COPY ./src/dotNet6/FansApp/. .
 WORKDIR "/src/FansApp"
 RUN dotnet build "FansApp.csproj" -c Release -o /app/build
 
