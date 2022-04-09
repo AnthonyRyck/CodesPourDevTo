@@ -4,6 +4,7 @@ on:
   push:
     paths:
      - 'src/FansApp/FansApp**'
+     - '!src/dotNet6**'
      - '!src/FansApp/FansApp/README.md'
      - '!.github/workflows/**'
      - '!README.md'
