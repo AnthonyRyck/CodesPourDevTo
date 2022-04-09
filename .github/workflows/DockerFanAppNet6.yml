@@ -1,4 +1,4 @@
-name: Build-Docker
+name: DockerFanAppNet6
 
 on:
   push:
