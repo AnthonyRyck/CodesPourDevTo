@@ -118,12 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DescriptionApp" xml:space="preserve">
-    <value>C'est une application demo pour mes articles pour Blazor Server</value>
+    <value>C'est une application demo pour mes articles sur Blazor Server</value>
+  </data>
+  <data name="HotKeysNum1" xml:space="preserve">
+    <value>"SHIFT + 1" - Accès à la page FanClub</value>
+  </data>
+  <data name="HotKeysNum2" xml:space="preserve">
+    <value>"SHIFT + 2" - Accès à la page Titanic ML</value>
+  </data>
+  <data name="HotKeysNum3" xml:space="preserve">
+    <value>"SHIFT + 3" - Accès à la page SCSS Isolation</value>
+  </data>
+  <data name="HotKeysNum4" xml:space="preserve">
+    <value>"SHIFT + 4" - Accès à la page Middleware</value>
+  </data>
+  <data name="HotKeysNum5" xml:space="preserve">
+    <value>"SHIFT + 5" - Accès à la page FAQ</value>
+  </data>
+  <data name="HotKeysNum6" xml:space="preserve">
+    <value>"SHIFT + 6" - Accès à la page ChatBot</value>
+  </data>
+  <data name="HotKeysTitre" xml:space="preserve">
+    <value>Pour l'article sur</value>
+  </data>
+  <data name="HotKeysWarning" xml:space="preserve">
+    <value>Ne pas faire SHIFT + une touche du pavé numérique. Il faut utiliser les touches qui sont au-dessus de AZERTY !</value>
   </data>
   <data name="MyBlog" xml:space="preserve">
     <value>mon blog.</value>
   </data>
+  <data name="TitreHotKeys" xml:space="preserve">
+    <value />
+  </data>
   <data name="WelcomeFanApp" xml:space="preserve">
-    <value>Bienvenu sur l'application des Fans</value>
+    <value>Bienvenu sur l'application des "Fans"... de Blazor :)</value>
   </data>
 </root>

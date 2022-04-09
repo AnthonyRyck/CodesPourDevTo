@@ -3,6 +3,8 @@
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<Index> localizer
 
+@inject IIndexViewModel viewModel
+
 <h1>Hello, world!</h1>
 
 <div>
@@ -11,4 +13,25 @@
 
 <div>
 	@localizer["DescriptionApp"] : <a href="https:\\www.ctrl-alt-suppr.dev" target="_blank">@localizer["MyBlog"].Value</a>
+</div>
+
+
+<div>
+	<br />
+	@localizer["HotKeysTitre"] <a href="https://github.com/jsakamoto/Toolbelt.Blazor.HotKeys/" target="_blank">Toolbet.Blazor.HotKeys</a>
+</div>
+
+<div>
+	<ul> 
+		<li>@localizer["HotKeysNum1"]</li>
+		<li>@localizer["HotKeysNum2"]</li>
+		<li>@localizer["HotKeysNum3"]</li>
+		<li>@localizer["HotKeysNum4"]</li>
+		<li>@localizer["HotKeysNum5"]</li>
+		<li>@localizer["HotKeysNum6"]</li>
+	</ul> 
+</div>
+
+<div>
+	<b>NOTE</b> : @localizer["HotKeysWarning"]
 </div>

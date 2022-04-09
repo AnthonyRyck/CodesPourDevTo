@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,9 @@ builder.Services.AddHostedService<ResetHostedService>();
 
 // Titanic Model
 builder.Services.AddScoped<ITitanicViewModel, TitanicViewModel>();
+
+// ViewModel pour la page Index, avec HotKeys
+builder.Services.AddScoped<IIndexViewModel, IndexViewModel>();
 
 // Service pour la localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
@@ -81,6 +85,9 @@ string qnaIdApp = Environment.GetEnvironmentVariable("QNA_ID_APP");
 // Service pour la page de Chatbot
 builder.Services.AddSingleton(new InfoVariablesEnvironment(qnaEndPoint, qnaEndPointKey, qnaIdApp));
 builder.Services.AddScoped<IWebChatViewModel, WebChatViewModel>();
+
+// Service pour "Toolbelt HotKeys"
+builder.Services.AddHotKeys();
 
 #endregion
 

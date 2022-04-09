@@ -120,10 +120,34 @@
   <data name="DescriptionApp" xml:space="preserve">
     <value>This is a demo app for my articles for Blazor Server</value>
   </data>
+  <data name="HotKeysNum1" xml:space="preserve">
+    <value>"SHIFT + 1" - Access to the FanClub page</value>
+  </data>
+  <data name="HotKeysNum2" xml:space="preserve">
+    <value>"SHIFT + 2" - Access to the Titanic ML page</value>
+  </data>
+  <data name="HotKeysNum3" xml:space="preserve">
+    <value>"SHIFT + 3" - Access to the SCSS Isolation page</value>
+  </data>
+  <data name="HotKeysNum4" xml:space="preserve">
+    <value>"SHIFT + 4" - Access to the Middleware page</value>
+  </data>
+  <data name="HotKeysNum5" xml:space="preserve">
+    <value>"SHIFT + 5" - Access to the FAQ page</value>
+  </data>
+  <data name="HotKeysNum6" xml:space="preserve">
+    <value>"SHIFT + 6" - Access to the ChatBot page</value>
+  </data>
+  <data name="HotKeysTitre" xml:space="preserve">
+    <value>For the article on</value>
+  </data>
+  <data name="HotKeysWarning" xml:space="preserve">
+    <value>Do not make SHIFT + a key on the numeric keypad. You have to use the keys that are above AZERTY !</value>
+  </data>
   <data name="MyBlog" xml:space="preserve">
     <value>my blog.</value>
   </data>
   <data name="WelcomeFanApp" xml:space="preserve">
-    <value>Welcome to the Fans app</value>
+    <value>Welcome to the Fans app ... of "Blazor" :)</value>
   </data>
 </root>
