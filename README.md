@@ -41,6 +41,7 @@ Codes d'exemple pour les articles que j'écris sur [**ctrl-alt-suppr.dev**](http
 14/06/21 [Les Middleware](https://www.ctrl-alt-suppr.dev/2021/06/14/les-middlewares/)  
 07/09/21 [QnA Maker – Implémenter un ChatBoT dans Blazor](https://www.ctrl-alt-suppr.dev/2021/09/07/qna-maker-azure-bot-implementer-un-chatbot-dans-blazor/)  
 07/12/21 [DynamicComponent avec Blazor](https://www.ctrl-alt-suppr.dev/2021/12/07/dynamiccomponent-avec-blazor/)  
+11/04/22 [Utiliser des raccourcis clavier avec Blazor](https://www.ctrl-alt-suppr.dev/2022/04/11/utiliser-des-raccourcis-clavier-avec-blazor/)  
 
 ## Xamarin.
 09/03/21 [Commencer avec Xamarin](https://www.ctrl-alt-suppr.dev/2021/03/09/commencer-avec-xamarin/)  
