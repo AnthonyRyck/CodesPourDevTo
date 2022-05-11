@@ -1,5 +1,5 @@
 # Codes d'exemple pour mes articles
-Codes d'exemple pour les articles que j'écris sur [**ctrl-alt-suppr.dev**](https://www.ctrl-alt-suppr.dev/)
+Codes d'exemple pour les articles que j'écris sur [**ctrl-alt-suppr.dev**](https://www.ctrl-alt-suppr.dev/) et maintenant sur  [**blog blazor - ctrl-alt-suppr.dev**](https://blog.ctrl-alt-suppr.dev/)  
 
 ## Articles
 
