@@ -24,7 +24,7 @@ namespace WebApi.Controllers
 		public IActionResult GetPersonne(Guid id)
 		{
 			var personne = dataAccess.GetPersonne(id);
-
+			
 			if (personne == null)
 			{
 				return NotFound();
@@ -44,18 +44,6 @@ namespace WebApi.Controllers
 			}
 
 			return personne;
-		}
-
-		[HttpGet("all")]
-		public IEnumerable<Personne> GeAll()
-		{
-			var people = dataAccess.GetAll();
-
-			foreach (var person in people)
-			{
-				Task.Delay(500).GetAwaiter().GetResult();
-				yield return person;
-			}
 		}
 
 	}

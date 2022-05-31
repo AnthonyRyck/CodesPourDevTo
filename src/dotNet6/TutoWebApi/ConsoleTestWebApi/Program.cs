@@ -22,7 +22,7 @@ string baseAddress = "https://localhost:7005/";
 //}
 
 AnsiConsole.WriteLine();
-AnsiConsole.MarkupLine("### Premier test - retour d'un type spécifique ###");
+AnsiConsole.MarkupLine("### 1er test - retour d'un [bold][underline]type spécifique[/][/] ###");
 AnsiConsole.MarkupLine("[italic]Appuyer sur une touche pour continuer...[/]");
 Console.ReadKey();
 
@@ -46,7 +46,7 @@ else
 }
 
 AnsiConsole.WriteLine();
-AnsiConsole.MarkupLine("### Deuxième test - utilisation d'un IActionResult ###");
+AnsiConsole.MarkupLine("### 2eme test - utilisation d'un [bold][underline]IActionResult[/][/] ###");
 AnsiConsole.MarkupLine("[italic]Appuyer sur une touche pour continuer...[/]");
 Console.ReadKey();
 
@@ -71,6 +71,17 @@ catch (Exception)
 {
 	AnsiConsole.MarkupLine("[red]ERREUR [/] :angry_face:");
 }
+
+
+AnsiConsole.WriteLine();
+AnsiConsole.MarkupLine("### 3eme test - utilisation d'un [bold][underline]ActionResult<T>[/][/] ###");
+AnsiConsole.MarkupLine("[italic]Appuyer sur une touche pour continuer...[/]");
+Console.ReadKey();
+
+
+
+
+
 
 AnsiConsole.WriteLine();
 var finTest = new FigletText("# Fin des tests #");
